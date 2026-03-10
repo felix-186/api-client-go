@@ -1,0 +1,88 @@
+// Copyright 2015 The gRPC Authors
+// protoc -I . --go_out=plugins=grpc:. ./ds.proto
+
+// protoc -I ./ --go_out=. ./dataService/ds.proto
+// protoc -I ./ --go-grpc_out=. dataService/ds.proto
+
+syntax = "proto3";
+
+package dataService;
+
+import "api/api.proto";
+
+option go_package = "./dataservice;dataservice";
+option java_package = "cn.airiot.sdk.client.dubbo.grpc.datasource";
+option java_multiple_files = true;
+option java_generate_equals_and_hash = true;
+option java_generic_services = true;
+
+service DataGroupService {
+  rpc Query (api.QueryRequest) returns (api.Response) {}
+  rpc Get (api.GetOrDeleteRequest) returns (api.Response) {}
+  rpc Delete (api.GetOrDeleteRequest) returns (api.Response) {}
+  rpc Update (api.UpdateRequest) returns (api.Response) {}
+  rpc Replace (api.UpdateRequest) returns (api.Response) {}
+  rpc Create (api.CreateRequest) returns (api.Response) {}
+  rpc CreateMany (api.CreateRequest) returns (api.Response) {}
+  rpc DeleteMany (api.QueryRequest) returns (api.Response) {}
+}
+
+service DataInterfaceService {
+  rpc Query (api.QueryRequest) returns (api.Response) {}
+  rpc Get (api.GetOrDeleteRequest) returns (api.Response) {}
+  rpc Delete (api.GetOrDeleteRequest) returns (api.Response) {}
+  rpc Update (api.UpdateRequest) returns (api.Response) {}
+  rpc Replace (api.UpdateRequest) returns (api.Response) {}
+  rpc Create (api.CreateRequest) returns (api.Response) {}
+  rpc CreateMany (api.CreateRequest) returns (api.Response) {}
+  rpc DeleteMany (api.QueryRequest) returns (api.Response) {}
+}
+
+service DataService {
+  rpc Proxy (Request) returns (ProxyResponse) {}
+}
+
+service DatasetService {
+  rpc Query (api.QueryRequest) returns (api.Response) {}
+  rpc QueryWhole (api.QueryRequest) returns (api.Response) {}
+  rpc CreateWhole (api.CreateRequest) returns (api.Response) {}
+  rpc ReplaceWhole (api.UpdateRequest) returns (api.Response) {}
+  rpc Preview (ViewPreviewReq) returns (api.Response) {}
+  rpc DeleteAll (api.QueryRequest) returns (api.Response) {}
+}
+
+service DatasetViewService {
+  rpc Query (api.QueryRequest) returns (api.Response) {}
+  rpc Create (api.CreateRequest) returns (api.Response) {}
+  rpc Replace (api.UpdateRequest) returns (api.Response) {}
+  rpc Preview (ViewPreviewReq) returns (api.Response) {}
+  rpc DeleteAll (api.QueryRequest) returns (api.Response) {}
+}
+
+message Request {
+  string key = 1;
+  bytes data = 2;
+}
+
+message ProxyResponse  {
+  bool status = 1;
+  int32 code = 2;
+  string info = 3;
+  string detail = 4;
+  bytes result = 5;
+  int64 count = 6;
+  int32 http_code = 7;
+  bytes headers = 8;
+}
+
+message ViewPreviewReq {
+  string mode = 1;
+  string datesetId = 2;
+  string viewId = 3;
+  bytes data = 4;
+}
+
+//
+//extend ProxyResponse {
+//  Response response = 1001;
+//}

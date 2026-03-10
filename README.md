@@ -1,1 +1,1 @@
-# api-client-go
+# airiot-client

@@ -1,0 +1,43 @@
+// Copyright 2015 The gRPC Authors
+// protoc -I . --go_out=plugins=grpc:. ./warning.proto
+
+// protoc -I ./ --go_out=. ./warning/warning.proto
+// protoc -I ./ --go-grpc_out=. warning/warning.proto
+syntax = "proto3";
+
+package warning;
+
+import "api/api.proto";
+
+option go_package = "./warning;warning";
+option java_package = "cn.airiot.sdk.client.dubbo.grpc.warning";
+option java_multiple_files = true;
+option java_generate_equals_and_hash = true;
+option java_generic_services = true;
+
+service WarnService {
+  rpc Query (QueryWarningRequest) returns (api.Response) {}
+  rpc Get (GetOrDeleteWarningRequest) returns (api.Response) {}
+  rpc Create (api.CreateRequest) returns (api.Response) {}
+  rpc BatchCreate (api.CreateRequest) returns (api.Response) {}
+}
+
+service RuleService {
+  rpc Query (api.QueryRequest) returns (api.Response) {}
+  rpc BatchCreate (api.CreateRequest) returns (api.Response) {}
+  rpc Update (api.UpdateRequest) returns (api.Response) {}
+  rpc Delete (api.GetOrDeleteRequest) returns (api.Response) {}
+  rpc Replace (api.UpdateRequest) returns (api.Response) {}
+}
+
+message QueryWarningRequest {
+  bytes query = 1;
+  string archive = 2;
+}
+
+message GetOrDeleteWarningRequest {
+  string id = 1;
+  string archive = 2;
+}
+
+

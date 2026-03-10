@@ -1,0 +1,297 @@
+// Copyright 2015 The gRPC Authors
+// protoc -I . --go_out=plugins=grpc:. ./core.proto   不用
+
+// protoc -I ./ --go_out=. ./core/core.proto
+// protoc -I ./ --go-grpc_out=. core/core.proto
+syntax = "proto3";
+
+package core;
+
+import "api/api.proto";
+
+option go_package = "./core;core";
+option java_package = "cn.airiot.sdk.client.dubbo.grpc.core";
+option java_multiple_files = true;
+option java_generate_equals_and_hash = true;
+option java_generic_services = true;
+
+service LicenseService {
+  rpc GetFileLicense (api.QueryRequest) returns (api.Response) {}
+  rpc UseLicense (api.QueryRequest) returns (api.Response) {}
+  rpc FindMachineCode (api.QueryRequest) returns (api.Response) {}
+  rpc GetDriverLicense (api.GetOrDeleteRequest) returns (api.Response) {}
+  rpc UploadLicense(stream UploadFileRequest) returns (api.Response) {}
+
+}
+
+service AppService {
+  rpc GetToken (api.TokenRequest) returns (api.Response) {}
+  rpc Query (api.QueryRequest) returns (api.Response) {}
+  rpc Get (api.GetOrDeleteRequest) returns (api.Response) {}
+}
+
+service LogService {
+  rpc Create (api.CreateRequest) returns (api.Response) {}
+  rpc Get (api.GetOrDeleteRequest) returns (api.Response) {}
+  rpc Query (api.QueryRequest) returns (api.Response) {}
+  rpc QueryApiPermission (api.QueryRequest) returns (api.Response) {}
+  rpc CreateApiPermission (api.CreateRequest) returns (api.Response) {}
+}
+
+service UserService {
+  rpc Query (api.QueryRequest) returns (api.Response) {}
+  rpc Get (api.GetOrDeleteRequest) returns (api.Response) {}
+  rpc Delete (api.GetOrDeleteRequest) returns (api.Response) {}
+  rpc Update (api.UpdateRequest) returns (api.Response) {}
+  rpc Replace (api.UpdateRequest) returns (api.Response) {}
+  rpc Create (api.CreateRequest) returns (api.Response) {}
+  rpc GetCurrentUserInfo(LoginUserRequest) returns (api.Response) {}
+  rpc UserPermissionUpdate(api.CreateRequest) returns (api.Response) {}
+  rpc QueryBackup (api.QueryRequest) returns (api.Response) {}
+  rpc DeleteManyBackup (api.QueryRequest) returns (api.Response) {}
+  rpc CreateManyBackup (api.CreateRequest) returns (api.Response) {}
+  rpc CallAIModel (api.CreateRequest) returns (api.Response) {}
+}
+
+service APIKeyService {
+  rpc Query (api.QueryRequest) returns (api.Response) {}
+  rpc Get (api.GetOrDeleteRequest) returns (api.Response) {}
+  rpc GetByKeyID (GetRequestName) returns (api.Response) {}
+  rpc Verify (VerifyAPIKeyRequest) returns (VerifyAPIKeyResponse) {}
+}
+
+service TableSchemaService {
+  rpc Query (api.QueryRequest) returns (api.Response) {}
+  rpc QueryDeviceByDriverAndGroup (GetDeviceRequest) returns (api.Response) {}
+  rpc QueryTableDeviceByDriverAndGroup (GetDeviceRequest) returns (api.Response) {}
+  rpc FindDevice (GetDataDeviceRequest) returns (api.Response) {}
+  rpc QueryEmulator (api.QueryRequest) returns (api.Response) {}
+  rpc Get (api.GetOrDeleteRequest) returns (api.Response) {}
+  rpc Delete (api.GetOrDeleteRequest) returns (api.Response) {}
+  rpc Update (api.UpdateRequest) returns (api.Response) {}
+  rpc Replace (api.UpdateRequest) returns (api.Response) {}
+  rpc Create (api.CreateRequest) returns (api.Response) {}
+  rpc StatsQuery (api.QueryRequest) returns (api.Response) {}
+  rpc FindCommandByID (api.GetOrDeleteRequest) returns (api.Response) {}
+}
+
+service TableDataService {
+  rpc Query (QueryDataRequest) returns (api.Response) {}
+  rpc QueryByTableId (QueryDataRequest) returns (api.Response) {}
+  rpc Get (GetOrDeleteDataRequest) returns (api.Response) {}
+  rpc Delete (GetOrDeleteDataRequest) returns (api.Response) {}
+  rpc DeleteMany (QueryDataRequest) returns (api.Response) {}
+  rpc Update (UpdateDataRequest) returns (api.Response) {}
+  rpc Replace (UpdateDataRequest) returns (api.Response) {}
+  rpc Create (CreateDataRequest) returns (api.Response) {}
+  rpc CreateMany (CreateDataRequest) returns (api.Response) {}
+  rpc FindTableDataDeptByDeptIDs (api.CreateRequest) returns (api.Response) {}
+  rpc UpdateMany (MultiUpdateDataRequest) returns (api.Response) {}
+  rpc GetWarningFilterIDs (api.EmptyRequest) returns (api.Response) {}
+  rpc FindTagByID (GetOrDeleteDataRequest) returns (api.Response) {}
+  rpc FindCommandByID (GetOrDeleteDataRequest) returns (api.Response) {}
+
+  rpc QueryByDB (QueryDataRequest) returns (api.Response) {}
+  rpc GetByDB (GetOrDeleteDataRequest) returns (api.Response) {}
+  rpc DeleteByDB (GetOrDeleteDataRequest) returns (api.Response) {}
+  rpc DeleteManyByDB (QueryDataRequest) returns (api.Response) {}
+  rpc UpdateByDB (UpdateDataRequest) returns (api.Response) {}
+  rpc ReplaceByDB (UpdateDataRequest) returns (api.Response) {}
+  rpc CreateByDB (CreateDataRequest) returns (api.Response) {}
+  rpc CreateManyByDB (CreateDataRequest) returns (api.Response) {}
+  rpc UpdateManyByDB (MultiUpdateDataRequest) returns (api.Response) {}
+}
+
+service TableRecordService {
+  rpc Query (api.QueryRequest) returns (api.Response) {}
+  rpc Get (api.GetOrDeleteRequest) returns (api.Response) {}
+  rpc Delete (api.GetOrDeleteRequest) returns (api.Response) {}
+  rpc Update (api.UpdateRequest) returns (api.Response) {}
+  rpc Replace (api.UpdateRequest) returns (api.Response) {}
+  rpc Create (api.CreateRequest) returns (api.Response) {}
+}
+
+service MessageService {
+  rpc Create (api.CreateRequest) returns (api.Response) {}
+  rpc Query (api.QueryRequest) returns (api.Response) {}
+}
+
+service DashboardService {
+  rpc Create (api.CreateRequest) returns (api.Response) {}
+  rpc Query (api.QueryRequest) returns (api.Response) {}
+}
+
+service DataQueryService {
+  rpc PostLatest (api.CreateRequest) returns (api.Response) {}
+  rpc GetQuery (api.QueryRequest) returns (api.Response) {}
+  rpc PostQuery (api.CreateRequest) returns (api.Response) {}
+}
+
+service RoleService {
+  rpc Query (api.QueryRequest) returns (api.Response) {}
+  rpc Get (api.GetOrDeleteRequest) returns (api.Response) {}
+  rpc AdminRoleCheck (api.EmptyRequest) returns (api.Response) {}
+}
+
+service CatalogService {
+  rpc Query (api.QueryRequest) returns (api.Response) {}
+  rpc Get (api.GetOrDeleteRequest) returns (api.Response) {}
+}
+
+service DeptService {
+  rpc Query (api.QueryRequest) returns (api.Response) {}
+  rpc Get (api.GetOrDeleteRequest) returns (api.Response) {}
+}
+
+service SettingService {
+  rpc Query (api.QueryRequest) returns (api.Response) {}
+}
+
+service SystemVariableService {
+  rpc Query (api.QueryRequest) returns (api.Response) {}
+  rpc Get (api.GetOrDeleteRequest) returns (api.Response) {}
+  rpc Delete (api.GetOrDeleteRequest) returns (api.Response) {}
+  rpc Update (api.UpdateRequest) returns (api.Response) {}
+  rpc Replace (api.UpdateRequest) returns (api.Response) {}
+  rpc Create (api.CreateRequest) returns (api.Response) {}
+}
+
+service BackupService {
+  rpc Query (api.QueryRequest) returns (api.Response) {}
+  rpc Get (api.GetOrDeleteRequest) returns (api.Response) {}
+  rpc Delete (api.GetOrDeleteRequest) returns (api.Response) {}
+  rpc Update (api.UpdateRequest) returns (api.Response) {}
+  rpc Import (api.QueryRequest) returns (api.Response) {}
+  rpc Export (api.QueryRequest) returns (api.Response) {}
+  rpc Upload(stream UploadFileRequest) returns (api.Response) {}
+  rpc Download(api.GetOrDeleteRequest) returns (stream DownloadFileResponse) {}
+}
+
+service TaskManagerService {
+  rpc Query (api.QueryRequest) returns (api.Response) {}
+  rpc Get (api.GetOrDeleteRequest) returns (api.Response) {}
+  rpc Delete (api.GetOrDeleteRequest) returns (api.Response) {}
+  rpc Update (api.UpdateRequest) returns (api.Response) {}
+  rpc Replace (api.UpdateRequest) returns (api.Response) {}
+  rpc Create (api.CreateRequest) returns (api.Response) {}
+}
+
+service MediaLibraryService {
+  rpc Query (MediaLibraryQueryRequest) returns (api.Response) {}
+  rpc UploadFromUrl(MediaLibraryUploadFromUrlRequest) returns (api.Response) {}
+  rpc UploadFromBase64(MediaLibraryUploadFromBase64Request) returns (api.Response) {}
+  rpc Mkdir(MediaLibraryDirMkDirRequest) returns (api.Response) {}
+  rpc DeleteFiles(MediaLibraryDeleteRequest) returns (api.Response) {}
+}
+
+service MediaLibraryDirSettingService {
+  rpc Create (api.CreateRequest) returns (api.Response) {}
+  rpc Delete (api.GetOrDeleteRequest) returns (api.Response) {}
+  rpc Update (api.UpdateRequest) returns (api.Response) {}
+  rpc Replace (api.UpdateRequest) returns (api.Response) {}
+  rpc Get (api.GetOrDeleteRequest) returns (api.Response) {}
+  rpc GetByPath (MediaLibraryDirSettingQueryByPathRequest) returns (api.Response) {}
+  rpc Query (api.QueryRequest) returns (api.Response) {}
+}
+
+message GetDeviceRequest {
+  string driver = 1;
+  string group = 2;
+}
+
+message GetDataDeviceRequest {
+  string driver = 1;
+  string group = 2;
+  string table = 3;
+  string id = 4;
+}
+
+message GetRequestName {
+  string name = 1;
+}
+
+message VerifyAPIKeyRequest {
+  string fullKey = 1;
+}
+
+message VerifyAPIKeyResponse {
+  string userId = 1;
+}
+
+message QueryDataRequest {
+  string table = 1;
+  bytes query = 2;
+}
+
+message GetOrDeleteDataRequest {
+  string table = 1;
+  string id = 2;
+}
+
+message UpdateDataRequest {
+  string table = 1;
+  string id = 2;
+  bytes data = 3;
+  bool  closeRequire = 4;
+}
+
+message MultiUpdateDataRequest {
+  string table = 1;
+  bytes query = 2;
+  bytes data = 3;
+  bool  closeRequire = 4;
+}
+
+message CreateDataRequest {
+  string table = 1;
+  bytes data = 2;
+  bool  closeRequire = 3;
+}
+
+message LoginUserRequest {
+  string token = 1;
+}
+
+message UploadFileRequest {
+  bytes data = 1;
+}
+
+message DownloadFileResponse {
+  bytes data = 1;
+}
+
+message MediaLibraryQueryRequest {
+  string catalog = 1;
+  bool addBase64 = 2;
+  bool isFile = 3;
+  bytes query = 4;
+}
+
+message MediaLibraryUploadFromUrlRequest {
+  string fileUrl = 1;
+  string mediaLibraryPath = 2;
+  string saveFileName = 3;
+  string action = 4;
+  string addBase64 = 5;
+}
+
+message MediaLibraryUploadFromBase64Request {
+  string base64Str = 1;
+  string mediaLibraryPath = 2;
+  string saveFileName = 3;
+  string action = 4;
+}
+
+message MediaLibraryDirSettingQueryByPathRequest {
+  string path = 1;
+}
+
+message MediaLibraryDirMkDirRequest {
+  string catalog = 1;
+  string name = 2;
+}
+
+message MediaLibraryDeleteRequest {
+  repeated string files = 1;
+  bool completeDelete = 2;
+}

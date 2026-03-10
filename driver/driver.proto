@@ -1,0 +1,294 @@
+// protoc -I ./ --go_out=. ./driver/driver.proto
+// protoc -I ./ --go-grpc_out=. driver/driver.proto
+
+syntax = "proto3";
+
+package driver;
+
+import "api/api.proto";
+
+option go_package = "./driver;driver";
+option java_package = "cn.airiot.sdk.driver.grpc.driver";
+option java_multiple_files = true;
+option java_generate_equals_and_hash = true;
+option java_generic_services = false;
+
+service DriverService {
+  // 驱动用
+  rpc HealthCheck (HealthCheckRequest) returns (HealthCheckResponse) {}
+  rpc Event (Request) returns (Response) {}
+  rpc CommandLog (Request) returns (Response) {}
+  rpc UpdateTableData (Request) returns (Response) {}
+  rpc FindTableData (TableDataRequest) returns (Response) {}
+
+  rpc SchemaStream (stream SchemaResult) returns (stream SchemaRequest) {}
+  rpc StartStream (stream StartResult) returns (stream StartRequest) {}
+  rpc RunStream (stream RunResult) returns (stream RunRequest) {}
+  rpc WriteTagStream (stream RunResult) returns (stream RunRequest) {}
+  rpc BatchRunStream (stream BatchRunResult) returns (stream BatchRunRequest) {}
+  rpc DebugStream (stream Debug) returns (stream Debug) {}
+  rpc HttpProxyStream (stream HttpProxyResult) returns (stream HttpProxyRequest) {}
+  rpc ConfigUpdateStream (stream ConfigUpdateResponse) returns (stream ConfigUpdateRequest) {}
+  //  rpc UpdateDeviceStream (stream UpdateDeviceResult) returns (stream UpdateDeviceRequest) {}
+
+  // 平台用
+  rpc BatchCommand (api.CreateRequest) returns (api.Response) {}
+  rpc ChangeCommand (api.UpdateRequest) returns (api.Response) {}
+  rpc HttpProxy (ClientHttpProxyRequest) returns (api.Response) {}
+  rpc WriteTag (api.CreateRequest) returns (api.Response) {}
+  rpc BatchWriteTag (api.CreateRequest) returns (api.Response) {}
+}
+
+service DriverInstanceService {
+  rpc Query (api.QueryRequest) returns (api.Response) {}
+  rpc Get (api.GetOrDeleteRequest) returns (api.Response) {}
+  rpc Delete (api.GetOrDeleteRequest) returns (api.Response) {}
+  rpc Update (api.UpdateRequest) returns (api.Response) {}
+  rpc Replace (api.UpdateRequest) returns (api.Response) {}
+  rpc Create (api.CreateRequest) returns (api.Response) {}
+}
+
+service DriverEventCronService {
+  rpc Query (api.QueryRequest) returns (api.Response) {}
+  rpc Get (api.GetOrDeleteRequest) returns (api.Response) {}
+  rpc Delete (api.GetOrDeleteRequest) returns (api.Response) {}
+  rpc Update (api.UpdateRequest) returns (api.Response) {}
+  rpc Replace (api.UpdateRequest) returns (api.Response) {}
+  rpc Create (api.CreateRequest) returns (api.Response) {}
+  rpc CreateMany (api.CreateRequest) returns (api.Response) {}
+  rpc DeleteMany (api.QueryRequest) returns (api.Response) {}
+}
+
+service DriverInstructCronService {
+  rpc Query (api.QueryRequest) returns (api.Response) {}
+  rpc Get (api.GetOrDeleteRequest) returns (api.Response) {}
+  rpc Delete (api.GetOrDeleteRequest) returns (api.Response) {}
+  rpc Update (api.UpdateRequest) returns (api.Response) {}
+  rpc Replace (api.UpdateRequest) returns (api.Response) {}
+  rpc Create (api.CreateRequest) returns (api.Response) {}
+  rpc CreateMany (api.CreateRequest) returns (api.Response) {}
+  rpc DeleteMany (api.QueryRequest) returns (api.Response) {}
+}
+
+service DriverInstructService {
+  rpc GetCommands (RequestCommand) returns (api.Response) {}
+  rpc Update (api.UpdateRequest) returns (api.Response) {}
+}
+
+message UpdateRequest {
+  string id = 1;
+  bytes data = 2;
+}
+
+message Response {
+  bool status = 1;
+  int32 code = 2;
+  string info = 3;
+  string detail = 4;
+  bytes result = 5;
+}
+
+message HealthCheckRequest {
+  string service = 1;
+  string projectId = 2;
+  string driverId = 3;
+}
+
+message HealthCheckResponse {
+  enum ServingStatus {
+    UNKNOWN = 0;
+    SERVING = 1;
+    NOT_SERVING = 2;
+    SERVICE_UNKNOWN = 3;  // Used only by the Watch method.
+  }
+  ServingStatus status = 1;
+  repeated Error errors = 2;
+}
+
+message Error {
+  enum ErrorCode {
+    Schema = 0;
+    Start = 1;
+    Run = 2;
+    Write = 3;  // Used only by the Watch method.
+    BatchRun = 4;  // Used only by the Watch method.
+    Debug = 5;  // Used only by the Watch method.
+    Health = 6;
+  }
+  ErrorCode code = 1;
+  string message = 2;
+}
+
+message Request {
+  string project = 1;
+  bytes data = 4;
+}
+
+message TableDataRequest {
+  string projectId = 1;
+  string service = 2;
+  string driverId = 3;
+  string tableId = 4;
+  string tableDataId = 5;
+}
+
+message UpdateDeviceRequest {
+  string request = 1;
+  string tableId = 2;
+  bytes data = 3;
+}
+
+message UpdateDeviceResult {
+  string request = 1;
+  bool status = 2;
+  int32 code = 3;
+  string info = 4;
+  string detail = 5;
+  bytes result = 6;
+}
+
+
+message SchemaRequest {
+  string request = 1;
+  string locale = 2;
+}
+
+message SchemaResult {
+  string request = 1;
+  bytes message = 2;
+}
+
+message StartRequest {
+  string request = 1;
+  bytes config = 2;
+}
+
+message StartResult {
+  string request = 1;
+  bytes message = 2;
+}
+
+message RunRequest {
+  string request = 1;
+  string tableId = 2;
+  string id = 3;
+  string serialNo = 4;
+  bytes command = 5;
+}
+
+message RunResult {
+  string request = 1;
+  bytes message = 2;
+}
+
+message BatchRunRequest {
+  string request = 1;
+  string tableId = 2;
+  repeated string id = 3;
+  string serialNo = 4;
+  bytes command = 5;
+}
+
+message BatchRunResult {
+  string request = 1;
+  bytes message = 2;
+}
+
+message Debug {
+  string request = 1;
+  bytes data = 2;
+}
+
+
+message HttpProxyRequest {
+  string request = 1;
+  string type = 2;
+  bytes headers = 3;
+  bytes data = 4;
+}
+
+
+message HttpProxyResult {
+  string request = 1;
+  bytes data = 2;
+}
+
+message ClientHttpProxyRequest {
+  string projectId = 1;
+  string type = 2;
+  string groupId = 3;
+  bytes headers = 4;
+  bytes data = 5;
+}
+
+message RequestCommand {
+  string tableId = 1;
+  string tableDataId = 2;
+}
+
+message ConfigUpdateRequest {
+  string request = 1;
+  enum OpsType {
+    ADD_DEVICE = 0;
+    DEL_DEVICE = 1;
+    EDIT_DEVICE = 2;
+    ADD_TABLE = 3;
+    DEL_TABLE = 4;
+    EDIT_TABLE = 5;
+    EDIT_DRIVER = 6; // 编辑驱动
+  }
+
+  OpsType opsType = 2;
+
+  oneof data {
+    AddDeviceData add_device_data = 3;
+    DelDeviceData del_device_data = 4;
+    EditDeviceData edit_device_data = 5;
+    AddTable  add_table = 6;
+    DelTable del_table = 7;
+    EditTable edit_table = 8;
+    EditDriver edit_driver = 9;
+  }
+
+  message AddDeviceData {
+    string tableId = 1;
+    string tableDataId = 2;
+    bytes tableData = 3; // 字节数组
+  }
+
+  message EditDeviceData {
+    string tableId = 1;
+    string tableDataId = 2;
+    bytes tableData = 3; // 字节数组
+  }
+
+  message DelDeviceData {
+    string tableId = 1;
+    string tableDataId = 2;
+  }
+
+  message AddTable {
+    string tableId = 1;
+    bytes table = 2; // 字节数组
+  }
+
+  message DelTable {
+    string tableId = 1;
+  }
+
+  message EditTable {
+    string tableId = 1;
+    bytes table = 2; // 字节数组
+  }
+
+  message EditDriver {
+    bytes driver = 1; // 字节数组
+  }
+}
+
+message ConfigUpdateResponse {
+  string request = 1;
+  bool status = 2;
+  string info = 3;
+  string detail = 4;
+}
