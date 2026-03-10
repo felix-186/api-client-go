@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/zhgqiang/api-client-go/jsserver"
+	"github.com/zhgqiang/api-client-go/v4/jsserver"
 	"github.com/zhgqiang/errors"
 	"github.com/zhgqiang/json"
 )

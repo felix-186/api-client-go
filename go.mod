@@ -1,4 +1,4 @@
-module github.com/zhgqiang/api-client-go
+module github.com/zhgqiang/api-client-go/v4
 
 go 1.24
 

@@ -6,11 +6,11 @@ import (
 	"sync"
 	"time"
 
-	"github.com/zhgqiang/api-client-go/api"
-	context2 "github.com/zhgqiang/api-client-go/apicontext"
-	"github.com/zhgqiang/api-client-go/config"
-	"github.com/zhgqiang/api-client-go/core"
-	"github.com/zhgqiang/api-client-go/spm"
+	"github.com/zhgqiang/api-client-go/v4/api"
+	context2 "github.com/zhgqiang/api-client-go/v4/apicontext"
+	"github.com/zhgqiang/api-client-go/v4/config"
+	"github.com/zhgqiang/api-client-go/v4/core"
+	"github.com/zhgqiang/api-client-go/v4/spm"
 	"github.com/zhgqiang/errors"
 	"github.com/zhgqiang/json"
 )

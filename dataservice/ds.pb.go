@@ -13,7 +13,7 @@
 package dataservice
 
 import (
-	api "github.com/zhgqiang/api-client-go/api"
+	api "github.com/zhgqiang/api-client-go/v4/api"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"

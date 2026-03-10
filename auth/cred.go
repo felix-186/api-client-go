@@ -6,8 +6,8 @@ import (
 
 	"github.com/go-kratos/kratos/v2/middleware"
 	"github.com/go-kratos/kratos/v2/transport"
-	"github.com/zhgqiang/api-client-go/apitransport"
-	"github.com/zhgqiang/api-client-go/config"
+	"github.com/zhgqiang/api-client-go/v4/apitransport"
+	"github.com/zhgqiang/api-client-go/v4/config"
 	"github.com/zhgqiang/errors"
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/metadata"

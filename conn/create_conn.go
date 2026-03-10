@@ -17,9 +17,9 @@ import (
 	"github.com/zhgqiang/logger"
 	ggrpc "google.golang.org/grpc"
 
-	"github.com/zhgqiang/api-client-go/config"
-	internalError "github.com/zhgqiang/api-client-go/errors"
-	"github.com/zhgqiang/api-client-go/filter"
+	"github.com/zhgqiang/api-client-go/v4/config"
+	internalError "github.com/zhgqiang/api-client-go/v4/errors"
+	"github.com/zhgqiang/api-client-go/v4/filter"
 )
 
 func CreateConn(serviceName string, cfg config.Config, r *etcd.Registry, opts ...ggrpc.DialOption) (*ggrpc.ClientConn, error) {

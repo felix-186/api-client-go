@@ -3,9 +3,9 @@ package api_client_go
 import (
 	"context"
 
-	"github.com/zhgqiang/api-client-go/api"
-	"github.com/zhgqiang/api-client-go/apicontext"
-	"github.com/zhgqiang/api-client-go/config"
+	"github.com/zhgqiang/api-client-go/v4/api"
+	"github.com/zhgqiang/api-client-go/v4/apicontext"
+	"github.com/zhgqiang/api-client-go/v4/config"
 	"github.com/zhgqiang/errors"
 	"github.com/zhgqiang/json"
 )
