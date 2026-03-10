@@ -3,13 +3,13 @@ package algorithm
 import (
 	"sync"
 
-	"github.com/air-iot/api-client-go/v4/config"
-	"github.com/air-iot/api-client-go/v4/conn"
-	"github.com/air-iot/errors"
-	"github.com/air-iot/logger"
 	"github.com/go-kratos/kratos/contrib/registry/etcd/v2"
 	"github.com/go-kratos/kratos/v2/middleware"
 	"github.com/go-kratos/kratos/v2/transport/http"
+	"github.com/zhgqiang/api-client-go/config"
+	"github.com/zhgqiang/api-client-go/conn"
+	"github.com/zhgqiang/errors"
+	"github.com/zhgqiang/logger"
 	"google.golang.org/grpc"
 )
 

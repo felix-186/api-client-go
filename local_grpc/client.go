@@ -2,8 +2,8 @@ package local_grpc
 
 import (
 	"context"
-	"github.com/air-iot/api-client-go/v4/auth"
-	"github.com/air-iot/api-client-go/v4/config"
+	"github.com/zhgqiang/api-client-go/auth"
+	"github.com/zhgqiang/api-client-go/config"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/metadata"

@@ -7,7 +7,7 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/air-iot/logger"
+	"github.com/zhgqiang/logger"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/encoding"

@@ -14,7 +14,7 @@ package algorithm;
 import "api/api.proto";
 
 option go_package = "./algorithm;algorithm";
-option java_package = "cn.airiot.sdk.algorithm.grpc.algorithm";
+option java_package = "cn.gtsiot.sdk.algorithm.grpc.algorithm";
 option java_multiple_files = true;
 option java_generate_equals_and_hash = true;
 option java_generic_services = false;

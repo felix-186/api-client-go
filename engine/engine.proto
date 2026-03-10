@@ -9,7 +9,7 @@ import "api/api.proto";
 package engine;
 
 option go_package = "./engine;engine";
-option java_package = "cn.airiot.sdk.client.dubbo.grpc.engine";
+option java_package = "cn.gtsiot.sdk.client.dubbo.grpc.engine";
 option java_multiple_files = true;
 option java_generate_equals_and_hash = true;
 option java_generic_services = true;

@@ -2,10 +2,10 @@ package errors
 
 import (
 	"fmt"
-	"github.com/air-iot/api-client-go/v4/api"
-	"github.com/air-iot/json"
+	"github.com/zhgqiang/api-client-go/api"
+	"github.com/zhgqiang/json"
 
-	"github.com/air-iot/errors"
+	"github.com/zhgqiang/errors"
 )
 
 // ResponseError 定义响应错误

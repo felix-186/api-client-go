@@ -16,14 +16,14 @@ import (
 	"strings"
 	"time"
 
-	"github.com/air-iot/api-client-go/v4/api"
-	"github.com/air-iot/api-client-go/v4/apicontext"
-	"github.com/air-iot/api-client-go/v4/apitransport"
-	"github.com/air-iot/api-client-go/v4/config"
-	"github.com/air-iot/api-client-go/v4/core"
-	"github.com/air-iot/errors"
-	"github.com/air-iot/json"
-	"github.com/air-iot/logger"
+	"github.com/zhgqiang/api-client-go/api"
+	"github.com/zhgqiang/api-client-go/apicontext"
+	"github.com/zhgqiang/api-client-go/apitransport"
+	"github.com/zhgqiang/api-client-go/config"
+	"github.com/zhgqiang/api-client-go/core"
+	"github.com/zhgqiang/errors"
+	"github.com/zhgqiang/json"
+	"github.com/zhgqiang/logger"
 )
 
 // MediaFile 媒体库文件

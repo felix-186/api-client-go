@@ -4,10 +4,10 @@ import (
 	"context"
 	"time"
 
-	"github.com/air-iot/api-client-go/v4/lock"
-	"github.com/air-iot/errors"
-	"github.com/air-iot/logger"
 	gocache "github.com/patrickmn/go-cache"
+	"github.com/zhgqiang/api-client-go/lock"
+	"github.com/zhgqiang/errors"
+	"github.com/zhgqiang/logger"
 )
 
 type Service struct {

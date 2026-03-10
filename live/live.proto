@@ -10,7 +10,7 @@ package live;
 import "api/api.proto";
 
 option go_package = "./live;live";
-option java_package = "cn.airiot.sdk.client.dubbo.grpc.live";
+option java_package = "cn.gtsiot.sdk.client.dubbo.grpc.live";
 option java_multiple_files = true;
 option java_generate_equals_and_hash = true;
 option java_generic_services = true;

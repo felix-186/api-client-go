@@ -13,7 +13,7 @@
 package core
 
 import (
-	api "github.com/air-iot/api-client-go/v4/api"
+	api "github.com/zhgqiang/api-client-go/api"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -1292,7 +1292,7 @@ const file_core_core_proto_rawDesc = "" +
 	"\x03Get\x12\x17.api.GetOrDeleteRequest\x1a\r.api.Response\"\x00\x12L\n" +
 	"\tGetByPath\x12..core.MediaLibraryDirSettingQueryByPathRequest\x1a\r.api.Response\"\x00\x12+\n" +
 	"\x05Query\x12\x11.api.QueryRequest\x1a\r.api.Response\"\x00B;\n" +
-	"$cn.airiot.sdk.client.dubbo.grpc.coreP\x01Z\v./core;core\x88\x01\x01\xa0\x01\x01b\x06proto3"
+	"$cn.gtsiot.sdk.client.dubbo.grpc.coreP\x01Z\v./core;core\x88\x01\x01\xa0\x01\x01b\x06proto3"
 
 var (
 	file_core_core_proto_rawDescOnce sync.Once

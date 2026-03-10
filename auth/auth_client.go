@@ -6,13 +6,13 @@ import (
 	"sync"
 	"time"
 
-	"github.com/air-iot/api-client-go/v4/api"
-	context2 "github.com/air-iot/api-client-go/v4/apicontext"
-	"github.com/air-iot/api-client-go/v4/config"
-	"github.com/air-iot/api-client-go/v4/core"
-	"github.com/air-iot/api-client-go/v4/spm"
-	"github.com/air-iot/errors"
-	"github.com/air-iot/json"
+	"github.com/zhgqiang/api-client-go/api"
+	context2 "github.com/zhgqiang/api-client-go/apicontext"
+	"github.com/zhgqiang/api-client-go/config"
+	"github.com/zhgqiang/api-client-go/core"
+	"github.com/zhgqiang/api-client-go/spm"
+	"github.com/zhgqiang/errors"
+	"github.com/zhgqiang/json"
 )
 
 type Token struct {

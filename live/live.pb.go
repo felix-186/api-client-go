@@ -13,7 +13,7 @@
 package live
 
 import (
-	api "github.com/air-iot/api-client-go/v4/api"
+	api "github.com/zhgqiang/api-client-go/api"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -85,7 +85,7 @@ const file_live_live_proto_rawDesc = "" +
 	"\x10QueryStreamsInfo\x12\x11.api.QueryRequest\x1a\r.api.Response\"\x00\x12-\n" +
 	"\x06Create\x12\x12.api.CreateRequest\x1a\r.api.Response\"\x00\x12R\n" +
 	"\x16StopStreamByStreamPath\x12'.live.LiveStopStreamByStreamPathRequest\x1a\r.api.Response\"\x00B;\n" +
-	"$cn.airiot.sdk.client.dubbo.grpc.liveP\x01Z\v./live;live\x88\x01\x01\xa0\x01\x01b\x06proto3"
+	"$cn.gtsiot.sdk.client.dubbo.grpc.liveP\x01Z\v./live;live\x88\x01\x01\xa0\x01\x01b\x06proto3"
 
 var (
 	file_live_live_proto_rawDescOnce sync.Once

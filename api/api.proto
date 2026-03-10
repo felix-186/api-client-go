@@ -7,8 +7,8 @@ syntax = "proto3";
 
 package api;
 
-option go_package = "github.com/air-iot/api-client-go/v4/api;api";
-option java_package = "cn.airiot.sdk.client.dubbo.grpc.api";
+option go_package = "github.com/zhgqiang/api-client-go/api;api";
+option java_package = "cn.gtsiot.sdk.client.dubbo.grpc.api";
 option java_multiple_files = true;
 option java_generate_equals_and_hash = true;
 option java_generic_services = true;

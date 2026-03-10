@@ -4,9 +4,9 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/air-iot/api-client-go/v4/jsserver"
-	"github.com/air-iot/errors"
-	"github.com/air-iot/json"
+	"github.com/zhgqiang/api-client-go/jsserver"
+	"github.com/zhgqiang/errors"
+	"github.com/zhgqiang/json"
 )
 
 func (c *Client) RunJsScript(ctx context.Context, variables interface{}, script string) ([]byte, error) {

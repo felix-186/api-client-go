@@ -6,35 +6,35 @@ import (
 	"time"
 
 	"dario.cat/mergo"
-	"github.com/air-iot/api-client-go/v4/ai"
-	"github.com/air-iot/api-client-go/v4/algorithm"
-	"github.com/air-iot/api-client-go/v4/api"
-	"github.com/air-iot/api-client-go/v4/auth"
-	"github.com/air-iot/api-client-go/v4/computerecord"
-	"github.com/air-iot/api-client-go/v4/config"
-	"github.com/air-iot/api-client-go/v4/core"
-	"github.com/air-iot/api-client-go/v4/datarelay"
-	"github.com/air-iot/api-client-go/v4/dataservice"
-	"github.com/air-iot/api-client-go/v4/driver"
-	"github.com/air-iot/api-client-go/v4/engine"
-	internalError "github.com/air-iot/api-client-go/v4/errors"
-	"github.com/air-iot/api-client-go/v4/flow"
-	"github.com/air-iot/api-client-go/v4/jsserver"
-	"github.com/air-iot/api-client-go/v4/live"
-	"github.com/air-iot/api-client-go/v4/local_grpc"
-	"github.com/air-iot/api-client-go/v4/record"
-	"github.com/air-iot/api-client-go/v4/report"
-	"github.com/air-iot/api-client-go/v4/spm"
-	"github.com/air-iot/api-client-go/v4/sync"
-	"github.com/air-iot/api-client-go/v4/syslog"
-	"github.com/air-iot/api-client-go/v4/warning"
-	"github.com/air-iot/errors"
-	"github.com/air-iot/json"
 	etcdConfig "github.com/go-kratos/kratos/contrib/config/etcd/v2"
 	"github.com/go-kratos/kratos/contrib/registry/etcd/v2"
 	kratosConfig "github.com/go-kratos/kratos/v2/config"
 	"github.com/go-kratos/kratos/v2/config/env"
 	"github.com/spf13/viper"
+	"github.com/zhgqiang/api-client-go/ai"
+	"github.com/zhgqiang/api-client-go/algorithm"
+	"github.com/zhgqiang/api-client-go/api"
+	"github.com/zhgqiang/api-client-go/auth"
+	"github.com/zhgqiang/api-client-go/computerecord"
+	"github.com/zhgqiang/api-client-go/config"
+	"github.com/zhgqiang/api-client-go/core"
+	"github.com/zhgqiang/api-client-go/datarelay"
+	"github.com/zhgqiang/api-client-go/dataservice"
+	"github.com/zhgqiang/api-client-go/driver"
+	"github.com/zhgqiang/api-client-go/engine"
+	internalError "github.com/zhgqiang/api-client-go/errors"
+	"github.com/zhgqiang/api-client-go/flow"
+	"github.com/zhgqiang/api-client-go/jsserver"
+	"github.com/zhgqiang/api-client-go/live"
+	"github.com/zhgqiang/api-client-go/local_grpc"
+	"github.com/zhgqiang/api-client-go/record"
+	"github.com/zhgqiang/api-client-go/report"
+	"github.com/zhgqiang/api-client-go/spm"
+	"github.com/zhgqiang/api-client-go/sync"
+	"github.com/zhgqiang/api-client-go/syslog"
+	"github.com/zhgqiang/api-client-go/warning"
+	"github.com/zhgqiang/errors"
+	"github.com/zhgqiang/json"
 	clientv3 "go.etcd.io/etcd/client/v3"
 	"google.golang.org/grpc"
 )
@@ -70,7 +70,7 @@ func NewClient(cli *clientv3.Client, cfg config.Config) (*Client, func(), error)
 
 func NewLocalClient(cfg config.Config, ss *local_grpc.Server) (*Client, func(), error) {
 	if cfg.EtcdConfig == "" {
-		cfg.EtcdConfig = "/airiot/config/pro.json"
+		cfg.EtcdConfig = "/config/pro.json"
 	}
 	if cfg.Timeout == 0 {
 		cfg.Timeout = 120
@@ -209,7 +209,7 @@ func NewLocalClient(cfg config.Config, ss *local_grpc.Server) (*Client, func(), 
 
 func newGrpcClient(cli *clientv3.Client, cfg config.Config) (*Client, func(), error) {
 	if cfg.EtcdConfig == "" {
-		cfg.EtcdConfig = "/airiot/config/pro.json"
+		cfg.EtcdConfig = "/config/pro.json"
 	}
 	if cfg.ExpirePrecision == 0 {
 		cfg.ExpirePrecision = 120

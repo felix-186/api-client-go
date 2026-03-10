@@ -4,12 +4,12 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/air-iot/api-client-go/v4/algorithm"
-	"github.com/air-iot/api-client-go/v4/api"
-	"github.com/air-iot/api-client-go/v4/apicontext"
-	"github.com/air-iot/api-client-go/v4/config"
-	"github.com/air-iot/errors"
-	"github.com/air-iot/json"
+	"github.com/zhgqiang/api-client-go/algorithm"
+	"github.com/zhgqiang/api-client-go/api"
+	"github.com/zhgqiang/api-client-go/apicontext"
+	"github.com/zhgqiang/api-client-go/config"
+	"github.com/zhgqiang/errors"
+	"github.com/zhgqiang/json"
 )
 
 // AlgorithmRunById 算法执行

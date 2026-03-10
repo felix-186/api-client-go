@@ -3,8 +3,8 @@ package metadata
 import (
 	"context"
 
-	"github.com/air-iot/api-client-go/v4/config"
-	"github.com/air-iot/errors"
+	"github.com/zhgqiang/api-client-go/config"
+	"github.com/zhgqiang/errors"
 	"google.golang.org/grpc/metadata"
 )
 

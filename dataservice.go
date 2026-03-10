@@ -5,14 +5,14 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/air-iot/api-client-go/v4/apicontext"
-	"github.com/air-iot/errors"
-	"github.com/air-iot/json"
+	"github.com/zhgqiang/api-client-go/apicontext"
+	"github.com/zhgqiang/errors"
+	"github.com/zhgqiang/json"
 
-	"github.com/air-iot/api-client-go/v4/api"
-	"github.com/air-iot/api-client-go/v4/config"
-	"github.com/air-iot/api-client-go/v4/dataservice"
-	internalError "github.com/air-iot/api-client-go/v4/errors"
+	"github.com/zhgqiang/api-client-go/api"
+	"github.com/zhgqiang/api-client-go/config"
+	"github.com/zhgqiang/api-client-go/dataservice"
+	internalError "github.com/zhgqiang/api-client-go/errors"
 )
 
 type ProxyResult struct {

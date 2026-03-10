@@ -5,7 +5,7 @@ import (
 
 	"github.com/go-kratos/kratos/v2/selector"
 
-	"github.com/air-iot/logger"
+	"github.com/zhgqiang/logger"
 )
 
 // Metadata is metadata filter.
