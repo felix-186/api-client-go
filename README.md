@@ -5,7 +5,7 @@
 当前模块名：
 
 ```go
-module github.com/zhgqiang/api-client-go/v4
+module github.com/zhgqiang/api-client-go
 ```
 
 ## 功能概览
@@ -41,7 +41,7 @@ module github.com/zhgqiang/api-client-go/v4
 ## 安装
 
 ```bash
-go get github.com/zhgqiang/api-client-go/v4
+go get github.com/zhgqiang/api-client-go
 ```
 
 ## 依赖要求
@@ -74,8 +74,8 @@ import (
     "log"
     "time"
 
-    api_client_go "github.com/zhgqiang/api-client-go/v4"
-    "github.com/zhgqiang/api-client-go/v4/config"
+    api_client_go "github.com/zhgqiang/api-client-go"
+    "github.com/zhgqiang/api-client-go/config"
     clientv3 "go.etcd.io/etcd/client/v3"
     "google.golang.org/grpc"
 )

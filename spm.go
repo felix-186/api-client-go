@@ -2,11 +2,11 @@ package api_client_go
 
 import (
 	"context"
-	"github.com/zhgqiang/api-client-go/v4/apicontext"
+	"github.com/zhgqiang/api-client-go/apicontext"
 	netHttp "net/http"
 	"net/url"
 
-	"github.com/zhgqiang/api-client-go/v4/api"
+	"github.com/zhgqiang/api-client-go/api"
 	"github.com/zhgqiang/errors"
 	"github.com/zhgqiang/json"
 )

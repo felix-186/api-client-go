@@ -3,7 +3,7 @@ package apicontext
 import (
 	"context"
 
-	"github.com/zhgqiang/api-client-go/v4/config"
+	"github.com/zhgqiang/api-client-go/config"
 	"google.golang.org/grpc/metadata"
 )
 

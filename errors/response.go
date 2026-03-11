@@ -2,7 +2,7 @@ package errors
 
 import (
 	"fmt"
-	"github.com/zhgqiang/api-client-go/v4/api"
+	"github.com/zhgqiang/api-client-go/api"
 	"github.com/zhgqiang/json"
 
 	"github.com/zhgqiang/errors"

@@ -16,7 +16,7 @@ package algorithm
 
 import (
 	context "context"
-	api "github.com/zhgqiang/api-client-go/v4/api"
+	api "github.com/zhgqiang/api-client-go/api"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
