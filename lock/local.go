@@ -5,7 +5,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/zhgqiang/errors"
+	"github.com/felix-186/errors"
 )
 
 // KeyInfo 结构体，用于存储每个 key 的锁和过期时间

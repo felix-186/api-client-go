@@ -4,10 +4,10 @@ import (
 	"context"
 	"time"
 
+	"github.com/felix-186/api-client-go/lock"
+	"github.com/felix-186/errors"
+	"github.com/felix-186/logger"
 	gocache "github.com/patrickmn/go-cache"
-	"github.com/zhgqiang/api-client-go/lock"
-	"github.com/zhgqiang/errors"
-	"github.com/zhgqiang/logger"
 )
 
 type Service struct {

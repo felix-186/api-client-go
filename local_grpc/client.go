@@ -2,8 +2,8 @@ package local_grpc
 
 import (
 	"context"
-	"github.com/zhgqiang/api-client-go/auth"
-	"github.com/zhgqiang/api-client-go/config"
+	"github.com/felix-186/api-client-go/auth"
+	"github.com/felix-186/api-client-go/config"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/metadata"

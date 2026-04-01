@@ -1,17 +1,17 @@
-module github.com/zhgqiang/api-client-go
+module github.com/felix-186/api-client-go
 
 go 1.24.0
 
 require (
 	dario.cat/mergo v1.0.2
+	github.com/felix-186/errors v0.1.1
+	github.com/felix-186/json v0.1.3
+	github.com/felix-186/logger v0.1.3
 	github.com/go-kratos/kratos/contrib/config/etcd/v2 v2.0.0-20260310032732-f85662384a8c
 	github.com/go-kratos/kratos/contrib/registry/etcd/v2 v2.0.0-20260310032732-f85662384a8c
 	github.com/go-kratos/kratos/v2 v2.9.2
 	github.com/patrickmn/go-cache v2.1.0+incompatible
 	github.com/spf13/viper v1.21.0
-	github.com/zhgqiang/errors v0.1.0
-	github.com/zhgqiang/json v0.1.2
-	github.com/zhgqiang/logger v0.1.2
 	go.etcd.io/etcd/client/v3 v3.6.8
 	go.opentelemetry.io/otel v1.39.0
 	go.opentelemetry.io/otel/sdk v1.39.0

@@ -2,10 +2,11 @@ package errors
 
 import (
 	"fmt"
-	"github.com/zhgqiang/api-client-go/api"
-	"github.com/zhgqiang/json"
 
-	"github.com/zhgqiang/errors"
+	"github.com/felix-186/api-client-go/api"
+	"github.com/felix-186/json"
+
+	"github.com/felix-186/errors"
 )
 
 // ResponseError 定义响应错误

@@ -7,7 +7,7 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/zhgqiang/logger"
+	"github.com/felix-186/logger"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/encoding"

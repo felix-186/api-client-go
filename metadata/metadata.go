@@ -3,8 +3,8 @@ package metadata
 import (
 	"context"
 
-	"github.com/zhgqiang/api-client-go/config"
-	"github.com/zhgqiang/errors"
+	"github.com/felix-186/api-client-go/config"
+	"github.com/felix-186/errors"
 	"google.golang.org/grpc/metadata"
 )
 

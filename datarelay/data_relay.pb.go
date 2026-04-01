@@ -12,7 +12,7 @@
 package datarelay
 
 import (
-	api "github.com/zhgqiang/api-client-go/api"
+	api "github.com/felix-186/api-client-go/api"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"

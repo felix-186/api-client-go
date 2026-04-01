@@ -16,14 +16,14 @@ import (
 	"strings"
 	"time"
 
-	"github.com/zhgqiang/api-client-go/api"
-	"github.com/zhgqiang/api-client-go/apicontext"
-	"github.com/zhgqiang/api-client-go/apitransport"
-	"github.com/zhgqiang/api-client-go/config"
-	"github.com/zhgqiang/api-client-go/core"
-	"github.com/zhgqiang/errors"
-	"github.com/zhgqiang/json"
-	"github.com/zhgqiang/logger"
+	"github.com/felix-186/api-client-go/api"
+	"github.com/felix-186/api-client-go/apicontext"
+	"github.com/felix-186/api-client-go/apitransport"
+	"github.com/felix-186/api-client-go/config"
+	"github.com/felix-186/api-client-go/core"
+	"github.com/felix-186/errors"
+	"github.com/felix-186/json"
+	"github.com/felix-186/logger"
 )
 
 // MediaFile 媒体库文件

@@ -4,9 +4,9 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/zhgqiang/api-client-go/jsserver"
-	"github.com/zhgqiang/errors"
-	"github.com/zhgqiang/json"
+	"github.com/felix-186/api-client-go/jsserver"
+	"github.com/felix-186/errors"
+	"github.com/felix-186/json"
 )
 
 func (c *Client) RunJsScript(ctx context.Context, variables interface{}, script string) ([]byte, error) {

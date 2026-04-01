@@ -7,19 +7,19 @@ import (
 	netHttp "net/http"
 	"time"
 
+	"github.com/felix-186/errors"
+	"github.com/felix-186/logger"
 	"github.com/go-kratos/kratos/contrib/registry/etcd/v2"
 	"github.com/go-kratos/kratos/v2/middleware"
 	"github.com/go-kratos/kratos/v2/middleware/recovery"
 	"github.com/go-kratos/kratos/v2/middleware/tracing"
 	"github.com/go-kratos/kratos/v2/transport/grpc"
 	"github.com/go-kratos/kratos/v2/transport/http"
-	"github.com/zhgqiang/errors"
-	"github.com/zhgqiang/logger"
 	ggrpc "google.golang.org/grpc"
 
-	"github.com/zhgqiang/api-client-go/config"
-	internalError "github.com/zhgqiang/api-client-go/errors"
-	"github.com/zhgqiang/api-client-go/filter"
+	"github.com/felix-186/api-client-go/config"
+	internalError "github.com/felix-186/api-client-go/errors"
+	"github.com/felix-186/api-client-go/filter"
 )
 
 func CreateConn(serviceName string, cfg config.Config, r *etcd.Registry, opts ...ggrpc.DialOption) (*ggrpc.ClientConn, error) {

@@ -3,13 +3,13 @@ package dataservice
 import (
 	"sync"
 
+	"github.com/felix-186/api-client-go/config"
+	"github.com/felix-186/api-client-go/conn"
+	"github.com/felix-186/errors"
+	"github.com/felix-186/logger"
 	"github.com/go-kratos/kratos/contrib/registry/etcd/v2"
 	"github.com/go-kratos/kratos/v2/middleware"
 	"github.com/go-kratos/kratos/v2/transport/http"
-	"github.com/zhgqiang/api-client-go/config"
-	"github.com/zhgqiang/api-client-go/conn"
-	"github.com/zhgqiang/errors"
-	"github.com/zhgqiang/logger"
 	"google.golang.org/grpc"
 )
 
