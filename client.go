@@ -16,7 +16,6 @@ import (
 	"github.com/felix-186/api-client-go/datarelay"
 	"github.com/felix-186/api-client-go/dataservice"
 	"github.com/felix-186/api-client-go/driver"
-	"github.com/felix-186/api-client-go/engine"
 	internalError "github.com/felix-186/api-client-go/errors"
 	"github.com/felix-186/api-client-go/flow"
 	"github.com/felix-186/api-client-go/jsserver"
@@ -50,7 +49,6 @@ type Client struct {
 	WarningClient       *warning.Client
 	DriverClient        *driver.Client
 	DataServiceClient   *dataservice.Client
-	FlowEngineClient    *engine.Client
 	ReportClient        *report.Client
 	LiveClient          *live.Client
 	AlgorithmClient     *algorithm.Client
@@ -115,10 +113,6 @@ func NewLocalClient(cfg config.Config, ss *local_grpc.Server) (*Client, func(), 
 	if err != nil {
 		return nil, nil, err
 	}
-	flowEngineClient, cleanFlowEngine, err := engine.NewLocalClient(cfg, cc)
-	if err != nil {
-		return nil, nil, err
-	}
 	reportClient, cleanReport, err := report.NewLocalClient(cfg, cc)
 	if err != nil {
 		return nil, nil, err
@@ -173,7 +167,6 @@ func NewLocalClient(cfg config.Config, ss *local_grpc.Server) (*Client, func(), 
 		WarningClient:     warningClient,
 		DriverClient:      driverClient,
 		DataServiceClient: dataServiceClient,
-		FlowEngineClient:  flowEngineClient,
 		ReportClient:      reportClient,
 		LiveClient:        liveClient,
 		AlgorithmClient:   algorithmClient,
@@ -193,7 +186,6 @@ func NewLocalClient(cfg config.Config, ss *local_grpc.Server) (*Client, func(), 
 		cleanWarning()
 		cleanDriver()
 		cleanDataService()
-		cleanFlowEngine()
 		cleanReport()
 		cleanLive()
 		cleanAlgorithm()
@@ -297,10 +289,6 @@ func newGrpcClient(cli *clientv3.Client, cfg config.Config) (*Client, func(), er
 	if err != nil {
 		return nil, nil, err
 	}
-	flowEngineClient, cleanFlowEngine, err := engine.NewClient(cfg, r, cred, httpCred)
-	if err != nil {
-		return nil, nil, err
-	}
 	reportClient, cleanReport, err := report.NewClient(cfg, r, cred, httpCred)
 	if err != nil {
 		return nil, nil, err
@@ -350,7 +338,6 @@ func newGrpcClient(cli *clientv3.Client, cfg config.Config) (*Client, func(), er
 		WarningClient:       warningClient,
 		DriverClient:        driverClient,
 		DataServiceClient:   dataServiceClient,
-		FlowEngineClient:    flowEngineClient,
 		ReportClient:        reportClient,
 		LiveClient:          liveClient,
 		AlgorithmClient:     algorithmClient,
@@ -373,7 +360,6 @@ func newGrpcClient(cli *clientv3.Client, cfg config.Config) (*Client, func(), er
 		cleanWarning()
 		cleanDriver()
 		cleanDataService()
-		cleanFlowEngine()
 		cleanReport()
 		cleanLive()
 		cleanAlgorithm()

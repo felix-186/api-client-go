@@ -6,7 +6,7 @@ import (
 	"github.com/felix-186/api-client-go/api"
 	"github.com/felix-186/api-client-go/apicontext"
 	"github.com/felix-186/api-client-go/config"
-	"github.com/felix-186/api-client-go/engine"
+	"github.com/felix-186/api-client-go/flow"
 	"github.com/felix-186/errors"
 	"github.com/felix-186/json"
 )
@@ -39,23 +39,23 @@ type Params struct {
 
 type Handler func(param Params, data []byte) (map[string]interface{}, error)
 
-func (c *Client) Run(ctx context.Context, projectId, flowConfig string, elementB []byte, variables map[string]interface{}) (result *engine.RunResponse, err error) {
+func (c *Client) Run(ctx context.Context, projectId, flowConfig string, elementB []byte, variables map[string]interface{}) (result *flow.RunResponse, err error) {
 	b, err := json.Marshal(variables)
 	if err != nil {
 		return nil, errors.Wrap(err, "序列化变量错误")
 	}
-	cli, err := c.FlowEngineClient.GetDataServiceClient()
+	cli, err := c.FlowClient.GetEngineServiceClient()
 	if err != nil {
 		return nil, err
 	}
-	res, err := cli.Run(apicontext.GetGrpcContext(ctx, map[string]string{config.XRequestProject: projectId}), &engine.RunRequest{
+	res, err := cli.Run(apicontext.GetGrpcContext(ctx, map[string]string{config.XRequestProject: projectId}), &flow.RunRequest{
 		ProjectId: projectId,
 		Config:    flowConfig,
 		Variables: b,
 		Element:   elementB,
 	})
 	if res != nil {
-		result = &engine.RunResponse{Job: res.Job}
+		result = &flow.RunResponse{Job: res.Job}
 	}
 	if err != nil {
 		return result, errors.NewResErrorMsg(err, "流程执行错误")
@@ -68,11 +68,11 @@ func (c *Client) Resume(ctx context.Context, projectId, jobId, elementId string,
 	if err != nil {
 		return errors.Wrap(err, "序列化变量错误")
 	}
-	cli, err := c.FlowEngineClient.GetDataServiceClient()
+	cli, err := c.FlowClient.GetEngineServiceClient()
 	if err != nil {
 		return err
 	}
-	if _, err := cli.Resume(apicontext.GetGrpcContext(ctx, map[string]string{config.XRequestProject: projectId}), &engine.ResumeRequest{
+	if _, err := cli.Resume(apicontext.GetGrpcContext(ctx, map[string]string{config.XRequestProject: projectId}), &flow.ResumeRequest{
 		ProjectId: projectId,
 		JobId:     jobId,
 		ElementId: elementId,
@@ -88,11 +88,11 @@ func (c *Client) Revert(ctx context.Context, projectId, jobId, elementId string,
 	if err != nil {
 		return errors.Wrap(err, "序列化变量错误")
 	}
-	cli, err := c.FlowEngineClient.GetDataServiceClient()
+	cli, err := c.FlowClient.GetEngineServiceClient()
 	if err != nil {
 		return err
 	}
-	if _, err := cli.Revert(apicontext.GetGrpcContext(ctx, map[string]string{config.XRequestProject: projectId}), &engine.ResumeRequest{
+	if _, err := cli.Revert(apicontext.GetGrpcContext(ctx, map[string]string{config.XRequestProject: projectId}), &flow.ResumeRequest{
 		ProjectId: projectId,
 		JobId:     jobId,
 		ElementId: elementId,
@@ -108,11 +108,11 @@ func (c *Client) Recall(ctx context.Context, projectId, jobId, elementId string,
 	if err != nil {
 		return errors.Wrap(err, "序列化变量错误")
 	}
-	cli, err := c.FlowEngineClient.GetDataServiceClient()
+	cli, err := c.FlowClient.GetEngineServiceClient()
 	if err != nil {
 		return err
 	}
-	if _, err := cli.Recall(apicontext.GetGrpcContext(ctx, map[string]string{config.XRequestProject: projectId}), &engine.ResumeRequest{
+	if _, err := cli.Recall(apicontext.GetGrpcContext(ctx, map[string]string{config.XRequestProject: projectId}), &flow.ResumeRequest{
 		ProjectId: projectId,
 		JobId:     jobId,
 		ElementId: elementId,
@@ -124,11 +124,11 @@ func (c *Client) Recall(ctx context.Context, projectId, jobId, elementId string,
 }
 
 func (c *Client) Fail(ctx context.Context, projectId, jobId, elementId, errMessage string) error {
-	cli, err := c.FlowEngineClient.GetDataServiceClient()
+	cli, err := c.FlowClient.GetEngineServiceClient()
 	if err != nil {
 		return err
 	}
-	if _, err := cli.Fail(apicontext.GetGrpcContext(ctx, map[string]string{config.XRequestProject: projectId}), &engine.FailRequest{
+	if _, err := cli.Fail(apicontext.GetGrpcContext(ctx, map[string]string{config.XRequestProject: projectId}), &flow.FailRequest{
 		ProjectId:    projectId,
 		JobId:        jobId,
 		ElementId:    elementId,
@@ -147,7 +147,7 @@ func (c *Client) QueryFlowJobCron(ctx context.Context, projectId string, query, 
 	if err != nil {
 		return errors.Wrap(err, "序列化查询参数错误")
 	}
-	cli, err := c.FlowEngineClient.GetFlowJobCronServiceClient()
+	cli, err := c.FlowClient.GetFlowJobCronServiceClient()
 	if err != nil {
 		return err
 	}
@@ -167,7 +167,7 @@ func (c *Client) GetFlowJobCron(ctx context.Context, projectId, id string, resul
 	if id == "" {
 		return nil, errors.New("id为空")
 	}
-	cli, err := c.FlowEngineClient.GetFlowJobCronServiceClient()
+	cli, err := c.FlowClient.GetFlowJobCronServiceClient()
 	if err != nil {
 		return nil, err
 	}
@@ -184,7 +184,7 @@ func (c *Client) DeleteFlowJobCron(ctx context.Context, projectId, id string) er
 	if id == "" {
 		return errors.New("id为空")
 	}
-	cli, err := c.FlowEngineClient.GetFlowJobCronServiceClient()
+	cli, err := c.FlowClient.GetFlowJobCronServiceClient()
 	if err != nil {
 		return err
 	}
@@ -208,7 +208,7 @@ func (c *Client) UpdateFlowJobCron(ctx context.Context, projectId, id string, up
 		return errors.New("更新数据为空")
 	}
 
-	cli, err := c.FlowEngineClient.GetFlowJobCronServiceClient()
+	cli, err := c.FlowClient.GetFlowJobCronServiceClient()
 	if err != nil {
 		return err
 	}
@@ -236,7 +236,7 @@ func (c *Client) ReplaceFlowJobCron(ctx context.Context, projectId, id string, u
 	if updateData == nil {
 		return errors.New("更新数据为空")
 	}
-	cli, err := c.FlowEngineClient.GetFlowJobCronServiceClient()
+	cli, err := c.FlowClient.GetFlowJobCronServiceClient()
 	if err != nil {
 		return err
 	}
@@ -260,7 +260,7 @@ func (c *Client) CreateFlowJobCron(ctx context.Context, projectId string, create
 	if createData == nil {
 		return errors.New("插入数据为空")
 	}
-	cli, err := c.FlowEngineClient.GetFlowJobCronServiceClient()
+	cli, err := c.FlowClient.GetFlowJobCronServiceClient()
 	if err != nil {
 		return err
 	}
@@ -284,7 +284,7 @@ func (c *Client) CreateManyFlowJobCron(ctx context.Context, projectId string, cr
 	if createData == nil {
 		return errors.New("插入数据为空")
 	}
-	cli, err := c.FlowEngineClient.GetFlowJobCronServiceClient()
+	cli, err := c.FlowClient.GetFlowJobCronServiceClient()
 	if err != nil {
 		return err
 	}
@@ -309,7 +309,7 @@ func (c *Client) DeleteManyFlowJobCron(ctx context.Context, projectId string, qu
 	if err != nil {
 		return 0, errors.Wrap(err, "序列化查询参数错误")
 	}
-	cli, err := c.FlowEngineClient.GetFlowJobCronServiceClient()
+	cli, err := c.FlowClient.GetFlowJobCronServiceClient()
 	if err != nil {
 		return 0, err
 	}
@@ -330,7 +330,7 @@ func (c *Client) QueryFlowLogCron(ctx context.Context, projectId string, query, 
 	if err != nil {
 		return errors.Wrap(err, "序列化查询参数错误")
 	}
-	cli, err := c.FlowEngineClient.GetFlowLogCronServiceClient()
+	cli, err := c.FlowClient.GetFlowLogCronServiceClient()
 	if err != nil {
 		return err
 	}
@@ -350,7 +350,7 @@ func (c *Client) GetFlowLogCron(ctx context.Context, projectId, id string, resul
 	if id == "" {
 		return nil, errors.New("id为空")
 	}
-	cli, err := c.FlowEngineClient.GetFlowLogCronServiceClient()
+	cli, err := c.FlowClient.GetFlowLogCronServiceClient()
 	if err != nil {
 		return nil, err
 	}
@@ -367,7 +367,7 @@ func (c *Client) DeleteFlowLogCron(ctx context.Context, projectId, id string) er
 	if id == "" {
 		return errors.New("id为空")
 	}
-	cli, err := c.FlowEngineClient.GetFlowLogCronServiceClient()
+	cli, err := c.FlowClient.GetFlowLogCronServiceClient()
 	if err != nil {
 		return err
 	}
@@ -391,7 +391,7 @@ func (c *Client) UpdateFlowLogCron(ctx context.Context, projectId, id string, up
 		return errors.New("更新数据为空")
 	}
 
-	cli, err := c.FlowEngineClient.GetFlowLogCronServiceClient()
+	cli, err := c.FlowClient.GetFlowLogCronServiceClient()
 	if err != nil {
 		return err
 	}
@@ -416,7 +416,7 @@ func (c *Client) CreateFlowLogCron(ctx context.Context, projectId string, create
 	if createData == nil {
 		return errors.New("插入数据为空")
 	}
-	cli, err := c.FlowEngineClient.GetFlowLogCronServiceClient()
+	cli, err := c.FlowClient.GetFlowLogCronServiceClient()
 	if err != nil {
 		return err
 	}
@@ -440,7 +440,7 @@ func (c *Client) CreateManyFlowLogCron(ctx context.Context, projectId string, cr
 	if createData == nil {
 		return errors.New("插入数据为空")
 	}
-	cli, err := c.FlowEngineClient.GetFlowLogCronServiceClient()
+	cli, err := c.FlowClient.GetFlowLogCronServiceClient()
 	if err != nil {
 		return err
 	}
@@ -465,7 +465,7 @@ func (c *Client) DeleteManyFlowLogCron(ctx context.Context, projectId string, qu
 	if err != nil {
 		return 0, errors.Wrap(err, "序列化查询参数错误")
 	}
-	cli, err := c.FlowEngineClient.GetFlowLogCronServiceClient()
+	cli, err := c.FlowClient.GetFlowLogCronServiceClient()
 	if err != nil {
 		return 0, err
 	}

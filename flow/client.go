@@ -30,6 +30,10 @@ type Client struct {
 	flowTaskClient                 FlowTaskServiceClient
 	flowClient                     FlowServiceClient
 	flowTriggerRecordServiceClient FlowTriggerRecordServiceClient
+	engineServiceClient            EngineServiceClient
+	pluginServiceClient            PluginServiceClient
+	flowJobCronServiceClient       FlowJobCronServiceClient
+	flowLogCronServiceClient       FlowLogCronServiceClient
 }
 
 func NewClient(cfg config.Config, registry *etcd.Registry, cred ggrpc.DialOption, httpCred middleware.Middleware) (*Client, func(), error) {
@@ -68,6 +72,10 @@ func NewLocalClient(cfg config.Config, cc ggrpc.ClientConnInterface) (*Client, f
 	c.flowTaskClient = NewFlowTaskServiceClient(cc)
 	c.flowClient = NewFlowServiceClient(cc)
 	c.flowTriggerRecordServiceClient = NewFlowTriggerRecordServiceClient(cc)
+	c.engineServiceClient = NewEngineServiceClient(cc)
+	c.pluginServiceClient = NewPluginServiceClient(cc)
+	c.flowJobCronServiceClient = NewFlowJobCronServiceClient(cc)
+	c.flowLogCronServiceClient = NewFlowLogCronServiceClient(cc)
 	cleanFunc := func() {}
 	return c, cleanFunc, nil
 }
@@ -86,6 +94,10 @@ func (c *Client) createConn() error {
 	c.flowTaskClient = NewFlowTaskServiceClient(cc)
 	c.flowClient = NewFlowServiceClient(cc)
 	c.flowTriggerRecordServiceClient = NewFlowTriggerRecordServiceClient(cc)
+	c.engineServiceClient = NewEngineServiceClient(cc)
+	c.pluginServiceClient = NewPluginServiceClient(cc)
+	c.flowJobCronServiceClient = NewFlowJobCronServiceClient(cc)
+	c.flowLogCronServiceClient = NewFlowLogCronServiceClient(cc)
 	c.conn = cc
 	return nil
 }
@@ -157,4 +169,64 @@ func (c *Client) GetFlowTriggerRecordServiceClient() (FlowTriggerRecordServiceCl
 		return nil, errors.New("客户端是空")
 	}
 	return c.flowTriggerRecordServiceClient, nil
+}
+
+func (c *Client) GetEngineServiceClient() (EngineServiceClient, error) {
+	if c.engineServiceClient != nil {
+		return c.engineServiceClient, nil
+	}
+	if c.conn == nil {
+		if err := c.createConn(); err != nil {
+			return nil, err
+		}
+	}
+	if c.engineServiceClient == nil {
+		return nil, errors.New("客户端是空")
+	}
+	return c.engineServiceClient, nil
+}
+
+func (c *Client) GetPluginServiceClient() (PluginServiceClient, error) {
+	if c.pluginServiceClient != nil {
+		return c.pluginServiceClient, nil
+	}
+	if c.conn == nil {
+		if err := c.createConn(); err != nil {
+			return nil, err
+		}
+	}
+	if c.pluginServiceClient == nil {
+		return nil, errors.New("客户端是空")
+	}
+	return c.pluginServiceClient, nil
+}
+
+func (c *Client) GetFlowJobCronServiceClient() (FlowJobCronServiceClient, error) {
+	if c.flowJobCronServiceClient != nil {
+		return c.flowJobCronServiceClient, nil
+	}
+	if c.conn == nil {
+		if err := c.createConn(); err != nil {
+			return nil, err
+		}
+	}
+	if c.flowJobCronServiceClient == nil {
+		return nil, errors.New("客户端是空")
+	}
+	return c.flowJobCronServiceClient, nil
+}
+
+func (c *Client) GetFlowLogCronServiceClient() (FlowLogCronServiceClient, error) {
+	if c.flowLogCronServiceClient != nil {
+		return c.flowLogCronServiceClient, nil
+	}
+	if c.conn == nil {
+		if err := c.createConn(); err != nil {
+			return nil, err
+		}
+	}
+	if c.flowLogCronServiceClient == nil {
+		return nil, errors.New("客户端是空")
+	}
+	return c.flowLogCronServiceClient, nil
 }
