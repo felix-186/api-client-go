@@ -27,13 +27,12 @@ type Client struct {
 	opts        []ggrpc.DialOption
 	middlewares []middleware.Middleware
 
-	flowTaskClient                 FlowTaskServiceClient
-	flowClient                     FlowServiceClient
-	flowTriggerRecordServiceClient FlowTriggerRecordServiceClient
-	engineServiceClient            EngineServiceClient
-	pluginServiceClient            PluginServiceClient
-	flowJobCronServiceClient       FlowJobCronServiceClient
-	flowLogCronServiceClient       FlowLogCronServiceClient
+	flowTaskClient           FlowTaskServiceClient
+	flowClient               FlowServiceClient
+	engineServiceClient      EngineServiceClient
+	pluginServiceClient      PluginServiceClient
+	flowJobCronServiceClient FlowJobCronServiceClient
+	flowLogCronServiceClient FlowLogCronServiceClient
 }
 
 func NewClient(cfg config.Config, registry *etcd.Registry, cred ggrpc.DialOption, httpCred middleware.Middleware) (*Client, func(), error) {
@@ -71,7 +70,6 @@ func NewLocalClient(cfg config.Config, cc ggrpc.ClientConnInterface) (*Client, f
 	}
 	c.flowTaskClient = NewFlowTaskServiceClient(cc)
 	c.flowClient = NewFlowServiceClient(cc)
-	c.flowTriggerRecordServiceClient = NewFlowTriggerRecordServiceClient(cc)
 	c.engineServiceClient = NewEngineServiceClient(cc)
 	c.pluginServiceClient = NewPluginServiceClient(cc)
 	c.flowJobCronServiceClient = NewFlowJobCronServiceClient(cc)
@@ -93,7 +91,6 @@ func (c *Client) createConn() error {
 	}
 	c.flowTaskClient = NewFlowTaskServiceClient(cc)
 	c.flowClient = NewFlowServiceClient(cc)
-	c.flowTriggerRecordServiceClient = NewFlowTriggerRecordServiceClient(cc)
 	c.engineServiceClient = NewEngineServiceClient(cc)
 	c.pluginServiceClient = NewPluginServiceClient(cc)
 	c.flowJobCronServiceClient = NewFlowJobCronServiceClient(cc)
@@ -154,21 +151,6 @@ func (c *Client) GetFlowTaskServiceClient() (FlowTaskServiceClient, error) {
 		return nil, errors.New("客户端是空")
 	}
 	return c.flowTaskClient, nil
-}
-
-func (c *Client) GetFlowTriggerRecordServiceClient() (FlowTriggerRecordServiceClient, error) {
-	if c.flowTriggerRecordServiceClient != nil {
-		return c.flowTriggerRecordServiceClient, nil
-	}
-	if c.conn == nil {
-		if err := c.createConn(); err != nil {
-			return nil, err
-		}
-	}
-	if c.flowTriggerRecordServiceClient == nil {
-		return nil, errors.New("客户端是空")
-	}
-	return c.flowTriggerRecordServiceClient, nil
 }
 
 func (c *Client) GetEngineServiceClient() (EngineServiceClient, error) {

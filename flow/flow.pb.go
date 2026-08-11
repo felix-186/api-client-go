@@ -1372,9 +1372,7 @@ const file_flow_flow_proto_rawDesc = "" +
 	"\x06Update\x12\x12.api.UpdateRequest\x1a\r.api.Response\"\x00\x122\n" +
 	"\vBatchCreate\x12\x12.api.CreateRequest\x1a\r.api.Response\"\x00\x122\n" +
 	"\x06Delete\x12\x17.api.GetOrDeleteRequest\x1a\r.api.Response\"\x00\x12.\n" +
-	"\aReplace\x12\x12.api.UpdateRequest\x1a\r.api.Response\"\x002I\n" +
-	"\x18FlowTriggerRecordService\x12-\n" +
-	"\x06Create\x12\x12.api.CreateRequest\x1a\r.api.Response\"\x002\x9d\x02\n" +
+	"\aReplace\x12\x12.api.UpdateRequest\x1a\r.api.Response\"\x002\x9d\x02\n" +
 	"\rEngineService\x12,\n" +
 	"\x03Run\x12\x10.flow.RunRequest\x1a\x11.flow.RunResponse\"\x00\x127\n" +
 	"\x06Resume\x12\x13.flow.ResumeRequest\x1a\x16.google.protobuf.Empty\"\x00\x127\n" +
@@ -1478,77 +1476,75 @@ var file_flow_flow_proto_depIdxs = []int32{
 	21, // 18: flow.FlowService.BatchCreate:input_type -> api.CreateRequest
 	22, // 19: flow.FlowService.Delete:input_type -> api.GetOrDeleteRequest
 	24, // 20: flow.FlowService.Replace:input_type -> api.UpdateRequest
-	21, // 21: flow.FlowTriggerRecordService.Create:input_type -> api.CreateRequest
-	4,  // 22: flow.EngineService.Run:input_type -> flow.RunRequest
-	6,  // 23: flow.EngineService.Resume:input_type -> flow.ResumeRequest
-	6,  // 24: flow.EngineService.Revert:input_type -> flow.ResumeRequest
-	6,  // 25: flow.EngineService.Recall:input_type -> flow.ResumeRequest
-	7,  // 26: flow.EngineService.Fail:input_type -> flow.FailRequest
-	8,  // 27: flow.PluginService.HealthCheck:input_type -> flow.HealthCheckRequest
-	12, // 28: flow.PluginService.Register:input_type -> flow.FlowResponse
-	14, // 29: flow.PluginService.DebugStream:input_type -> flow.DebugResponse
-	15, // 30: flow.ExtensionService.HealthCheck:input_type -> flow.ExtensionHealthCheckRequest
-	20, // 31: flow.ExtensionService.SchemaStream:input_type -> flow.ExtensionResult
-	20, // 32: flow.ExtensionService.RunStream:input_type -> flow.ExtensionResult
-	23, // 33: flow.FlowJobCronService.Query:input_type -> api.QueryRequest
-	22, // 34: flow.FlowJobCronService.Get:input_type -> api.GetOrDeleteRequest
-	22, // 35: flow.FlowJobCronService.Delete:input_type -> api.GetOrDeleteRequest
-	24, // 36: flow.FlowJobCronService.Update:input_type -> api.UpdateRequest
-	24, // 37: flow.FlowJobCronService.Replace:input_type -> api.UpdateRequest
-	21, // 38: flow.FlowJobCronService.Create:input_type -> api.CreateRequest
-	21, // 39: flow.FlowJobCronService.CreateMany:input_type -> api.CreateRequest
-	23, // 40: flow.FlowJobCronService.DeleteMany:input_type -> api.QueryRequest
-	23, // 41: flow.FlowLogCronService.Query:input_type -> api.QueryRequest
-	22, // 42: flow.FlowLogCronService.Get:input_type -> api.GetOrDeleteRequest
-	22, // 43: flow.FlowLogCronService.Delete:input_type -> api.GetOrDeleteRequest
-	24, // 44: flow.FlowLogCronService.Update:input_type -> api.UpdateRequest
-	21, // 45: flow.FlowLogCronService.Create:input_type -> api.CreateRequest
-	21, // 46: flow.FlowLogCronService.CreateMany:input_type -> api.CreateRequest
-	23, // 47: flow.FlowLogCronService.DeleteMany:input_type -> api.QueryRequest
-	26, // 48: flow.FlowTaskService.Create:output_type -> api.Response
-	26, // 49: flow.FlowTaskService.Get:output_type -> api.Response
-	26, // 50: flow.FlowTaskService.Query:output_type -> api.Response
-	26, // 51: flow.FlowTaskService.BatchCreate:output_type -> api.Response
-	26, // 52: flow.FlowTaskService.Update:output_type -> api.Response
-	26, // 53: flow.FlowTaskService.RevertCreate:output_type -> api.Response
-	26, // 54: flow.FlowTaskService.Delete:output_type -> api.Response
-	26, // 55: flow.FlowTaskService.Replace:output_type -> api.Response
-	26, // 56: flow.FlowTaskService.UpdateFilter:output_type -> api.Response
-	26, // 57: flow.FlowService.Query:output_type -> api.Response
-	26, // 58: flow.FlowService.Get:output_type -> api.Response
-	26, // 59: flow.FlowService.Update:output_type -> api.Response
-	26, // 60: flow.FlowService.BatchCreate:output_type -> api.Response
-	26, // 61: flow.FlowService.Delete:output_type -> api.Response
-	26, // 62: flow.FlowService.Replace:output_type -> api.Response
-	26, // 63: flow.FlowTriggerRecordService.Create:output_type -> api.Response
-	5,  // 64: flow.EngineService.Run:output_type -> flow.RunResponse
-	27, // 65: flow.EngineService.Resume:output_type -> google.protobuf.Empty
-	27, // 66: flow.EngineService.Revert:output_type -> google.protobuf.Empty
-	27, // 67: flow.EngineService.Recall:output_type -> google.protobuf.Empty
-	27, // 68: flow.EngineService.Fail:output_type -> google.protobuf.Empty
-	9,  // 69: flow.PluginService.HealthCheck:output_type -> flow.HealthCheckResponse
-	11, // 70: flow.PluginService.Register:output_type -> flow.FlowRequest
-	13, // 71: flow.PluginService.DebugStream:output_type -> flow.DebugRequest
-	16, // 72: flow.ExtensionService.HealthCheck:output_type -> flow.ExtensionHealthCheckResponse
-	18, // 73: flow.ExtensionService.SchemaStream:output_type -> flow.ExtensionSchemaRequest
-	19, // 74: flow.ExtensionService.RunStream:output_type -> flow.ExtensionRunRequest
-	26, // 75: flow.FlowJobCronService.Query:output_type -> api.Response
-	26, // 76: flow.FlowJobCronService.Get:output_type -> api.Response
-	26, // 77: flow.FlowJobCronService.Delete:output_type -> api.Response
-	26, // 78: flow.FlowJobCronService.Update:output_type -> api.Response
-	26, // 79: flow.FlowJobCronService.Replace:output_type -> api.Response
-	26, // 80: flow.FlowJobCronService.Create:output_type -> api.Response
-	26, // 81: flow.FlowJobCronService.CreateMany:output_type -> api.Response
-	26, // 82: flow.FlowJobCronService.DeleteMany:output_type -> api.Response
-	26, // 83: flow.FlowLogCronService.Query:output_type -> api.Response
-	26, // 84: flow.FlowLogCronService.Get:output_type -> api.Response
-	26, // 85: flow.FlowLogCronService.Delete:output_type -> api.Response
-	26, // 86: flow.FlowLogCronService.Update:output_type -> api.Response
-	26, // 87: flow.FlowLogCronService.Create:output_type -> api.Response
-	26, // 88: flow.FlowLogCronService.CreateMany:output_type -> api.Response
-	26, // 89: flow.FlowLogCronService.DeleteMany:output_type -> api.Response
-	48, // [48:90] is the sub-list for method output_type
-	6,  // [6:48] is the sub-list for method input_type
+	4,  // 21: flow.EngineService.Run:input_type -> flow.RunRequest
+	6,  // 22: flow.EngineService.Resume:input_type -> flow.ResumeRequest
+	6,  // 23: flow.EngineService.Revert:input_type -> flow.ResumeRequest
+	6,  // 24: flow.EngineService.Recall:input_type -> flow.ResumeRequest
+	7,  // 25: flow.EngineService.Fail:input_type -> flow.FailRequest
+	8,  // 26: flow.PluginService.HealthCheck:input_type -> flow.HealthCheckRequest
+	12, // 27: flow.PluginService.Register:input_type -> flow.FlowResponse
+	14, // 28: flow.PluginService.DebugStream:input_type -> flow.DebugResponse
+	15, // 29: flow.ExtensionService.HealthCheck:input_type -> flow.ExtensionHealthCheckRequest
+	20, // 30: flow.ExtensionService.SchemaStream:input_type -> flow.ExtensionResult
+	20, // 31: flow.ExtensionService.RunStream:input_type -> flow.ExtensionResult
+	23, // 32: flow.FlowJobCronService.Query:input_type -> api.QueryRequest
+	22, // 33: flow.FlowJobCronService.Get:input_type -> api.GetOrDeleteRequest
+	22, // 34: flow.FlowJobCronService.Delete:input_type -> api.GetOrDeleteRequest
+	24, // 35: flow.FlowJobCronService.Update:input_type -> api.UpdateRequest
+	24, // 36: flow.FlowJobCronService.Replace:input_type -> api.UpdateRequest
+	21, // 37: flow.FlowJobCronService.Create:input_type -> api.CreateRequest
+	21, // 38: flow.FlowJobCronService.CreateMany:input_type -> api.CreateRequest
+	23, // 39: flow.FlowJobCronService.DeleteMany:input_type -> api.QueryRequest
+	23, // 40: flow.FlowLogCronService.Query:input_type -> api.QueryRequest
+	22, // 41: flow.FlowLogCronService.Get:input_type -> api.GetOrDeleteRequest
+	22, // 42: flow.FlowLogCronService.Delete:input_type -> api.GetOrDeleteRequest
+	24, // 43: flow.FlowLogCronService.Update:input_type -> api.UpdateRequest
+	21, // 44: flow.FlowLogCronService.Create:input_type -> api.CreateRequest
+	21, // 45: flow.FlowLogCronService.CreateMany:input_type -> api.CreateRequest
+	23, // 46: flow.FlowLogCronService.DeleteMany:input_type -> api.QueryRequest
+	26, // 47: flow.FlowTaskService.Create:output_type -> api.Response
+	26, // 48: flow.FlowTaskService.Get:output_type -> api.Response
+	26, // 49: flow.FlowTaskService.Query:output_type -> api.Response
+	26, // 50: flow.FlowTaskService.BatchCreate:output_type -> api.Response
+	26, // 51: flow.FlowTaskService.Update:output_type -> api.Response
+	26, // 52: flow.FlowTaskService.RevertCreate:output_type -> api.Response
+	26, // 53: flow.FlowTaskService.Delete:output_type -> api.Response
+	26, // 54: flow.FlowTaskService.Replace:output_type -> api.Response
+	26, // 55: flow.FlowTaskService.UpdateFilter:output_type -> api.Response
+	26, // 56: flow.FlowService.Query:output_type -> api.Response
+	26, // 57: flow.FlowService.Get:output_type -> api.Response
+	26, // 58: flow.FlowService.Update:output_type -> api.Response
+	26, // 59: flow.FlowService.BatchCreate:output_type -> api.Response
+	26, // 60: flow.FlowService.Delete:output_type -> api.Response
+	26, // 61: flow.FlowService.Replace:output_type -> api.Response
+	5,  // 62: flow.EngineService.Run:output_type -> flow.RunResponse
+	27, // 63: flow.EngineService.Resume:output_type -> google.protobuf.Empty
+	27, // 64: flow.EngineService.Revert:output_type -> google.protobuf.Empty
+	27, // 65: flow.EngineService.Recall:output_type -> google.protobuf.Empty
+	27, // 66: flow.EngineService.Fail:output_type -> google.protobuf.Empty
+	9,  // 67: flow.PluginService.HealthCheck:output_type -> flow.HealthCheckResponse
+	11, // 68: flow.PluginService.Register:output_type -> flow.FlowRequest
+	13, // 69: flow.PluginService.DebugStream:output_type -> flow.DebugRequest
+	16, // 70: flow.ExtensionService.HealthCheck:output_type -> flow.ExtensionHealthCheckResponse
+	18, // 71: flow.ExtensionService.SchemaStream:output_type -> flow.ExtensionSchemaRequest
+	19, // 72: flow.ExtensionService.RunStream:output_type -> flow.ExtensionRunRequest
+	26, // 73: flow.FlowJobCronService.Query:output_type -> api.Response
+	26, // 74: flow.FlowJobCronService.Get:output_type -> api.Response
+	26, // 75: flow.FlowJobCronService.Delete:output_type -> api.Response
+	26, // 76: flow.FlowJobCronService.Update:output_type -> api.Response
+	26, // 77: flow.FlowJobCronService.Replace:output_type -> api.Response
+	26, // 78: flow.FlowJobCronService.Create:output_type -> api.Response
+	26, // 79: flow.FlowJobCronService.CreateMany:output_type -> api.Response
+	26, // 80: flow.FlowJobCronService.DeleteMany:output_type -> api.Response
+	26, // 81: flow.FlowLogCronService.Query:output_type -> api.Response
+	26, // 82: flow.FlowLogCronService.Get:output_type -> api.Response
+	26, // 83: flow.FlowLogCronService.Delete:output_type -> api.Response
+	26, // 84: flow.FlowLogCronService.Update:output_type -> api.Response
+	26, // 85: flow.FlowLogCronService.Create:output_type -> api.Response
+	26, // 86: flow.FlowLogCronService.CreateMany:output_type -> api.Response
+	26, // 87: flow.FlowLogCronService.DeleteMany:output_type -> api.Response
+	47, // [47:88] is the sub-list for method output_type
+	6,  // [6:47] is the sub-list for method input_type
 	6,  // [6:6] is the sub-list for extension type_name
 	6,  // [6:6] is the sub-list for extension extendee
 	0,  // [0:6] is the sub-list for field type_name
@@ -1567,7 +1563,7 @@ func file_flow_flow_proto_init() {
 			NumEnums:      4,
 			NumMessages:   17,
 			NumExtensions: 0,
-			NumServices:   8,
+			NumServices:   7,
 		},
 		GoTypes:           file_flow_flow_proto_goTypes,
 		DependencyIndexes: file_flow_flow_proto_depIdxs,

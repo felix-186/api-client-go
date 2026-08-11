@@ -47,6 +47,7 @@ type Client struct {
 	dashboardClient              DashboardServiceClient
 	mediaLibraryClient           MediaLibraryServiceClient
 	mediaLibraryDirSettingClient MediaLibraryDirSettingServiceClient
+	authorizationServiceClient   AuthorizationServiceClient
 }
 
 func NewClient(cfg config.Config, registry *etcd.Registry, cred grpc.DialOption, httpCred middleware.Middleware) (*Client, func(), error) {
@@ -102,6 +103,7 @@ func NewLocalClient(cfg config.Config, cc grpc.ClientConnInterface) (*Client, fu
 	c.taskManagerServiceClient = NewTaskManagerServiceClient(cc)
 	c.mediaLibraryClient = NewMediaLibraryServiceClient(cc)
 	c.mediaLibraryDirSettingClient = NewMediaLibraryDirSettingServiceClient(cc)
+	c.authorizationServiceClient = NewAuthorizationServiceClient(cc)
 	cleanFunc := func() {}
 	return c, cleanFunc, nil
 }
@@ -137,6 +139,7 @@ func (c *Client) createConn() error {
 	c.taskManagerServiceClient = NewTaskManagerServiceClient(cc)
 	c.mediaLibraryClient = NewMediaLibraryServiceClient(cc)
 	c.mediaLibraryDirSettingClient = NewMediaLibraryDirSettingServiceClient(cc)
+	c.authorizationServiceClient = NewAuthorizationServiceClient(cc)
 	c.conn = cc
 	return nil
 }
@@ -463,4 +466,19 @@ func (c *Client) GetMediaLibraryDirSettingServiceClient() (MediaLibraryDirSettin
 		return nil, errors.New("客户端是空")
 	}
 	return c.mediaLibraryDirSettingClient, nil
+}
+
+func (c *Client) GetAuthorizationServiceClient() (AuthorizationServiceClient, error) {
+	if c.authorizationServiceClient != nil {
+		return c.authorizationServiceClient, nil
+	}
+	if c.conn == nil {
+		if err := c.createConn(); err != nil {
+			return nil, err
+		}
+	}
+	if c.authorizationServiceClient == nil {
+		return nil, errors.New("客户端是空")
+	}
+	return c.authorizationServiceClient, nil
 }

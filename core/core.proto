@@ -196,6 +196,65 @@ service MediaLibraryDirSettingService {
   rpc Query (api.QueryRequest) returns (api.Response) {}
 }
 
+// AuthorizationService is the remote authorization entry point for services
+// other than Core. Core derives the subject from gRPC metadata.
+service AuthorizationService {
+  rpc CheckPermission (AuthorizationPermissionRequest) returns (AuthorizationDecision) {}
+  rpc BatchCheckResourceAccess (BatchResourceAccessRequest) returns (BatchResourceAccessResponse) {}
+  rpc ListAccessibleResources (ListAccessibleResourcesRequest) returns (ListAccessibleResourcesResponse) {}
+  rpc GetAuthorizationRevision (AuthorizationRevisionRequest) returns (AuthorizationRevisionResponse) {}
+}
+
+message AuthorizationRevisionRequest {}
+
+message AuthorizationRevisionResponse {
+  int64 authorization_version = 1;
+}
+
+message AuthorizationPermissionRequest {
+  string permission_code = 1;
+}
+
+message AuthorizationDecision {
+  bool allowed = 1;
+  int64 authorization_version = 2;
+  bool privileged = 3;
+}
+
+message AuthorizationResource {
+  string resource_type = 1;
+  string parent_resource_id = 2;
+  string resource_id = 3;
+  string action = 4;
+}
+
+message BatchResourceAccessRequest {
+  repeated AuthorizationResource resources = 1;
+}
+
+message ResourceAccessDecision {
+  AuthorizationResource resource = 1;
+  bool allowed = 2;
+}
+
+message BatchResourceAccessResponse {
+  repeated ResourceAccessDecision decisions = 1;
+  int64 authorization_version = 2;
+}
+
+message ListAccessibleResourcesRequest {
+  string resource_type = 1;
+  string parent_resource_id = 2;
+  string action = 3;
+}
+
+message ListAccessibleResourcesResponse {
+  repeated string resource_ids = 1;
+  bool unrestricted = 2;
+  int64 authorization_version = 3;
+  repeated AuthorizationResource resources = 4;
+}
+
 message GetDeviceRequest {
   string driver = 1;
   string group = 2;

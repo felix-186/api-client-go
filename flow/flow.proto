@@ -36,10 +36,6 @@ service FlowService {
   rpc Replace (api.UpdateRequest) returns (api.Response) {}
 }
 
-service FlowTriggerRecordService {
-  rpc Create (api.CreateRequest) returns (api.Response) {}
-}
-
 service EngineService {
   rpc Run (RunRequest) returns (RunResponse) {}
   rpc Resume (ResumeRequest) returns (google.protobuf.Empty) {}

@@ -157,6 +157,122 @@ func (c *Client) GetCurrentUserInfo(ctx context.Context, projectId, token string
 	return nil
 }
 
+// CheckPermission asks Core to evaluate the current token's function
+// permission. It intentionally returns only a decision, never a user snapshot.
+func (c *Client) CheckPermission(ctx context.Context, projectId, token, permissionCode string) (bool, int64, error) {
+	allowed, _, revision, err := c.CheckPermissionState(ctx, projectId, token, permissionCode)
+	return allowed, revision, err
+}
+
+// CheckPermissionState also reports whether Core granted access through the
+// configured root user, isSuper, or the super-administrator role.
+func (c *Client) CheckPermissionState(ctx context.Context, projectId, token, permissionCode string) (bool, bool, int64, error) {
+	if projectId == "" {
+		projectId = config.XRequestProjectDefault
+	}
+	if token == "" {
+		return false, false, 0, errors.New("token is empty")
+	}
+	if permissionCode == "" {
+		return false, false, 0, errors.New("permission code is empty")
+	}
+	cli, err := c.CoreClient.GetAuthorizationServiceClient()
+	if err != nil {
+		return false, false, 0, err
+	}
+	res, err := cli.CheckPermission(
+		apicontext.GetGrpcContext(ctx, map[string]string{config.XRequestProject: projectId, config.XRequestHeaderAuthorization: token}),
+		&core.AuthorizationPermissionRequest{PermissionCode: permissionCode},
+	)
+	if err != nil {
+		return false, false, 0, err
+	}
+	return res.GetAllowed(), res.GetPrivileged(), res.GetAuthorizationVersion(), nil
+}
+
+// AuthorizationRevision returns the project-local authorization revision
+// without rebuilding a user's permissions. Long-lived consumers use it to
+// discard retained decisions when relations change.
+func (c *Client) AuthorizationRevision(ctx context.Context, projectId, token string) (int64, error) {
+	if projectId == "" {
+		projectId = config.XRequestProjectDefault
+	}
+	if token == "" {
+		return 0, errors.New("token is empty")
+	}
+	cli, err := c.CoreClient.GetAuthorizationServiceClient()
+	if err != nil {
+		return 0, err
+	}
+	res, err := cli.GetAuthorizationRevision(
+		apicontext.GetGrpcContext(ctx, map[string]string{config.XRequestProject: projectId, config.XRequestHeaderAuthorization: token}),
+		&core.AuthorizationRevisionRequest{},
+	)
+	if err != nil {
+		return 0, err
+	}
+	return res.GetAuthorizationVersion(), nil
+}
+
+// CheckResourceAccess checks resources in one RPC. Use it for subscriptions
+// and batch operations instead of materializing an entire user data scope.
+func (c *Client) CheckResourceAccess(ctx context.Context, projectId, token string, resources []*core.AuthorizationResource) ([]*core.ResourceAccessDecision, int64, error) {
+	if projectId == "" {
+		projectId = config.XRequestProjectDefault
+	}
+	if token == "" {
+		return nil, 0, errors.New("token is empty")
+	}
+	if len(resources) == 0 {
+		return []*core.ResourceAccessDecision{}, 0, nil
+	}
+	cli, err := c.CoreClient.GetAuthorizationServiceClient()
+	if err != nil {
+		return nil, 0, err
+	}
+	res, err := cli.BatchCheckResourceAccess(
+		apicontext.GetGrpcContext(ctx, map[string]string{config.XRequestProject: projectId, config.XRequestHeaderAuthorization: token}),
+		&core.BatchResourceAccessRequest{Resources: resources},
+	)
+	if err != nil {
+		return nil, 0, err
+	}
+	return res.GetDecisions(), res.GetAuthorizationVersion(), nil
+}
+
+func (c *Client) ListAccessibleResources(ctx context.Context, projectId, token, resourceType, parentResourceID, action string) ([]string, bool, int64, error) {
+	resources, unrestricted, version, err := c.ListAccessibleResourceDetails(ctx, projectId, token, resourceType, parentResourceID, action)
+	if err != nil {
+		return nil, false, 0, err
+	}
+	ids := make([]string, 0, len(resources))
+	for _, resource := range resources {
+		ids = append(ids, resource.GetResourceId())
+	}
+	return ids, unrestricted, version, nil
+}
+
+func (c *Client) ListAccessibleResourceDetails(ctx context.Context, projectId, token, resourceType, parentResourceID, action string) ([]*core.AuthorizationResource, bool, int64, error) {
+	if projectId == "" {
+		projectId = config.XRequestProjectDefault
+	}
+	if token == "" {
+		return nil, false, 0, errors.New("token is empty")
+	}
+	cli, err := c.CoreClient.GetAuthorizationServiceClient()
+	if err != nil {
+		return nil, false, 0, err
+	}
+	res, err := cli.ListAccessibleResources(
+		apicontext.GetGrpcContext(ctx, map[string]string{config.XRequestProject: projectId, config.XRequestHeaderAuthorization: token}),
+		&core.ListAccessibleResourcesRequest{ResourceType: resourceType, ParentResourceId: parentResourceID, Action: action},
+	)
+	if err != nil {
+		return nil, false, 0, err
+	}
+	return res.GetResources(), res.GetUnrestricted(), res.GetAuthorizationVersion(), nil
+}
+
 func (c *Client) UserPermissionUpdate(ctx context.Context, projectId, token string, createData, result interface{}) error {
 	if projectId == "" {
 		projectId = config.XRequestProjectDefault

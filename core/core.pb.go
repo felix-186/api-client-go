@@ -28,6 +28,534 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+type AuthorizationRevisionRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AuthorizationRevisionRequest) Reset() {
+	*x = AuthorizationRevisionRequest{}
+	mi := &file_core_core_proto_msgTypes[0]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AuthorizationRevisionRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AuthorizationRevisionRequest) ProtoMessage() {}
+
+func (x *AuthorizationRevisionRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_core_core_proto_msgTypes[0]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AuthorizationRevisionRequest.ProtoReflect.Descriptor instead.
+func (*AuthorizationRevisionRequest) Descriptor() ([]byte, []int) {
+	return file_core_core_proto_rawDescGZIP(), []int{0}
+}
+
+type AuthorizationRevisionResponse struct {
+	state                protoimpl.MessageState `protogen:"open.v1"`
+	AuthorizationVersion int64                  `protobuf:"varint,1,opt,name=authorization_version,json=authorizationVersion,proto3" json:"authorization_version,omitempty"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
+}
+
+func (x *AuthorizationRevisionResponse) Reset() {
+	*x = AuthorizationRevisionResponse{}
+	mi := &file_core_core_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AuthorizationRevisionResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AuthorizationRevisionResponse) ProtoMessage() {}
+
+func (x *AuthorizationRevisionResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_core_core_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AuthorizationRevisionResponse.ProtoReflect.Descriptor instead.
+func (*AuthorizationRevisionResponse) Descriptor() ([]byte, []int) {
+	return file_core_core_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *AuthorizationRevisionResponse) GetAuthorizationVersion() int64 {
+	if x != nil {
+		return x.AuthorizationVersion
+	}
+	return 0
+}
+
+type AuthorizationPermissionRequest struct {
+	state          protoimpl.MessageState `protogen:"open.v1"`
+	PermissionCode string                 `protobuf:"bytes,1,opt,name=permission_code,json=permissionCode,proto3" json:"permission_code,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
+}
+
+func (x *AuthorizationPermissionRequest) Reset() {
+	*x = AuthorizationPermissionRequest{}
+	mi := &file_core_core_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AuthorizationPermissionRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AuthorizationPermissionRequest) ProtoMessage() {}
+
+func (x *AuthorizationPermissionRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_core_core_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AuthorizationPermissionRequest.ProtoReflect.Descriptor instead.
+func (*AuthorizationPermissionRequest) Descriptor() ([]byte, []int) {
+	return file_core_core_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *AuthorizationPermissionRequest) GetPermissionCode() string {
+	if x != nil {
+		return x.PermissionCode
+	}
+	return ""
+}
+
+type AuthorizationDecision struct {
+	state                protoimpl.MessageState `protogen:"open.v1"`
+	Allowed              bool                   `protobuf:"varint,1,opt,name=allowed,proto3" json:"allowed,omitempty"`
+	AuthorizationVersion int64                  `protobuf:"varint,2,opt,name=authorization_version,json=authorizationVersion,proto3" json:"authorization_version,omitempty"`
+	Privileged           bool                   `protobuf:"varint,3,opt,name=privileged,proto3" json:"privileged,omitempty"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
+}
+
+func (x *AuthorizationDecision) Reset() {
+	*x = AuthorizationDecision{}
+	mi := &file_core_core_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AuthorizationDecision) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AuthorizationDecision) ProtoMessage() {}
+
+func (x *AuthorizationDecision) ProtoReflect() protoreflect.Message {
+	mi := &file_core_core_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AuthorizationDecision.ProtoReflect.Descriptor instead.
+func (*AuthorizationDecision) Descriptor() ([]byte, []int) {
+	return file_core_core_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *AuthorizationDecision) GetAllowed() bool {
+	if x != nil {
+		return x.Allowed
+	}
+	return false
+}
+
+func (x *AuthorizationDecision) GetAuthorizationVersion() int64 {
+	if x != nil {
+		return x.AuthorizationVersion
+	}
+	return 0
+}
+
+func (x *AuthorizationDecision) GetPrivileged() bool {
+	if x != nil {
+		return x.Privileged
+	}
+	return false
+}
+
+type AuthorizationResource struct {
+	state            protoimpl.MessageState `protogen:"open.v1"`
+	ResourceType     string                 `protobuf:"bytes,1,opt,name=resource_type,json=resourceType,proto3" json:"resource_type,omitempty"`
+	ParentResourceId string                 `protobuf:"bytes,2,opt,name=parent_resource_id,json=parentResourceId,proto3" json:"parent_resource_id,omitempty"`
+	ResourceId       string                 `protobuf:"bytes,3,opt,name=resource_id,json=resourceId,proto3" json:"resource_id,omitempty"`
+	Action           string                 `protobuf:"bytes,4,opt,name=action,proto3" json:"action,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
+}
+
+func (x *AuthorizationResource) Reset() {
+	*x = AuthorizationResource{}
+	mi := &file_core_core_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AuthorizationResource) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AuthorizationResource) ProtoMessage() {}
+
+func (x *AuthorizationResource) ProtoReflect() protoreflect.Message {
+	mi := &file_core_core_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AuthorizationResource.ProtoReflect.Descriptor instead.
+func (*AuthorizationResource) Descriptor() ([]byte, []int) {
+	return file_core_core_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *AuthorizationResource) GetResourceType() string {
+	if x != nil {
+		return x.ResourceType
+	}
+	return ""
+}
+
+func (x *AuthorizationResource) GetParentResourceId() string {
+	if x != nil {
+		return x.ParentResourceId
+	}
+	return ""
+}
+
+func (x *AuthorizationResource) GetResourceId() string {
+	if x != nil {
+		return x.ResourceId
+	}
+	return ""
+}
+
+func (x *AuthorizationResource) GetAction() string {
+	if x != nil {
+		return x.Action
+	}
+	return ""
+}
+
+type BatchResourceAccessRequest struct {
+	state         protoimpl.MessageState   `protogen:"open.v1"`
+	Resources     []*AuthorizationResource `protobuf:"bytes,1,rep,name=resources,proto3" json:"resources,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *BatchResourceAccessRequest) Reset() {
+	*x = BatchResourceAccessRequest{}
+	mi := &file_core_core_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *BatchResourceAccessRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*BatchResourceAccessRequest) ProtoMessage() {}
+
+func (x *BatchResourceAccessRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_core_core_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use BatchResourceAccessRequest.ProtoReflect.Descriptor instead.
+func (*BatchResourceAccessRequest) Descriptor() ([]byte, []int) {
+	return file_core_core_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *BatchResourceAccessRequest) GetResources() []*AuthorizationResource {
+	if x != nil {
+		return x.Resources
+	}
+	return nil
+}
+
+type ResourceAccessDecision struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Resource      *AuthorizationResource `protobuf:"bytes,1,opt,name=resource,proto3" json:"resource,omitempty"`
+	Allowed       bool                   `protobuf:"varint,2,opt,name=allowed,proto3" json:"allowed,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ResourceAccessDecision) Reset() {
+	*x = ResourceAccessDecision{}
+	mi := &file_core_core_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ResourceAccessDecision) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ResourceAccessDecision) ProtoMessage() {}
+
+func (x *ResourceAccessDecision) ProtoReflect() protoreflect.Message {
+	mi := &file_core_core_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ResourceAccessDecision.ProtoReflect.Descriptor instead.
+func (*ResourceAccessDecision) Descriptor() ([]byte, []int) {
+	return file_core_core_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *ResourceAccessDecision) GetResource() *AuthorizationResource {
+	if x != nil {
+		return x.Resource
+	}
+	return nil
+}
+
+func (x *ResourceAccessDecision) GetAllowed() bool {
+	if x != nil {
+		return x.Allowed
+	}
+	return false
+}
+
+type BatchResourceAccessResponse struct {
+	state                protoimpl.MessageState    `protogen:"open.v1"`
+	Decisions            []*ResourceAccessDecision `protobuf:"bytes,1,rep,name=decisions,proto3" json:"decisions,omitempty"`
+	AuthorizationVersion int64                     `protobuf:"varint,2,opt,name=authorization_version,json=authorizationVersion,proto3" json:"authorization_version,omitempty"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
+}
+
+func (x *BatchResourceAccessResponse) Reset() {
+	*x = BatchResourceAccessResponse{}
+	mi := &file_core_core_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *BatchResourceAccessResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*BatchResourceAccessResponse) ProtoMessage() {}
+
+func (x *BatchResourceAccessResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_core_core_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use BatchResourceAccessResponse.ProtoReflect.Descriptor instead.
+func (*BatchResourceAccessResponse) Descriptor() ([]byte, []int) {
+	return file_core_core_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *BatchResourceAccessResponse) GetDecisions() []*ResourceAccessDecision {
+	if x != nil {
+		return x.Decisions
+	}
+	return nil
+}
+
+func (x *BatchResourceAccessResponse) GetAuthorizationVersion() int64 {
+	if x != nil {
+		return x.AuthorizationVersion
+	}
+	return 0
+}
+
+type ListAccessibleResourcesRequest struct {
+	state            protoimpl.MessageState `protogen:"open.v1"`
+	ResourceType     string                 `protobuf:"bytes,1,opt,name=resource_type,json=resourceType,proto3" json:"resource_type,omitempty"`
+	ParentResourceId string                 `protobuf:"bytes,2,opt,name=parent_resource_id,json=parentResourceId,proto3" json:"parent_resource_id,omitempty"`
+	Action           string                 `protobuf:"bytes,3,opt,name=action,proto3" json:"action,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
+}
+
+func (x *ListAccessibleResourcesRequest) Reset() {
+	*x = ListAccessibleResourcesRequest{}
+	mi := &file_core_core_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListAccessibleResourcesRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListAccessibleResourcesRequest) ProtoMessage() {}
+
+func (x *ListAccessibleResourcesRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_core_core_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListAccessibleResourcesRequest.ProtoReflect.Descriptor instead.
+func (*ListAccessibleResourcesRequest) Descriptor() ([]byte, []int) {
+	return file_core_core_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *ListAccessibleResourcesRequest) GetResourceType() string {
+	if x != nil {
+		return x.ResourceType
+	}
+	return ""
+}
+
+func (x *ListAccessibleResourcesRequest) GetParentResourceId() string {
+	if x != nil {
+		return x.ParentResourceId
+	}
+	return ""
+}
+
+func (x *ListAccessibleResourcesRequest) GetAction() string {
+	if x != nil {
+		return x.Action
+	}
+	return ""
+}
+
+type ListAccessibleResourcesResponse struct {
+	state                protoimpl.MessageState   `protogen:"open.v1"`
+	ResourceIds          []string                 `protobuf:"bytes,1,rep,name=resource_ids,json=resourceIds,proto3" json:"resource_ids,omitempty"`
+	Unrestricted         bool                     `protobuf:"varint,2,opt,name=unrestricted,proto3" json:"unrestricted,omitempty"`
+	AuthorizationVersion int64                    `protobuf:"varint,3,opt,name=authorization_version,json=authorizationVersion,proto3" json:"authorization_version,omitempty"`
+	Resources            []*AuthorizationResource `protobuf:"bytes,4,rep,name=resources,proto3" json:"resources,omitempty"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
+}
+
+func (x *ListAccessibleResourcesResponse) Reset() {
+	*x = ListAccessibleResourcesResponse{}
+	mi := &file_core_core_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListAccessibleResourcesResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListAccessibleResourcesResponse) ProtoMessage() {}
+
+func (x *ListAccessibleResourcesResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_core_core_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListAccessibleResourcesResponse.ProtoReflect.Descriptor instead.
+func (*ListAccessibleResourcesResponse) Descriptor() ([]byte, []int) {
+	return file_core_core_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *ListAccessibleResourcesResponse) GetResourceIds() []string {
+	if x != nil {
+		return x.ResourceIds
+	}
+	return nil
+}
+
+func (x *ListAccessibleResourcesResponse) GetUnrestricted() bool {
+	if x != nil {
+		return x.Unrestricted
+	}
+	return false
+}
+
+func (x *ListAccessibleResourcesResponse) GetAuthorizationVersion() int64 {
+	if x != nil {
+		return x.AuthorizationVersion
+	}
+	return 0
+}
+
+func (x *ListAccessibleResourcesResponse) GetResources() []*AuthorizationResource {
+	if x != nil {
+		return x.Resources
+	}
+	return nil
+}
+
 type GetDeviceRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Driver        string                 `protobuf:"bytes,1,opt,name=driver,proto3" json:"driver,omitempty"`
@@ -38,7 +566,7 @@ type GetDeviceRequest struct {
 
 func (x *GetDeviceRequest) Reset() {
 	*x = GetDeviceRequest{}
-	mi := &file_core_core_proto_msgTypes[0]
+	mi := &file_core_core_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -50,7 +578,7 @@ func (x *GetDeviceRequest) String() string {
 func (*GetDeviceRequest) ProtoMessage() {}
 
 func (x *GetDeviceRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_core_core_proto_msgTypes[0]
+	mi := &file_core_core_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -63,7 +591,7 @@ func (x *GetDeviceRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetDeviceRequest.ProtoReflect.Descriptor instead.
 func (*GetDeviceRequest) Descriptor() ([]byte, []int) {
-	return file_core_core_proto_rawDescGZIP(), []int{0}
+	return file_core_core_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *GetDeviceRequest) GetDriver() string {
@@ -92,7 +620,7 @@ type GetDataDeviceRequest struct {
 
 func (x *GetDataDeviceRequest) Reset() {
 	*x = GetDataDeviceRequest{}
-	mi := &file_core_core_proto_msgTypes[1]
+	mi := &file_core_core_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -104,7 +632,7 @@ func (x *GetDataDeviceRequest) String() string {
 func (*GetDataDeviceRequest) ProtoMessage() {}
 
 func (x *GetDataDeviceRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_core_core_proto_msgTypes[1]
+	mi := &file_core_core_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -117,7 +645,7 @@ func (x *GetDataDeviceRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetDataDeviceRequest.ProtoReflect.Descriptor instead.
 func (*GetDataDeviceRequest) Descriptor() ([]byte, []int) {
-	return file_core_core_proto_rawDescGZIP(), []int{1}
+	return file_core_core_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *GetDataDeviceRequest) GetDriver() string {
@@ -157,7 +685,7 @@ type GetRequestName struct {
 
 func (x *GetRequestName) Reset() {
 	*x = GetRequestName{}
-	mi := &file_core_core_proto_msgTypes[2]
+	mi := &file_core_core_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -169,7 +697,7 @@ func (x *GetRequestName) String() string {
 func (*GetRequestName) ProtoMessage() {}
 
 func (x *GetRequestName) ProtoReflect() protoreflect.Message {
-	mi := &file_core_core_proto_msgTypes[2]
+	mi := &file_core_core_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -182,7 +710,7 @@ func (x *GetRequestName) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetRequestName.ProtoReflect.Descriptor instead.
 func (*GetRequestName) Descriptor() ([]byte, []int) {
-	return file_core_core_proto_rawDescGZIP(), []int{2}
+	return file_core_core_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *GetRequestName) GetName() string {
@@ -201,7 +729,7 @@ type VerifyAPIKeyRequest struct {
 
 func (x *VerifyAPIKeyRequest) Reset() {
 	*x = VerifyAPIKeyRequest{}
-	mi := &file_core_core_proto_msgTypes[3]
+	mi := &file_core_core_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -213,7 +741,7 @@ func (x *VerifyAPIKeyRequest) String() string {
 func (*VerifyAPIKeyRequest) ProtoMessage() {}
 
 func (x *VerifyAPIKeyRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_core_core_proto_msgTypes[3]
+	mi := &file_core_core_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -226,7 +754,7 @@ func (x *VerifyAPIKeyRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use VerifyAPIKeyRequest.ProtoReflect.Descriptor instead.
 func (*VerifyAPIKeyRequest) Descriptor() ([]byte, []int) {
-	return file_core_core_proto_rawDescGZIP(), []int{3}
+	return file_core_core_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *VerifyAPIKeyRequest) GetFullKey() string {
@@ -245,7 +773,7 @@ type VerifyAPIKeyResponse struct {
 
 func (x *VerifyAPIKeyResponse) Reset() {
 	*x = VerifyAPIKeyResponse{}
-	mi := &file_core_core_proto_msgTypes[4]
+	mi := &file_core_core_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -257,7 +785,7 @@ func (x *VerifyAPIKeyResponse) String() string {
 func (*VerifyAPIKeyResponse) ProtoMessage() {}
 
 func (x *VerifyAPIKeyResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_core_core_proto_msgTypes[4]
+	mi := &file_core_core_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -270,7 +798,7 @@ func (x *VerifyAPIKeyResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use VerifyAPIKeyResponse.ProtoReflect.Descriptor instead.
 func (*VerifyAPIKeyResponse) Descriptor() ([]byte, []int) {
-	return file_core_core_proto_rawDescGZIP(), []int{4}
+	return file_core_core_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *VerifyAPIKeyResponse) GetUserId() string {
@@ -290,7 +818,7 @@ type QueryDataRequest struct {
 
 func (x *QueryDataRequest) Reset() {
 	*x = QueryDataRequest{}
-	mi := &file_core_core_proto_msgTypes[5]
+	mi := &file_core_core_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -302,7 +830,7 @@ func (x *QueryDataRequest) String() string {
 func (*QueryDataRequest) ProtoMessage() {}
 
 func (x *QueryDataRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_core_core_proto_msgTypes[5]
+	mi := &file_core_core_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -315,7 +843,7 @@ func (x *QueryDataRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use QueryDataRequest.ProtoReflect.Descriptor instead.
 func (*QueryDataRequest) Descriptor() ([]byte, []int) {
-	return file_core_core_proto_rawDescGZIP(), []int{5}
+	return file_core_core_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *QueryDataRequest) GetTable() string {
@@ -342,7 +870,7 @@ type GetOrDeleteDataRequest struct {
 
 func (x *GetOrDeleteDataRequest) Reset() {
 	*x = GetOrDeleteDataRequest{}
-	mi := &file_core_core_proto_msgTypes[6]
+	mi := &file_core_core_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -354,7 +882,7 @@ func (x *GetOrDeleteDataRequest) String() string {
 func (*GetOrDeleteDataRequest) ProtoMessage() {}
 
 func (x *GetOrDeleteDataRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_core_core_proto_msgTypes[6]
+	mi := &file_core_core_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -367,7 +895,7 @@ func (x *GetOrDeleteDataRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetOrDeleteDataRequest.ProtoReflect.Descriptor instead.
 func (*GetOrDeleteDataRequest) Descriptor() ([]byte, []int) {
-	return file_core_core_proto_rawDescGZIP(), []int{6}
+	return file_core_core_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *GetOrDeleteDataRequest) GetTable() string {
@@ -396,7 +924,7 @@ type UpdateDataRequest struct {
 
 func (x *UpdateDataRequest) Reset() {
 	*x = UpdateDataRequest{}
-	mi := &file_core_core_proto_msgTypes[7]
+	mi := &file_core_core_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -408,7 +936,7 @@ func (x *UpdateDataRequest) String() string {
 func (*UpdateDataRequest) ProtoMessage() {}
 
 func (x *UpdateDataRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_core_core_proto_msgTypes[7]
+	mi := &file_core_core_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -421,7 +949,7 @@ func (x *UpdateDataRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateDataRequest.ProtoReflect.Descriptor instead.
 func (*UpdateDataRequest) Descriptor() ([]byte, []int) {
-	return file_core_core_proto_rawDescGZIP(), []int{7}
+	return file_core_core_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *UpdateDataRequest) GetTable() string {
@@ -464,7 +992,7 @@ type MultiUpdateDataRequest struct {
 
 func (x *MultiUpdateDataRequest) Reset() {
 	*x = MultiUpdateDataRequest{}
-	mi := &file_core_core_proto_msgTypes[8]
+	mi := &file_core_core_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -476,7 +1004,7 @@ func (x *MultiUpdateDataRequest) String() string {
 func (*MultiUpdateDataRequest) ProtoMessage() {}
 
 func (x *MultiUpdateDataRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_core_core_proto_msgTypes[8]
+	mi := &file_core_core_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -489,7 +1017,7 @@ func (x *MultiUpdateDataRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MultiUpdateDataRequest.ProtoReflect.Descriptor instead.
 func (*MultiUpdateDataRequest) Descriptor() ([]byte, []int) {
-	return file_core_core_proto_rawDescGZIP(), []int{8}
+	return file_core_core_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *MultiUpdateDataRequest) GetTable() string {
@@ -531,7 +1059,7 @@ type CreateDataRequest struct {
 
 func (x *CreateDataRequest) Reset() {
 	*x = CreateDataRequest{}
-	mi := &file_core_core_proto_msgTypes[9]
+	mi := &file_core_core_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -543,7 +1071,7 @@ func (x *CreateDataRequest) String() string {
 func (*CreateDataRequest) ProtoMessage() {}
 
 func (x *CreateDataRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_core_core_proto_msgTypes[9]
+	mi := &file_core_core_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -556,7 +1084,7 @@ func (x *CreateDataRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateDataRequest.ProtoReflect.Descriptor instead.
 func (*CreateDataRequest) Descriptor() ([]byte, []int) {
-	return file_core_core_proto_rawDescGZIP(), []int{9}
+	return file_core_core_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *CreateDataRequest) GetTable() string {
@@ -589,7 +1117,7 @@ type LoginUserRequest struct {
 
 func (x *LoginUserRequest) Reset() {
 	*x = LoginUserRequest{}
-	mi := &file_core_core_proto_msgTypes[10]
+	mi := &file_core_core_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -601,7 +1129,7 @@ func (x *LoginUserRequest) String() string {
 func (*LoginUserRequest) ProtoMessage() {}
 
 func (x *LoginUserRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_core_core_proto_msgTypes[10]
+	mi := &file_core_core_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -614,7 +1142,7 @@ func (x *LoginUserRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LoginUserRequest.ProtoReflect.Descriptor instead.
 func (*LoginUserRequest) Descriptor() ([]byte, []int) {
-	return file_core_core_proto_rawDescGZIP(), []int{10}
+	return file_core_core_proto_rawDescGZIP(), []int{20}
 }
 
 func (x *LoginUserRequest) GetToken() string {
@@ -633,7 +1161,7 @@ type UploadFileRequest struct {
 
 func (x *UploadFileRequest) Reset() {
 	*x = UploadFileRequest{}
-	mi := &file_core_core_proto_msgTypes[11]
+	mi := &file_core_core_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -645,7 +1173,7 @@ func (x *UploadFileRequest) String() string {
 func (*UploadFileRequest) ProtoMessage() {}
 
 func (x *UploadFileRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_core_core_proto_msgTypes[11]
+	mi := &file_core_core_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -658,7 +1186,7 @@ func (x *UploadFileRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UploadFileRequest.ProtoReflect.Descriptor instead.
 func (*UploadFileRequest) Descriptor() ([]byte, []int) {
-	return file_core_core_proto_rawDescGZIP(), []int{11}
+	return file_core_core_proto_rawDescGZIP(), []int{21}
 }
 
 func (x *UploadFileRequest) GetData() []byte {
@@ -677,7 +1205,7 @@ type DownloadFileResponse struct {
 
 func (x *DownloadFileResponse) Reset() {
 	*x = DownloadFileResponse{}
-	mi := &file_core_core_proto_msgTypes[12]
+	mi := &file_core_core_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -689,7 +1217,7 @@ func (x *DownloadFileResponse) String() string {
 func (*DownloadFileResponse) ProtoMessage() {}
 
 func (x *DownloadFileResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_core_core_proto_msgTypes[12]
+	mi := &file_core_core_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -702,7 +1230,7 @@ func (x *DownloadFileResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DownloadFileResponse.ProtoReflect.Descriptor instead.
 func (*DownloadFileResponse) Descriptor() ([]byte, []int) {
-	return file_core_core_proto_rawDescGZIP(), []int{12}
+	return file_core_core_proto_rawDescGZIP(), []int{22}
 }
 
 func (x *DownloadFileResponse) GetData() []byte {
@@ -724,7 +1252,7 @@ type MediaLibraryQueryRequest struct {
 
 func (x *MediaLibraryQueryRequest) Reset() {
 	*x = MediaLibraryQueryRequest{}
-	mi := &file_core_core_proto_msgTypes[13]
+	mi := &file_core_core_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -736,7 +1264,7 @@ func (x *MediaLibraryQueryRequest) String() string {
 func (*MediaLibraryQueryRequest) ProtoMessage() {}
 
 func (x *MediaLibraryQueryRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_core_core_proto_msgTypes[13]
+	mi := &file_core_core_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -749,7 +1277,7 @@ func (x *MediaLibraryQueryRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MediaLibraryQueryRequest.ProtoReflect.Descriptor instead.
 func (*MediaLibraryQueryRequest) Descriptor() ([]byte, []int) {
-	return file_core_core_proto_rawDescGZIP(), []int{13}
+	return file_core_core_proto_rawDescGZIP(), []int{23}
 }
 
 func (x *MediaLibraryQueryRequest) GetCatalog() string {
@@ -793,7 +1321,7 @@ type MediaLibraryUploadFromUrlRequest struct {
 
 func (x *MediaLibraryUploadFromUrlRequest) Reset() {
 	*x = MediaLibraryUploadFromUrlRequest{}
-	mi := &file_core_core_proto_msgTypes[14]
+	mi := &file_core_core_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -805,7 +1333,7 @@ func (x *MediaLibraryUploadFromUrlRequest) String() string {
 func (*MediaLibraryUploadFromUrlRequest) ProtoMessage() {}
 
 func (x *MediaLibraryUploadFromUrlRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_core_core_proto_msgTypes[14]
+	mi := &file_core_core_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -818,7 +1346,7 @@ func (x *MediaLibraryUploadFromUrlRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MediaLibraryUploadFromUrlRequest.ProtoReflect.Descriptor instead.
 func (*MediaLibraryUploadFromUrlRequest) Descriptor() ([]byte, []int) {
-	return file_core_core_proto_rawDescGZIP(), []int{14}
+	return file_core_core_proto_rawDescGZIP(), []int{24}
 }
 
 func (x *MediaLibraryUploadFromUrlRequest) GetFileUrl() string {
@@ -868,7 +1396,7 @@ type MediaLibraryUploadFromBase64Request struct {
 
 func (x *MediaLibraryUploadFromBase64Request) Reset() {
 	*x = MediaLibraryUploadFromBase64Request{}
-	mi := &file_core_core_proto_msgTypes[15]
+	mi := &file_core_core_proto_msgTypes[25]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -880,7 +1408,7 @@ func (x *MediaLibraryUploadFromBase64Request) String() string {
 func (*MediaLibraryUploadFromBase64Request) ProtoMessage() {}
 
 func (x *MediaLibraryUploadFromBase64Request) ProtoReflect() protoreflect.Message {
-	mi := &file_core_core_proto_msgTypes[15]
+	mi := &file_core_core_proto_msgTypes[25]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -893,7 +1421,7 @@ func (x *MediaLibraryUploadFromBase64Request) ProtoReflect() protoreflect.Messag
 
 // Deprecated: Use MediaLibraryUploadFromBase64Request.ProtoReflect.Descriptor instead.
 func (*MediaLibraryUploadFromBase64Request) Descriptor() ([]byte, []int) {
-	return file_core_core_proto_rawDescGZIP(), []int{15}
+	return file_core_core_proto_rawDescGZIP(), []int{25}
 }
 
 func (x *MediaLibraryUploadFromBase64Request) GetBase64Str() string {
@@ -933,7 +1461,7 @@ type MediaLibraryDirSettingQueryByPathRequest struct {
 
 func (x *MediaLibraryDirSettingQueryByPathRequest) Reset() {
 	*x = MediaLibraryDirSettingQueryByPathRequest{}
-	mi := &file_core_core_proto_msgTypes[16]
+	mi := &file_core_core_proto_msgTypes[26]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -945,7 +1473,7 @@ func (x *MediaLibraryDirSettingQueryByPathRequest) String() string {
 func (*MediaLibraryDirSettingQueryByPathRequest) ProtoMessage() {}
 
 func (x *MediaLibraryDirSettingQueryByPathRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_core_core_proto_msgTypes[16]
+	mi := &file_core_core_proto_msgTypes[26]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -958,7 +1486,7 @@ func (x *MediaLibraryDirSettingQueryByPathRequest) ProtoReflect() protoreflect.M
 
 // Deprecated: Use MediaLibraryDirSettingQueryByPathRequest.ProtoReflect.Descriptor instead.
 func (*MediaLibraryDirSettingQueryByPathRequest) Descriptor() ([]byte, []int) {
-	return file_core_core_proto_rawDescGZIP(), []int{16}
+	return file_core_core_proto_rawDescGZIP(), []int{26}
 }
 
 func (x *MediaLibraryDirSettingQueryByPathRequest) GetPath() string {
@@ -978,7 +1506,7 @@ type MediaLibraryDirMkDirRequest struct {
 
 func (x *MediaLibraryDirMkDirRequest) Reset() {
 	*x = MediaLibraryDirMkDirRequest{}
-	mi := &file_core_core_proto_msgTypes[17]
+	mi := &file_core_core_proto_msgTypes[27]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -990,7 +1518,7 @@ func (x *MediaLibraryDirMkDirRequest) String() string {
 func (*MediaLibraryDirMkDirRequest) ProtoMessage() {}
 
 func (x *MediaLibraryDirMkDirRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_core_core_proto_msgTypes[17]
+	mi := &file_core_core_proto_msgTypes[27]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1003,7 +1531,7 @@ func (x *MediaLibraryDirMkDirRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MediaLibraryDirMkDirRequest.ProtoReflect.Descriptor instead.
 func (*MediaLibraryDirMkDirRequest) Descriptor() ([]byte, []int) {
-	return file_core_core_proto_rawDescGZIP(), []int{17}
+	return file_core_core_proto_rawDescGZIP(), []int{27}
 }
 
 func (x *MediaLibraryDirMkDirRequest) GetCatalog() string {
@@ -1030,7 +1558,7 @@ type MediaLibraryDeleteRequest struct {
 
 func (x *MediaLibraryDeleteRequest) Reset() {
 	*x = MediaLibraryDeleteRequest{}
-	mi := &file_core_core_proto_msgTypes[18]
+	mi := &file_core_core_proto_msgTypes[28]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1042,7 +1570,7 @@ func (x *MediaLibraryDeleteRequest) String() string {
 func (*MediaLibraryDeleteRequest) ProtoMessage() {}
 
 func (x *MediaLibraryDeleteRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_core_core_proto_msgTypes[18]
+	mi := &file_core_core_proto_msgTypes[28]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1055,7 +1583,7 @@ func (x *MediaLibraryDeleteRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MediaLibraryDeleteRequest.ProtoReflect.Descriptor instead.
 func (*MediaLibraryDeleteRequest) Descriptor() ([]byte, []int) {
-	return file_core_core_proto_rawDescGZIP(), []int{18}
+	return file_core_core_proto_rawDescGZIP(), []int{28}
 }
 
 func (x *MediaLibraryDeleteRequest) GetFiles() []string {
@@ -1076,7 +1604,41 @@ var File_core_core_proto protoreflect.FileDescriptor
 
 const file_core_core_proto_rawDesc = "" +
 	"\n" +
-	"\x0fcore/core.proto\x12\x04core\x1a\rapi/api.proto\"@\n" +
+	"\x0fcore/core.proto\x12\x04core\x1a\rapi/api.proto\"\x1e\n" +
+	"\x1cAuthorizationRevisionRequest\"T\n" +
+	"\x1dAuthorizationRevisionResponse\x123\n" +
+	"\x15authorization_version\x18\x01 \x01(\x03R\x14authorizationVersion\"I\n" +
+	"\x1eAuthorizationPermissionRequest\x12'\n" +
+	"\x0fpermission_code\x18\x01 \x01(\tR\x0epermissionCode\"\x86\x01\n" +
+	"\x15AuthorizationDecision\x12\x18\n" +
+	"\aallowed\x18\x01 \x01(\bR\aallowed\x123\n" +
+	"\x15authorization_version\x18\x02 \x01(\x03R\x14authorizationVersion\x12\x1e\n" +
+	"\n" +
+	"privileged\x18\x03 \x01(\bR\n" +
+	"privileged\"\xa3\x01\n" +
+	"\x15AuthorizationResource\x12#\n" +
+	"\rresource_type\x18\x01 \x01(\tR\fresourceType\x12,\n" +
+	"\x12parent_resource_id\x18\x02 \x01(\tR\x10parentResourceId\x12\x1f\n" +
+	"\vresource_id\x18\x03 \x01(\tR\n" +
+	"resourceId\x12\x16\n" +
+	"\x06action\x18\x04 \x01(\tR\x06action\"W\n" +
+	"\x1aBatchResourceAccessRequest\x129\n" +
+	"\tresources\x18\x01 \x03(\v2\x1b.core.AuthorizationResourceR\tresources\"k\n" +
+	"\x16ResourceAccessDecision\x127\n" +
+	"\bresource\x18\x01 \x01(\v2\x1b.core.AuthorizationResourceR\bresource\x12\x18\n" +
+	"\aallowed\x18\x02 \x01(\bR\aallowed\"\x8e\x01\n" +
+	"\x1bBatchResourceAccessResponse\x12:\n" +
+	"\tdecisions\x18\x01 \x03(\v2\x1c.core.ResourceAccessDecisionR\tdecisions\x123\n" +
+	"\x15authorization_version\x18\x02 \x01(\x03R\x14authorizationVersion\"\x8b\x01\n" +
+	"\x1eListAccessibleResourcesRequest\x12#\n" +
+	"\rresource_type\x18\x01 \x01(\tR\fresourceType\x12,\n" +
+	"\x12parent_resource_id\x18\x02 \x01(\tR\x10parentResourceId\x12\x16\n" +
+	"\x06action\x18\x03 \x01(\tR\x06action\"\xd8\x01\n" +
+	"\x1fListAccessibleResourcesResponse\x12!\n" +
+	"\fresource_ids\x18\x01 \x03(\tR\vresourceIds\x12\"\n" +
+	"\funrestricted\x18\x02 \x01(\bR\funrestricted\x123\n" +
+	"\x15authorization_version\x18\x03 \x01(\x03R\x14authorizationVersion\x129\n" +
+	"\tresources\x18\x04 \x03(\v2\x1b.core.AuthorizationResourceR\tresources\"@\n" +
 	"\x10GetDeviceRequest\x12\x16\n" +
 	"\x06driver\x18\x01 \x01(\tR\x06driver\x12\x14\n" +
 	"\x05group\x18\x02 \x01(\tR\x05group\"j\n" +
@@ -1293,7 +1855,12 @@ const file_core_core_proto_rawDesc = "" +
 	"\aReplace\x12\x12.api.UpdateRequest\x1a\r.api.Response\"\x00\x12/\n" +
 	"\x03Get\x12\x17.api.GetOrDeleteRequest\x1a\r.api.Response\"\x00\x12L\n" +
 	"\tGetByPath\x12..core.MediaLibraryDirSettingQueryByPathRequest\x1a\r.api.Response\"\x00\x12+\n" +
-	"\x05Query\x12\x11.api.QueryRequest\x1a\r.api.Response\"\x00B;\n" +
+	"\x05Query\x12\x11.api.QueryRequest\x1a\r.api.Response\"\x002\xa2\x03\n" +
+	"\x14AuthorizationService\x12V\n" +
+	"\x0fCheckPermission\x12$.core.AuthorizationPermissionRequest\x1a\x1b.core.AuthorizationDecision\"\x00\x12a\n" +
+	"\x18BatchCheckResourceAccess\x12 .core.BatchResourceAccessRequest\x1a!.core.BatchResourceAccessResponse\"\x00\x12h\n" +
+	"\x17ListAccessibleResources\x12$.core.ListAccessibleResourcesRequest\x1a%.core.ListAccessibleResourcesResponse\"\x00\x12e\n" +
+	"\x18GetAuthorizationRevision\x12\".core.AuthorizationRevisionRequest\x1a#.core.AuthorizationRevisionResponse\"\x00B;\n" +
 	"$cn.gtsiot.sdk.client.dubbo.grpc.coreP\x01Z\v./core;core\x88\x01\x01\xa0\x01\x01b\x06proto3"
 
 var (
@@ -1308,279 +1875,301 @@ func file_core_core_proto_rawDescGZIP() []byte {
 	return file_core_core_proto_rawDescData
 }
 
-var file_core_core_proto_msgTypes = make([]protoimpl.MessageInfo, 19)
+var file_core_core_proto_msgTypes = make([]protoimpl.MessageInfo, 29)
 var file_core_core_proto_goTypes = []any{
-	(*GetDeviceRequest)(nil),                         // 0: core.GetDeviceRequest
-	(*GetDataDeviceRequest)(nil),                     // 1: core.GetDataDeviceRequest
-	(*GetRequestName)(nil),                           // 2: core.GetRequestName
-	(*VerifyAPIKeyRequest)(nil),                      // 3: core.VerifyAPIKeyRequest
-	(*VerifyAPIKeyResponse)(nil),                     // 4: core.VerifyAPIKeyResponse
-	(*QueryDataRequest)(nil),                         // 5: core.QueryDataRequest
-	(*GetOrDeleteDataRequest)(nil),                   // 6: core.GetOrDeleteDataRequest
-	(*UpdateDataRequest)(nil),                        // 7: core.UpdateDataRequest
-	(*MultiUpdateDataRequest)(nil),                   // 8: core.MultiUpdateDataRequest
-	(*CreateDataRequest)(nil),                        // 9: core.CreateDataRequest
-	(*LoginUserRequest)(nil),                         // 10: core.LoginUserRequest
-	(*UploadFileRequest)(nil),                        // 11: core.UploadFileRequest
-	(*DownloadFileResponse)(nil),                     // 12: core.DownloadFileResponse
-	(*MediaLibraryQueryRequest)(nil),                 // 13: core.MediaLibraryQueryRequest
-	(*MediaLibraryUploadFromUrlRequest)(nil),         // 14: core.MediaLibraryUploadFromUrlRequest
-	(*MediaLibraryUploadFromBase64Request)(nil),      // 15: core.MediaLibraryUploadFromBase64Request
-	(*MediaLibraryDirSettingQueryByPathRequest)(nil), // 16: core.MediaLibraryDirSettingQueryByPathRequest
-	(*MediaLibraryDirMkDirRequest)(nil),              // 17: core.MediaLibraryDirMkDirRequest
-	(*MediaLibraryDeleteRequest)(nil),                // 18: core.MediaLibraryDeleteRequest
-	(*api.QueryRequest)(nil),                         // 19: api.QueryRequest
-	(*api.GetOrDeleteRequest)(nil),                   // 20: api.GetOrDeleteRequest
-	(*api.TokenRequest)(nil),                         // 21: api.TokenRequest
-	(*api.CreateRequest)(nil),                        // 22: api.CreateRequest
-	(*api.UpdateRequest)(nil),                        // 23: api.UpdateRequest
-	(*api.EmptyRequest)(nil),                         // 24: api.EmptyRequest
-	(*api.Response)(nil),                             // 25: api.Response
+	(*AuthorizationRevisionRequest)(nil),             // 0: core.AuthorizationRevisionRequest
+	(*AuthorizationRevisionResponse)(nil),            // 1: core.AuthorizationRevisionResponse
+	(*AuthorizationPermissionRequest)(nil),           // 2: core.AuthorizationPermissionRequest
+	(*AuthorizationDecision)(nil),                    // 3: core.AuthorizationDecision
+	(*AuthorizationResource)(nil),                    // 4: core.AuthorizationResource
+	(*BatchResourceAccessRequest)(nil),               // 5: core.BatchResourceAccessRequest
+	(*ResourceAccessDecision)(nil),                   // 6: core.ResourceAccessDecision
+	(*BatchResourceAccessResponse)(nil),              // 7: core.BatchResourceAccessResponse
+	(*ListAccessibleResourcesRequest)(nil),           // 8: core.ListAccessibleResourcesRequest
+	(*ListAccessibleResourcesResponse)(nil),          // 9: core.ListAccessibleResourcesResponse
+	(*GetDeviceRequest)(nil),                         // 10: core.GetDeviceRequest
+	(*GetDataDeviceRequest)(nil),                     // 11: core.GetDataDeviceRequest
+	(*GetRequestName)(nil),                           // 12: core.GetRequestName
+	(*VerifyAPIKeyRequest)(nil),                      // 13: core.VerifyAPIKeyRequest
+	(*VerifyAPIKeyResponse)(nil),                     // 14: core.VerifyAPIKeyResponse
+	(*QueryDataRequest)(nil),                         // 15: core.QueryDataRequest
+	(*GetOrDeleteDataRequest)(nil),                   // 16: core.GetOrDeleteDataRequest
+	(*UpdateDataRequest)(nil),                        // 17: core.UpdateDataRequest
+	(*MultiUpdateDataRequest)(nil),                   // 18: core.MultiUpdateDataRequest
+	(*CreateDataRequest)(nil),                        // 19: core.CreateDataRequest
+	(*LoginUserRequest)(nil),                         // 20: core.LoginUserRequest
+	(*UploadFileRequest)(nil),                        // 21: core.UploadFileRequest
+	(*DownloadFileResponse)(nil),                     // 22: core.DownloadFileResponse
+	(*MediaLibraryQueryRequest)(nil),                 // 23: core.MediaLibraryQueryRequest
+	(*MediaLibraryUploadFromUrlRequest)(nil),         // 24: core.MediaLibraryUploadFromUrlRequest
+	(*MediaLibraryUploadFromBase64Request)(nil),      // 25: core.MediaLibraryUploadFromBase64Request
+	(*MediaLibraryDirSettingQueryByPathRequest)(nil), // 26: core.MediaLibraryDirSettingQueryByPathRequest
+	(*MediaLibraryDirMkDirRequest)(nil),              // 27: core.MediaLibraryDirMkDirRequest
+	(*MediaLibraryDeleteRequest)(nil),                // 28: core.MediaLibraryDeleteRequest
+	(*api.QueryRequest)(nil),                         // 29: api.QueryRequest
+	(*api.GetOrDeleteRequest)(nil),                   // 30: api.GetOrDeleteRequest
+	(*api.TokenRequest)(nil),                         // 31: api.TokenRequest
+	(*api.CreateRequest)(nil),                        // 32: api.CreateRequest
+	(*api.UpdateRequest)(nil),                        // 33: api.UpdateRequest
+	(*api.EmptyRequest)(nil),                         // 34: api.EmptyRequest
+	(*api.Response)(nil),                             // 35: api.Response
 }
 var file_core_core_proto_depIdxs = []int32{
-	19,  // 0: core.LicenseService.GetFileLicense:input_type -> api.QueryRequest
-	19,  // 1: core.LicenseService.UseLicense:input_type -> api.QueryRequest
-	19,  // 2: core.LicenseService.FindMachineCode:input_type -> api.QueryRequest
-	20,  // 3: core.LicenseService.GetDriverLicense:input_type -> api.GetOrDeleteRequest
-	11,  // 4: core.LicenseService.UploadLicense:input_type -> core.UploadFileRequest
-	21,  // 5: core.AppService.GetToken:input_type -> api.TokenRequest
-	19,  // 6: core.AppService.Query:input_type -> api.QueryRequest
-	20,  // 7: core.AppService.Get:input_type -> api.GetOrDeleteRequest
-	22,  // 8: core.LogService.Create:input_type -> api.CreateRequest
-	20,  // 9: core.LogService.Get:input_type -> api.GetOrDeleteRequest
-	19,  // 10: core.LogService.Query:input_type -> api.QueryRequest
-	19,  // 11: core.LogService.QueryApiPermission:input_type -> api.QueryRequest
-	22,  // 12: core.LogService.CreateApiPermission:input_type -> api.CreateRequest
-	19,  // 13: core.UserService.Query:input_type -> api.QueryRequest
-	20,  // 14: core.UserService.Get:input_type -> api.GetOrDeleteRequest
-	20,  // 15: core.UserService.Delete:input_type -> api.GetOrDeleteRequest
-	23,  // 16: core.UserService.Update:input_type -> api.UpdateRequest
-	23,  // 17: core.UserService.Replace:input_type -> api.UpdateRequest
-	22,  // 18: core.UserService.Create:input_type -> api.CreateRequest
-	10,  // 19: core.UserService.GetCurrentUserInfo:input_type -> core.LoginUserRequest
-	22,  // 20: core.UserService.UserPermissionUpdate:input_type -> api.CreateRequest
-	19,  // 21: core.UserService.QueryBackup:input_type -> api.QueryRequest
-	19,  // 22: core.UserService.DeleteManyBackup:input_type -> api.QueryRequest
-	22,  // 23: core.UserService.CreateManyBackup:input_type -> api.CreateRequest
-	22,  // 24: core.UserService.CallAIModel:input_type -> api.CreateRequest
-	19,  // 25: core.APIKeyService.Query:input_type -> api.QueryRequest
-	20,  // 26: core.APIKeyService.Get:input_type -> api.GetOrDeleteRequest
-	22,  // 27: core.APIKeyService.Create:input_type -> api.CreateRequest
-	20,  // 28: core.APIKeyService.Delete:input_type -> api.GetOrDeleteRequest
-	2,   // 29: core.APIKeyService.GetByKeyID:input_type -> core.GetRequestName
-	3,   // 30: core.APIKeyService.Verify:input_type -> core.VerifyAPIKeyRequest
-	19,  // 31: core.TableSchemaService.Query:input_type -> api.QueryRequest
-	0,   // 32: core.TableSchemaService.QueryDeviceByDriverAndGroup:input_type -> core.GetDeviceRequest
-	0,   // 33: core.TableSchemaService.QueryTableDeviceByDriverAndGroup:input_type -> core.GetDeviceRequest
-	1,   // 34: core.TableSchemaService.FindDevice:input_type -> core.GetDataDeviceRequest
-	19,  // 35: core.TableSchemaService.QueryEmulator:input_type -> api.QueryRequest
-	20,  // 36: core.TableSchemaService.Get:input_type -> api.GetOrDeleteRequest
-	20,  // 37: core.TableSchemaService.Delete:input_type -> api.GetOrDeleteRequest
-	23,  // 38: core.TableSchemaService.Update:input_type -> api.UpdateRequest
-	23,  // 39: core.TableSchemaService.Replace:input_type -> api.UpdateRequest
-	22,  // 40: core.TableSchemaService.Create:input_type -> api.CreateRequest
-	19,  // 41: core.TableSchemaService.StatsQuery:input_type -> api.QueryRequest
-	20,  // 42: core.TableSchemaService.FindCommandByID:input_type -> api.GetOrDeleteRequest
-	5,   // 43: core.TableDataService.Query:input_type -> core.QueryDataRequest
-	5,   // 44: core.TableDataService.QueryByTableId:input_type -> core.QueryDataRequest
-	6,   // 45: core.TableDataService.Get:input_type -> core.GetOrDeleteDataRequest
-	6,   // 46: core.TableDataService.Delete:input_type -> core.GetOrDeleteDataRequest
-	5,   // 47: core.TableDataService.DeleteMany:input_type -> core.QueryDataRequest
-	7,   // 48: core.TableDataService.Update:input_type -> core.UpdateDataRequest
-	7,   // 49: core.TableDataService.Replace:input_type -> core.UpdateDataRequest
-	9,   // 50: core.TableDataService.Create:input_type -> core.CreateDataRequest
-	9,   // 51: core.TableDataService.CreateMany:input_type -> core.CreateDataRequest
-	22,  // 52: core.TableDataService.FindTableDataDeptByDeptIDs:input_type -> api.CreateRequest
-	8,   // 53: core.TableDataService.UpdateMany:input_type -> core.MultiUpdateDataRequest
-	24,  // 54: core.TableDataService.GetWarningFilterIDs:input_type -> api.EmptyRequest
-	6,   // 55: core.TableDataService.FindTagByID:input_type -> core.GetOrDeleteDataRequest
-	6,   // 56: core.TableDataService.FindCommandByID:input_type -> core.GetOrDeleteDataRequest
-	5,   // 57: core.TableDataService.QueryByDB:input_type -> core.QueryDataRequest
-	6,   // 58: core.TableDataService.GetByDB:input_type -> core.GetOrDeleteDataRequest
-	6,   // 59: core.TableDataService.DeleteByDB:input_type -> core.GetOrDeleteDataRequest
-	5,   // 60: core.TableDataService.DeleteManyByDB:input_type -> core.QueryDataRequest
-	7,   // 61: core.TableDataService.UpdateByDB:input_type -> core.UpdateDataRequest
-	7,   // 62: core.TableDataService.ReplaceByDB:input_type -> core.UpdateDataRequest
-	9,   // 63: core.TableDataService.CreateByDB:input_type -> core.CreateDataRequest
-	9,   // 64: core.TableDataService.CreateManyByDB:input_type -> core.CreateDataRequest
-	8,   // 65: core.TableDataService.UpdateManyByDB:input_type -> core.MultiUpdateDataRequest
-	19,  // 66: core.TableRecordService.Query:input_type -> api.QueryRequest
-	20,  // 67: core.TableRecordService.Get:input_type -> api.GetOrDeleteRequest
-	20,  // 68: core.TableRecordService.Delete:input_type -> api.GetOrDeleteRequest
-	23,  // 69: core.TableRecordService.Update:input_type -> api.UpdateRequest
-	23,  // 70: core.TableRecordService.Replace:input_type -> api.UpdateRequest
-	22,  // 71: core.TableRecordService.Create:input_type -> api.CreateRequest
-	22,  // 72: core.MessageService.Create:input_type -> api.CreateRequest
-	19,  // 73: core.MessageService.Query:input_type -> api.QueryRequest
-	22,  // 74: core.DashboardService.Create:input_type -> api.CreateRequest
-	19,  // 75: core.DashboardService.Query:input_type -> api.QueryRequest
-	22,  // 76: core.DataQueryService.PostLatest:input_type -> api.CreateRequest
-	19,  // 77: core.DataQueryService.GetQuery:input_type -> api.QueryRequest
-	22,  // 78: core.DataQueryService.PostQuery:input_type -> api.CreateRequest
-	19,  // 79: core.RoleService.Query:input_type -> api.QueryRequest
-	20,  // 80: core.RoleService.Get:input_type -> api.GetOrDeleteRequest
-	24,  // 81: core.RoleService.AdminRoleCheck:input_type -> api.EmptyRequest
-	19,  // 82: core.CatalogService.Query:input_type -> api.QueryRequest
-	20,  // 83: core.CatalogService.Get:input_type -> api.GetOrDeleteRequest
-	19,  // 84: core.DeptService.Query:input_type -> api.QueryRequest
-	20,  // 85: core.DeptService.Get:input_type -> api.GetOrDeleteRequest
-	19,  // 86: core.SettingService.Query:input_type -> api.QueryRequest
-	19,  // 87: core.SystemVariableService.Query:input_type -> api.QueryRequest
-	20,  // 88: core.SystemVariableService.Get:input_type -> api.GetOrDeleteRequest
-	20,  // 89: core.SystemVariableService.Delete:input_type -> api.GetOrDeleteRequest
-	23,  // 90: core.SystemVariableService.Update:input_type -> api.UpdateRequest
-	23,  // 91: core.SystemVariableService.Replace:input_type -> api.UpdateRequest
-	22,  // 92: core.SystemVariableService.Create:input_type -> api.CreateRequest
-	19,  // 93: core.BackupService.Query:input_type -> api.QueryRequest
-	20,  // 94: core.BackupService.Get:input_type -> api.GetOrDeleteRequest
-	20,  // 95: core.BackupService.Delete:input_type -> api.GetOrDeleteRequest
-	23,  // 96: core.BackupService.Update:input_type -> api.UpdateRequest
-	19,  // 97: core.BackupService.Import:input_type -> api.QueryRequest
-	19,  // 98: core.BackupService.Export:input_type -> api.QueryRequest
-	11,  // 99: core.BackupService.Upload:input_type -> core.UploadFileRequest
-	20,  // 100: core.BackupService.Download:input_type -> api.GetOrDeleteRequest
-	19,  // 101: core.TaskManagerService.Query:input_type -> api.QueryRequest
-	20,  // 102: core.TaskManagerService.Get:input_type -> api.GetOrDeleteRequest
-	20,  // 103: core.TaskManagerService.Delete:input_type -> api.GetOrDeleteRequest
-	23,  // 104: core.TaskManagerService.Update:input_type -> api.UpdateRequest
-	23,  // 105: core.TaskManagerService.Replace:input_type -> api.UpdateRequest
-	22,  // 106: core.TaskManagerService.Create:input_type -> api.CreateRequest
-	13,  // 107: core.MediaLibraryService.Query:input_type -> core.MediaLibraryQueryRequest
-	14,  // 108: core.MediaLibraryService.UploadFromUrl:input_type -> core.MediaLibraryUploadFromUrlRequest
-	15,  // 109: core.MediaLibraryService.UploadFromBase64:input_type -> core.MediaLibraryUploadFromBase64Request
-	17,  // 110: core.MediaLibraryService.Mkdir:input_type -> core.MediaLibraryDirMkDirRequest
-	18,  // 111: core.MediaLibraryService.DeleteFiles:input_type -> core.MediaLibraryDeleteRequest
-	22,  // 112: core.MediaLibraryDirSettingService.Create:input_type -> api.CreateRequest
-	20,  // 113: core.MediaLibraryDirSettingService.Delete:input_type -> api.GetOrDeleteRequest
-	23,  // 114: core.MediaLibraryDirSettingService.Update:input_type -> api.UpdateRequest
-	23,  // 115: core.MediaLibraryDirSettingService.Replace:input_type -> api.UpdateRequest
-	20,  // 116: core.MediaLibraryDirSettingService.Get:input_type -> api.GetOrDeleteRequest
-	16,  // 117: core.MediaLibraryDirSettingService.GetByPath:input_type -> core.MediaLibraryDirSettingQueryByPathRequest
-	19,  // 118: core.MediaLibraryDirSettingService.Query:input_type -> api.QueryRequest
-	25,  // 119: core.LicenseService.GetFileLicense:output_type -> api.Response
-	25,  // 120: core.LicenseService.UseLicense:output_type -> api.Response
-	25,  // 121: core.LicenseService.FindMachineCode:output_type -> api.Response
-	25,  // 122: core.LicenseService.GetDriverLicense:output_type -> api.Response
-	25,  // 123: core.LicenseService.UploadLicense:output_type -> api.Response
-	25,  // 124: core.AppService.GetToken:output_type -> api.Response
-	25,  // 125: core.AppService.Query:output_type -> api.Response
-	25,  // 126: core.AppService.Get:output_type -> api.Response
-	25,  // 127: core.LogService.Create:output_type -> api.Response
-	25,  // 128: core.LogService.Get:output_type -> api.Response
-	25,  // 129: core.LogService.Query:output_type -> api.Response
-	25,  // 130: core.LogService.QueryApiPermission:output_type -> api.Response
-	25,  // 131: core.LogService.CreateApiPermission:output_type -> api.Response
-	25,  // 132: core.UserService.Query:output_type -> api.Response
-	25,  // 133: core.UserService.Get:output_type -> api.Response
-	25,  // 134: core.UserService.Delete:output_type -> api.Response
-	25,  // 135: core.UserService.Update:output_type -> api.Response
-	25,  // 136: core.UserService.Replace:output_type -> api.Response
-	25,  // 137: core.UserService.Create:output_type -> api.Response
-	25,  // 138: core.UserService.GetCurrentUserInfo:output_type -> api.Response
-	25,  // 139: core.UserService.UserPermissionUpdate:output_type -> api.Response
-	25,  // 140: core.UserService.QueryBackup:output_type -> api.Response
-	25,  // 141: core.UserService.DeleteManyBackup:output_type -> api.Response
-	25,  // 142: core.UserService.CreateManyBackup:output_type -> api.Response
-	25,  // 143: core.UserService.CallAIModel:output_type -> api.Response
-	25,  // 144: core.APIKeyService.Query:output_type -> api.Response
-	25,  // 145: core.APIKeyService.Get:output_type -> api.Response
-	25,  // 146: core.APIKeyService.Create:output_type -> api.Response
-	25,  // 147: core.APIKeyService.Delete:output_type -> api.Response
-	25,  // 148: core.APIKeyService.GetByKeyID:output_type -> api.Response
-	4,   // 149: core.APIKeyService.Verify:output_type -> core.VerifyAPIKeyResponse
-	25,  // 150: core.TableSchemaService.Query:output_type -> api.Response
-	25,  // 151: core.TableSchemaService.QueryDeviceByDriverAndGroup:output_type -> api.Response
-	25,  // 152: core.TableSchemaService.QueryTableDeviceByDriverAndGroup:output_type -> api.Response
-	25,  // 153: core.TableSchemaService.FindDevice:output_type -> api.Response
-	25,  // 154: core.TableSchemaService.QueryEmulator:output_type -> api.Response
-	25,  // 155: core.TableSchemaService.Get:output_type -> api.Response
-	25,  // 156: core.TableSchemaService.Delete:output_type -> api.Response
-	25,  // 157: core.TableSchemaService.Update:output_type -> api.Response
-	25,  // 158: core.TableSchemaService.Replace:output_type -> api.Response
-	25,  // 159: core.TableSchemaService.Create:output_type -> api.Response
-	25,  // 160: core.TableSchemaService.StatsQuery:output_type -> api.Response
-	25,  // 161: core.TableSchemaService.FindCommandByID:output_type -> api.Response
-	25,  // 162: core.TableDataService.Query:output_type -> api.Response
-	25,  // 163: core.TableDataService.QueryByTableId:output_type -> api.Response
-	25,  // 164: core.TableDataService.Get:output_type -> api.Response
-	25,  // 165: core.TableDataService.Delete:output_type -> api.Response
-	25,  // 166: core.TableDataService.DeleteMany:output_type -> api.Response
-	25,  // 167: core.TableDataService.Update:output_type -> api.Response
-	25,  // 168: core.TableDataService.Replace:output_type -> api.Response
-	25,  // 169: core.TableDataService.Create:output_type -> api.Response
-	25,  // 170: core.TableDataService.CreateMany:output_type -> api.Response
-	25,  // 171: core.TableDataService.FindTableDataDeptByDeptIDs:output_type -> api.Response
-	25,  // 172: core.TableDataService.UpdateMany:output_type -> api.Response
-	25,  // 173: core.TableDataService.GetWarningFilterIDs:output_type -> api.Response
-	25,  // 174: core.TableDataService.FindTagByID:output_type -> api.Response
-	25,  // 175: core.TableDataService.FindCommandByID:output_type -> api.Response
-	25,  // 176: core.TableDataService.QueryByDB:output_type -> api.Response
-	25,  // 177: core.TableDataService.GetByDB:output_type -> api.Response
-	25,  // 178: core.TableDataService.DeleteByDB:output_type -> api.Response
-	25,  // 179: core.TableDataService.DeleteManyByDB:output_type -> api.Response
-	25,  // 180: core.TableDataService.UpdateByDB:output_type -> api.Response
-	25,  // 181: core.TableDataService.ReplaceByDB:output_type -> api.Response
-	25,  // 182: core.TableDataService.CreateByDB:output_type -> api.Response
-	25,  // 183: core.TableDataService.CreateManyByDB:output_type -> api.Response
-	25,  // 184: core.TableDataService.UpdateManyByDB:output_type -> api.Response
-	25,  // 185: core.TableRecordService.Query:output_type -> api.Response
-	25,  // 186: core.TableRecordService.Get:output_type -> api.Response
-	25,  // 187: core.TableRecordService.Delete:output_type -> api.Response
-	25,  // 188: core.TableRecordService.Update:output_type -> api.Response
-	25,  // 189: core.TableRecordService.Replace:output_type -> api.Response
-	25,  // 190: core.TableRecordService.Create:output_type -> api.Response
-	25,  // 191: core.MessageService.Create:output_type -> api.Response
-	25,  // 192: core.MessageService.Query:output_type -> api.Response
-	25,  // 193: core.DashboardService.Create:output_type -> api.Response
-	25,  // 194: core.DashboardService.Query:output_type -> api.Response
-	25,  // 195: core.DataQueryService.PostLatest:output_type -> api.Response
-	25,  // 196: core.DataQueryService.GetQuery:output_type -> api.Response
-	25,  // 197: core.DataQueryService.PostQuery:output_type -> api.Response
-	25,  // 198: core.RoleService.Query:output_type -> api.Response
-	25,  // 199: core.RoleService.Get:output_type -> api.Response
-	25,  // 200: core.RoleService.AdminRoleCheck:output_type -> api.Response
-	25,  // 201: core.CatalogService.Query:output_type -> api.Response
-	25,  // 202: core.CatalogService.Get:output_type -> api.Response
-	25,  // 203: core.DeptService.Query:output_type -> api.Response
-	25,  // 204: core.DeptService.Get:output_type -> api.Response
-	25,  // 205: core.SettingService.Query:output_type -> api.Response
-	25,  // 206: core.SystemVariableService.Query:output_type -> api.Response
-	25,  // 207: core.SystemVariableService.Get:output_type -> api.Response
-	25,  // 208: core.SystemVariableService.Delete:output_type -> api.Response
-	25,  // 209: core.SystemVariableService.Update:output_type -> api.Response
-	25,  // 210: core.SystemVariableService.Replace:output_type -> api.Response
-	25,  // 211: core.SystemVariableService.Create:output_type -> api.Response
-	25,  // 212: core.BackupService.Query:output_type -> api.Response
-	25,  // 213: core.BackupService.Get:output_type -> api.Response
-	25,  // 214: core.BackupService.Delete:output_type -> api.Response
-	25,  // 215: core.BackupService.Update:output_type -> api.Response
-	25,  // 216: core.BackupService.Import:output_type -> api.Response
-	25,  // 217: core.BackupService.Export:output_type -> api.Response
-	25,  // 218: core.BackupService.Upload:output_type -> api.Response
-	12,  // 219: core.BackupService.Download:output_type -> core.DownloadFileResponse
-	25,  // 220: core.TaskManagerService.Query:output_type -> api.Response
-	25,  // 221: core.TaskManagerService.Get:output_type -> api.Response
-	25,  // 222: core.TaskManagerService.Delete:output_type -> api.Response
-	25,  // 223: core.TaskManagerService.Update:output_type -> api.Response
-	25,  // 224: core.TaskManagerService.Replace:output_type -> api.Response
-	25,  // 225: core.TaskManagerService.Create:output_type -> api.Response
-	25,  // 226: core.MediaLibraryService.Query:output_type -> api.Response
-	25,  // 227: core.MediaLibraryService.UploadFromUrl:output_type -> api.Response
-	25,  // 228: core.MediaLibraryService.UploadFromBase64:output_type -> api.Response
-	25,  // 229: core.MediaLibraryService.Mkdir:output_type -> api.Response
-	25,  // 230: core.MediaLibraryService.DeleteFiles:output_type -> api.Response
-	25,  // 231: core.MediaLibraryDirSettingService.Create:output_type -> api.Response
-	25,  // 232: core.MediaLibraryDirSettingService.Delete:output_type -> api.Response
-	25,  // 233: core.MediaLibraryDirSettingService.Update:output_type -> api.Response
-	25,  // 234: core.MediaLibraryDirSettingService.Replace:output_type -> api.Response
-	25,  // 235: core.MediaLibraryDirSettingService.Get:output_type -> api.Response
-	25,  // 236: core.MediaLibraryDirSettingService.GetByPath:output_type -> api.Response
-	25,  // 237: core.MediaLibraryDirSettingService.Query:output_type -> api.Response
-	119, // [119:238] is the sub-list for method output_type
-	0,   // [0:119] is the sub-list for method input_type
-	0,   // [0:0] is the sub-list for extension type_name
-	0,   // [0:0] is the sub-list for extension extendee
-	0,   // [0:0] is the sub-list for field type_name
+	4,   // 0: core.BatchResourceAccessRequest.resources:type_name -> core.AuthorizationResource
+	4,   // 1: core.ResourceAccessDecision.resource:type_name -> core.AuthorizationResource
+	6,   // 2: core.BatchResourceAccessResponse.decisions:type_name -> core.ResourceAccessDecision
+	4,   // 3: core.ListAccessibleResourcesResponse.resources:type_name -> core.AuthorizationResource
+	29,  // 4: core.LicenseService.GetFileLicense:input_type -> api.QueryRequest
+	29,  // 5: core.LicenseService.UseLicense:input_type -> api.QueryRequest
+	29,  // 6: core.LicenseService.FindMachineCode:input_type -> api.QueryRequest
+	30,  // 7: core.LicenseService.GetDriverLicense:input_type -> api.GetOrDeleteRequest
+	21,  // 8: core.LicenseService.UploadLicense:input_type -> core.UploadFileRequest
+	31,  // 9: core.AppService.GetToken:input_type -> api.TokenRequest
+	29,  // 10: core.AppService.Query:input_type -> api.QueryRequest
+	30,  // 11: core.AppService.Get:input_type -> api.GetOrDeleteRequest
+	32,  // 12: core.LogService.Create:input_type -> api.CreateRequest
+	30,  // 13: core.LogService.Get:input_type -> api.GetOrDeleteRequest
+	29,  // 14: core.LogService.Query:input_type -> api.QueryRequest
+	29,  // 15: core.LogService.QueryApiPermission:input_type -> api.QueryRequest
+	32,  // 16: core.LogService.CreateApiPermission:input_type -> api.CreateRequest
+	29,  // 17: core.UserService.Query:input_type -> api.QueryRequest
+	30,  // 18: core.UserService.Get:input_type -> api.GetOrDeleteRequest
+	30,  // 19: core.UserService.Delete:input_type -> api.GetOrDeleteRequest
+	33,  // 20: core.UserService.Update:input_type -> api.UpdateRequest
+	33,  // 21: core.UserService.Replace:input_type -> api.UpdateRequest
+	32,  // 22: core.UserService.Create:input_type -> api.CreateRequest
+	20,  // 23: core.UserService.GetCurrentUserInfo:input_type -> core.LoginUserRequest
+	32,  // 24: core.UserService.UserPermissionUpdate:input_type -> api.CreateRequest
+	29,  // 25: core.UserService.QueryBackup:input_type -> api.QueryRequest
+	29,  // 26: core.UserService.DeleteManyBackup:input_type -> api.QueryRequest
+	32,  // 27: core.UserService.CreateManyBackup:input_type -> api.CreateRequest
+	32,  // 28: core.UserService.CallAIModel:input_type -> api.CreateRequest
+	29,  // 29: core.APIKeyService.Query:input_type -> api.QueryRequest
+	30,  // 30: core.APIKeyService.Get:input_type -> api.GetOrDeleteRequest
+	32,  // 31: core.APIKeyService.Create:input_type -> api.CreateRequest
+	30,  // 32: core.APIKeyService.Delete:input_type -> api.GetOrDeleteRequest
+	12,  // 33: core.APIKeyService.GetByKeyID:input_type -> core.GetRequestName
+	13,  // 34: core.APIKeyService.Verify:input_type -> core.VerifyAPIKeyRequest
+	29,  // 35: core.TableSchemaService.Query:input_type -> api.QueryRequest
+	10,  // 36: core.TableSchemaService.QueryDeviceByDriverAndGroup:input_type -> core.GetDeviceRequest
+	10,  // 37: core.TableSchemaService.QueryTableDeviceByDriverAndGroup:input_type -> core.GetDeviceRequest
+	11,  // 38: core.TableSchemaService.FindDevice:input_type -> core.GetDataDeviceRequest
+	29,  // 39: core.TableSchemaService.QueryEmulator:input_type -> api.QueryRequest
+	30,  // 40: core.TableSchemaService.Get:input_type -> api.GetOrDeleteRequest
+	30,  // 41: core.TableSchemaService.Delete:input_type -> api.GetOrDeleteRequest
+	33,  // 42: core.TableSchemaService.Update:input_type -> api.UpdateRequest
+	33,  // 43: core.TableSchemaService.Replace:input_type -> api.UpdateRequest
+	32,  // 44: core.TableSchemaService.Create:input_type -> api.CreateRequest
+	29,  // 45: core.TableSchemaService.StatsQuery:input_type -> api.QueryRequest
+	30,  // 46: core.TableSchemaService.FindCommandByID:input_type -> api.GetOrDeleteRequest
+	15,  // 47: core.TableDataService.Query:input_type -> core.QueryDataRequest
+	15,  // 48: core.TableDataService.QueryByTableId:input_type -> core.QueryDataRequest
+	16,  // 49: core.TableDataService.Get:input_type -> core.GetOrDeleteDataRequest
+	16,  // 50: core.TableDataService.Delete:input_type -> core.GetOrDeleteDataRequest
+	15,  // 51: core.TableDataService.DeleteMany:input_type -> core.QueryDataRequest
+	17,  // 52: core.TableDataService.Update:input_type -> core.UpdateDataRequest
+	17,  // 53: core.TableDataService.Replace:input_type -> core.UpdateDataRequest
+	19,  // 54: core.TableDataService.Create:input_type -> core.CreateDataRequest
+	19,  // 55: core.TableDataService.CreateMany:input_type -> core.CreateDataRequest
+	32,  // 56: core.TableDataService.FindTableDataDeptByDeptIDs:input_type -> api.CreateRequest
+	18,  // 57: core.TableDataService.UpdateMany:input_type -> core.MultiUpdateDataRequest
+	34,  // 58: core.TableDataService.GetWarningFilterIDs:input_type -> api.EmptyRequest
+	16,  // 59: core.TableDataService.FindTagByID:input_type -> core.GetOrDeleteDataRequest
+	16,  // 60: core.TableDataService.FindCommandByID:input_type -> core.GetOrDeleteDataRequest
+	15,  // 61: core.TableDataService.QueryByDB:input_type -> core.QueryDataRequest
+	16,  // 62: core.TableDataService.GetByDB:input_type -> core.GetOrDeleteDataRequest
+	16,  // 63: core.TableDataService.DeleteByDB:input_type -> core.GetOrDeleteDataRequest
+	15,  // 64: core.TableDataService.DeleteManyByDB:input_type -> core.QueryDataRequest
+	17,  // 65: core.TableDataService.UpdateByDB:input_type -> core.UpdateDataRequest
+	17,  // 66: core.TableDataService.ReplaceByDB:input_type -> core.UpdateDataRequest
+	19,  // 67: core.TableDataService.CreateByDB:input_type -> core.CreateDataRequest
+	19,  // 68: core.TableDataService.CreateManyByDB:input_type -> core.CreateDataRequest
+	18,  // 69: core.TableDataService.UpdateManyByDB:input_type -> core.MultiUpdateDataRequest
+	29,  // 70: core.TableRecordService.Query:input_type -> api.QueryRequest
+	30,  // 71: core.TableRecordService.Get:input_type -> api.GetOrDeleteRequest
+	30,  // 72: core.TableRecordService.Delete:input_type -> api.GetOrDeleteRequest
+	33,  // 73: core.TableRecordService.Update:input_type -> api.UpdateRequest
+	33,  // 74: core.TableRecordService.Replace:input_type -> api.UpdateRequest
+	32,  // 75: core.TableRecordService.Create:input_type -> api.CreateRequest
+	32,  // 76: core.MessageService.Create:input_type -> api.CreateRequest
+	29,  // 77: core.MessageService.Query:input_type -> api.QueryRequest
+	32,  // 78: core.DashboardService.Create:input_type -> api.CreateRequest
+	29,  // 79: core.DashboardService.Query:input_type -> api.QueryRequest
+	32,  // 80: core.DataQueryService.PostLatest:input_type -> api.CreateRequest
+	29,  // 81: core.DataQueryService.GetQuery:input_type -> api.QueryRequest
+	32,  // 82: core.DataQueryService.PostQuery:input_type -> api.CreateRequest
+	29,  // 83: core.RoleService.Query:input_type -> api.QueryRequest
+	30,  // 84: core.RoleService.Get:input_type -> api.GetOrDeleteRequest
+	34,  // 85: core.RoleService.AdminRoleCheck:input_type -> api.EmptyRequest
+	29,  // 86: core.CatalogService.Query:input_type -> api.QueryRequest
+	30,  // 87: core.CatalogService.Get:input_type -> api.GetOrDeleteRequest
+	29,  // 88: core.DeptService.Query:input_type -> api.QueryRequest
+	30,  // 89: core.DeptService.Get:input_type -> api.GetOrDeleteRequest
+	29,  // 90: core.SettingService.Query:input_type -> api.QueryRequest
+	29,  // 91: core.SystemVariableService.Query:input_type -> api.QueryRequest
+	30,  // 92: core.SystemVariableService.Get:input_type -> api.GetOrDeleteRequest
+	30,  // 93: core.SystemVariableService.Delete:input_type -> api.GetOrDeleteRequest
+	33,  // 94: core.SystemVariableService.Update:input_type -> api.UpdateRequest
+	33,  // 95: core.SystemVariableService.Replace:input_type -> api.UpdateRequest
+	32,  // 96: core.SystemVariableService.Create:input_type -> api.CreateRequest
+	29,  // 97: core.BackupService.Query:input_type -> api.QueryRequest
+	30,  // 98: core.BackupService.Get:input_type -> api.GetOrDeleteRequest
+	30,  // 99: core.BackupService.Delete:input_type -> api.GetOrDeleteRequest
+	33,  // 100: core.BackupService.Update:input_type -> api.UpdateRequest
+	29,  // 101: core.BackupService.Import:input_type -> api.QueryRequest
+	29,  // 102: core.BackupService.Export:input_type -> api.QueryRequest
+	21,  // 103: core.BackupService.Upload:input_type -> core.UploadFileRequest
+	30,  // 104: core.BackupService.Download:input_type -> api.GetOrDeleteRequest
+	29,  // 105: core.TaskManagerService.Query:input_type -> api.QueryRequest
+	30,  // 106: core.TaskManagerService.Get:input_type -> api.GetOrDeleteRequest
+	30,  // 107: core.TaskManagerService.Delete:input_type -> api.GetOrDeleteRequest
+	33,  // 108: core.TaskManagerService.Update:input_type -> api.UpdateRequest
+	33,  // 109: core.TaskManagerService.Replace:input_type -> api.UpdateRequest
+	32,  // 110: core.TaskManagerService.Create:input_type -> api.CreateRequest
+	23,  // 111: core.MediaLibraryService.Query:input_type -> core.MediaLibraryQueryRequest
+	24,  // 112: core.MediaLibraryService.UploadFromUrl:input_type -> core.MediaLibraryUploadFromUrlRequest
+	25,  // 113: core.MediaLibraryService.UploadFromBase64:input_type -> core.MediaLibraryUploadFromBase64Request
+	27,  // 114: core.MediaLibraryService.Mkdir:input_type -> core.MediaLibraryDirMkDirRequest
+	28,  // 115: core.MediaLibraryService.DeleteFiles:input_type -> core.MediaLibraryDeleteRequest
+	32,  // 116: core.MediaLibraryDirSettingService.Create:input_type -> api.CreateRequest
+	30,  // 117: core.MediaLibraryDirSettingService.Delete:input_type -> api.GetOrDeleteRequest
+	33,  // 118: core.MediaLibraryDirSettingService.Update:input_type -> api.UpdateRequest
+	33,  // 119: core.MediaLibraryDirSettingService.Replace:input_type -> api.UpdateRequest
+	30,  // 120: core.MediaLibraryDirSettingService.Get:input_type -> api.GetOrDeleteRequest
+	26,  // 121: core.MediaLibraryDirSettingService.GetByPath:input_type -> core.MediaLibraryDirSettingQueryByPathRequest
+	29,  // 122: core.MediaLibraryDirSettingService.Query:input_type -> api.QueryRequest
+	2,   // 123: core.AuthorizationService.CheckPermission:input_type -> core.AuthorizationPermissionRequest
+	5,   // 124: core.AuthorizationService.BatchCheckResourceAccess:input_type -> core.BatchResourceAccessRequest
+	8,   // 125: core.AuthorizationService.ListAccessibleResources:input_type -> core.ListAccessibleResourcesRequest
+	0,   // 126: core.AuthorizationService.GetAuthorizationRevision:input_type -> core.AuthorizationRevisionRequest
+	35,  // 127: core.LicenseService.GetFileLicense:output_type -> api.Response
+	35,  // 128: core.LicenseService.UseLicense:output_type -> api.Response
+	35,  // 129: core.LicenseService.FindMachineCode:output_type -> api.Response
+	35,  // 130: core.LicenseService.GetDriverLicense:output_type -> api.Response
+	35,  // 131: core.LicenseService.UploadLicense:output_type -> api.Response
+	35,  // 132: core.AppService.GetToken:output_type -> api.Response
+	35,  // 133: core.AppService.Query:output_type -> api.Response
+	35,  // 134: core.AppService.Get:output_type -> api.Response
+	35,  // 135: core.LogService.Create:output_type -> api.Response
+	35,  // 136: core.LogService.Get:output_type -> api.Response
+	35,  // 137: core.LogService.Query:output_type -> api.Response
+	35,  // 138: core.LogService.QueryApiPermission:output_type -> api.Response
+	35,  // 139: core.LogService.CreateApiPermission:output_type -> api.Response
+	35,  // 140: core.UserService.Query:output_type -> api.Response
+	35,  // 141: core.UserService.Get:output_type -> api.Response
+	35,  // 142: core.UserService.Delete:output_type -> api.Response
+	35,  // 143: core.UserService.Update:output_type -> api.Response
+	35,  // 144: core.UserService.Replace:output_type -> api.Response
+	35,  // 145: core.UserService.Create:output_type -> api.Response
+	35,  // 146: core.UserService.GetCurrentUserInfo:output_type -> api.Response
+	35,  // 147: core.UserService.UserPermissionUpdate:output_type -> api.Response
+	35,  // 148: core.UserService.QueryBackup:output_type -> api.Response
+	35,  // 149: core.UserService.DeleteManyBackup:output_type -> api.Response
+	35,  // 150: core.UserService.CreateManyBackup:output_type -> api.Response
+	35,  // 151: core.UserService.CallAIModel:output_type -> api.Response
+	35,  // 152: core.APIKeyService.Query:output_type -> api.Response
+	35,  // 153: core.APIKeyService.Get:output_type -> api.Response
+	35,  // 154: core.APIKeyService.Create:output_type -> api.Response
+	35,  // 155: core.APIKeyService.Delete:output_type -> api.Response
+	35,  // 156: core.APIKeyService.GetByKeyID:output_type -> api.Response
+	14,  // 157: core.APIKeyService.Verify:output_type -> core.VerifyAPIKeyResponse
+	35,  // 158: core.TableSchemaService.Query:output_type -> api.Response
+	35,  // 159: core.TableSchemaService.QueryDeviceByDriverAndGroup:output_type -> api.Response
+	35,  // 160: core.TableSchemaService.QueryTableDeviceByDriverAndGroup:output_type -> api.Response
+	35,  // 161: core.TableSchemaService.FindDevice:output_type -> api.Response
+	35,  // 162: core.TableSchemaService.QueryEmulator:output_type -> api.Response
+	35,  // 163: core.TableSchemaService.Get:output_type -> api.Response
+	35,  // 164: core.TableSchemaService.Delete:output_type -> api.Response
+	35,  // 165: core.TableSchemaService.Update:output_type -> api.Response
+	35,  // 166: core.TableSchemaService.Replace:output_type -> api.Response
+	35,  // 167: core.TableSchemaService.Create:output_type -> api.Response
+	35,  // 168: core.TableSchemaService.StatsQuery:output_type -> api.Response
+	35,  // 169: core.TableSchemaService.FindCommandByID:output_type -> api.Response
+	35,  // 170: core.TableDataService.Query:output_type -> api.Response
+	35,  // 171: core.TableDataService.QueryByTableId:output_type -> api.Response
+	35,  // 172: core.TableDataService.Get:output_type -> api.Response
+	35,  // 173: core.TableDataService.Delete:output_type -> api.Response
+	35,  // 174: core.TableDataService.DeleteMany:output_type -> api.Response
+	35,  // 175: core.TableDataService.Update:output_type -> api.Response
+	35,  // 176: core.TableDataService.Replace:output_type -> api.Response
+	35,  // 177: core.TableDataService.Create:output_type -> api.Response
+	35,  // 178: core.TableDataService.CreateMany:output_type -> api.Response
+	35,  // 179: core.TableDataService.FindTableDataDeptByDeptIDs:output_type -> api.Response
+	35,  // 180: core.TableDataService.UpdateMany:output_type -> api.Response
+	35,  // 181: core.TableDataService.GetWarningFilterIDs:output_type -> api.Response
+	35,  // 182: core.TableDataService.FindTagByID:output_type -> api.Response
+	35,  // 183: core.TableDataService.FindCommandByID:output_type -> api.Response
+	35,  // 184: core.TableDataService.QueryByDB:output_type -> api.Response
+	35,  // 185: core.TableDataService.GetByDB:output_type -> api.Response
+	35,  // 186: core.TableDataService.DeleteByDB:output_type -> api.Response
+	35,  // 187: core.TableDataService.DeleteManyByDB:output_type -> api.Response
+	35,  // 188: core.TableDataService.UpdateByDB:output_type -> api.Response
+	35,  // 189: core.TableDataService.ReplaceByDB:output_type -> api.Response
+	35,  // 190: core.TableDataService.CreateByDB:output_type -> api.Response
+	35,  // 191: core.TableDataService.CreateManyByDB:output_type -> api.Response
+	35,  // 192: core.TableDataService.UpdateManyByDB:output_type -> api.Response
+	35,  // 193: core.TableRecordService.Query:output_type -> api.Response
+	35,  // 194: core.TableRecordService.Get:output_type -> api.Response
+	35,  // 195: core.TableRecordService.Delete:output_type -> api.Response
+	35,  // 196: core.TableRecordService.Update:output_type -> api.Response
+	35,  // 197: core.TableRecordService.Replace:output_type -> api.Response
+	35,  // 198: core.TableRecordService.Create:output_type -> api.Response
+	35,  // 199: core.MessageService.Create:output_type -> api.Response
+	35,  // 200: core.MessageService.Query:output_type -> api.Response
+	35,  // 201: core.DashboardService.Create:output_type -> api.Response
+	35,  // 202: core.DashboardService.Query:output_type -> api.Response
+	35,  // 203: core.DataQueryService.PostLatest:output_type -> api.Response
+	35,  // 204: core.DataQueryService.GetQuery:output_type -> api.Response
+	35,  // 205: core.DataQueryService.PostQuery:output_type -> api.Response
+	35,  // 206: core.RoleService.Query:output_type -> api.Response
+	35,  // 207: core.RoleService.Get:output_type -> api.Response
+	35,  // 208: core.RoleService.AdminRoleCheck:output_type -> api.Response
+	35,  // 209: core.CatalogService.Query:output_type -> api.Response
+	35,  // 210: core.CatalogService.Get:output_type -> api.Response
+	35,  // 211: core.DeptService.Query:output_type -> api.Response
+	35,  // 212: core.DeptService.Get:output_type -> api.Response
+	35,  // 213: core.SettingService.Query:output_type -> api.Response
+	35,  // 214: core.SystemVariableService.Query:output_type -> api.Response
+	35,  // 215: core.SystemVariableService.Get:output_type -> api.Response
+	35,  // 216: core.SystemVariableService.Delete:output_type -> api.Response
+	35,  // 217: core.SystemVariableService.Update:output_type -> api.Response
+	35,  // 218: core.SystemVariableService.Replace:output_type -> api.Response
+	35,  // 219: core.SystemVariableService.Create:output_type -> api.Response
+	35,  // 220: core.BackupService.Query:output_type -> api.Response
+	35,  // 221: core.BackupService.Get:output_type -> api.Response
+	35,  // 222: core.BackupService.Delete:output_type -> api.Response
+	35,  // 223: core.BackupService.Update:output_type -> api.Response
+	35,  // 224: core.BackupService.Import:output_type -> api.Response
+	35,  // 225: core.BackupService.Export:output_type -> api.Response
+	35,  // 226: core.BackupService.Upload:output_type -> api.Response
+	22,  // 227: core.BackupService.Download:output_type -> core.DownloadFileResponse
+	35,  // 228: core.TaskManagerService.Query:output_type -> api.Response
+	35,  // 229: core.TaskManagerService.Get:output_type -> api.Response
+	35,  // 230: core.TaskManagerService.Delete:output_type -> api.Response
+	35,  // 231: core.TaskManagerService.Update:output_type -> api.Response
+	35,  // 232: core.TaskManagerService.Replace:output_type -> api.Response
+	35,  // 233: core.TaskManagerService.Create:output_type -> api.Response
+	35,  // 234: core.MediaLibraryService.Query:output_type -> api.Response
+	35,  // 235: core.MediaLibraryService.UploadFromUrl:output_type -> api.Response
+	35,  // 236: core.MediaLibraryService.UploadFromBase64:output_type -> api.Response
+	35,  // 237: core.MediaLibraryService.Mkdir:output_type -> api.Response
+	35,  // 238: core.MediaLibraryService.DeleteFiles:output_type -> api.Response
+	35,  // 239: core.MediaLibraryDirSettingService.Create:output_type -> api.Response
+	35,  // 240: core.MediaLibraryDirSettingService.Delete:output_type -> api.Response
+	35,  // 241: core.MediaLibraryDirSettingService.Update:output_type -> api.Response
+	35,  // 242: core.MediaLibraryDirSettingService.Replace:output_type -> api.Response
+	35,  // 243: core.MediaLibraryDirSettingService.Get:output_type -> api.Response
+	35,  // 244: core.MediaLibraryDirSettingService.GetByPath:output_type -> api.Response
+	35,  // 245: core.MediaLibraryDirSettingService.Query:output_type -> api.Response
+	3,   // 246: core.AuthorizationService.CheckPermission:output_type -> core.AuthorizationDecision
+	7,   // 247: core.AuthorizationService.BatchCheckResourceAccess:output_type -> core.BatchResourceAccessResponse
+	9,   // 248: core.AuthorizationService.ListAccessibleResources:output_type -> core.ListAccessibleResourcesResponse
+	1,   // 249: core.AuthorizationService.GetAuthorizationRevision:output_type -> core.AuthorizationRevisionResponse
+	127, // [127:250] is the sub-list for method output_type
+	4,   // [4:127] is the sub-list for method input_type
+	4,   // [4:4] is the sub-list for extension type_name
+	4,   // [4:4] is the sub-list for extension extendee
+	0,   // [0:4] is the sub-list for field type_name
 }
 
 func init() { file_core_core_proto_init() }
@@ -1594,9 +2183,9 @@ func file_core_core_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_core_core_proto_rawDesc), len(file_core_core_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   19,
+			NumMessages:   29,
 			NumExtensions: 0,
-			NumServices:   20,
+			NumServices:   21,
 		},
 		GoTypes:           file_core_core_proto_goTypes,
 		DependencyIndexes: file_core_core_proto_depIdxs,

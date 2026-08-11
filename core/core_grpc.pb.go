@@ -5818,3 +5818,225 @@ var MediaLibraryDirSettingService_ServiceDesc = grpc.ServiceDesc{
 	Streams:  []grpc.StreamDesc{},
 	Metadata: "core/core.proto",
 }
+
+const (
+	AuthorizationService_CheckPermission_FullMethodName          = "/core.AuthorizationService/CheckPermission"
+	AuthorizationService_BatchCheckResourceAccess_FullMethodName = "/core.AuthorizationService/BatchCheckResourceAccess"
+	AuthorizationService_ListAccessibleResources_FullMethodName  = "/core.AuthorizationService/ListAccessibleResources"
+	AuthorizationService_GetAuthorizationRevision_FullMethodName = "/core.AuthorizationService/GetAuthorizationRevision"
+)
+
+// AuthorizationServiceClient is the client API for AuthorizationService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+//
+// AuthorizationService is the remote authorization entry point for services
+// other than Core. Core derives the subject from gRPC metadata.
+type AuthorizationServiceClient interface {
+	CheckPermission(ctx context.Context, in *AuthorizationPermissionRequest, opts ...grpc.CallOption) (*AuthorizationDecision, error)
+	BatchCheckResourceAccess(ctx context.Context, in *BatchResourceAccessRequest, opts ...grpc.CallOption) (*BatchResourceAccessResponse, error)
+	ListAccessibleResources(ctx context.Context, in *ListAccessibleResourcesRequest, opts ...grpc.CallOption) (*ListAccessibleResourcesResponse, error)
+	GetAuthorizationRevision(ctx context.Context, in *AuthorizationRevisionRequest, opts ...grpc.CallOption) (*AuthorizationRevisionResponse, error)
+}
+
+type authorizationServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewAuthorizationServiceClient(cc grpc.ClientConnInterface) AuthorizationServiceClient {
+	return &authorizationServiceClient{cc}
+}
+
+func (c *authorizationServiceClient) CheckPermission(ctx context.Context, in *AuthorizationPermissionRequest, opts ...grpc.CallOption) (*AuthorizationDecision, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(AuthorizationDecision)
+	err := c.cc.Invoke(ctx, AuthorizationService_CheckPermission_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *authorizationServiceClient) BatchCheckResourceAccess(ctx context.Context, in *BatchResourceAccessRequest, opts ...grpc.CallOption) (*BatchResourceAccessResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(BatchResourceAccessResponse)
+	err := c.cc.Invoke(ctx, AuthorizationService_BatchCheckResourceAccess_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *authorizationServiceClient) ListAccessibleResources(ctx context.Context, in *ListAccessibleResourcesRequest, opts ...grpc.CallOption) (*ListAccessibleResourcesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListAccessibleResourcesResponse)
+	err := c.cc.Invoke(ctx, AuthorizationService_ListAccessibleResources_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *authorizationServiceClient) GetAuthorizationRevision(ctx context.Context, in *AuthorizationRevisionRequest, opts ...grpc.CallOption) (*AuthorizationRevisionResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(AuthorizationRevisionResponse)
+	err := c.cc.Invoke(ctx, AuthorizationService_GetAuthorizationRevision_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// AuthorizationServiceServer is the server API for AuthorizationService service.
+// All implementations must embed UnimplementedAuthorizationServiceServer
+// for forward compatibility.
+//
+// AuthorizationService is the remote authorization entry point for services
+// other than Core. Core derives the subject from gRPC metadata.
+type AuthorizationServiceServer interface {
+	CheckPermission(context.Context, *AuthorizationPermissionRequest) (*AuthorizationDecision, error)
+	BatchCheckResourceAccess(context.Context, *BatchResourceAccessRequest) (*BatchResourceAccessResponse, error)
+	ListAccessibleResources(context.Context, *ListAccessibleResourcesRequest) (*ListAccessibleResourcesResponse, error)
+	GetAuthorizationRevision(context.Context, *AuthorizationRevisionRequest) (*AuthorizationRevisionResponse, error)
+	mustEmbedUnimplementedAuthorizationServiceServer()
+}
+
+// UnimplementedAuthorizationServiceServer must be embedded to have
+// forward compatible implementations.
+//
+// NOTE: this should be embedded by value instead of pointer to avoid a nil
+// pointer dereference when methods are called.
+type UnimplementedAuthorizationServiceServer struct{}
+
+func (UnimplementedAuthorizationServiceServer) CheckPermission(context.Context, *AuthorizationPermissionRequest) (*AuthorizationDecision, error) {
+	return nil, status.Error(codes.Unimplemented, "method CheckPermission not implemented")
+}
+func (UnimplementedAuthorizationServiceServer) BatchCheckResourceAccess(context.Context, *BatchResourceAccessRequest) (*BatchResourceAccessResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method BatchCheckResourceAccess not implemented")
+}
+func (UnimplementedAuthorizationServiceServer) ListAccessibleResources(context.Context, *ListAccessibleResourcesRequest) (*ListAccessibleResourcesResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListAccessibleResources not implemented")
+}
+func (UnimplementedAuthorizationServiceServer) GetAuthorizationRevision(context.Context, *AuthorizationRevisionRequest) (*AuthorizationRevisionResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetAuthorizationRevision not implemented")
+}
+func (UnimplementedAuthorizationServiceServer) mustEmbedUnimplementedAuthorizationServiceServer() {}
+func (UnimplementedAuthorizationServiceServer) testEmbeddedByValue()                              {}
+
+// UnsafeAuthorizationServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to AuthorizationServiceServer will
+// result in compilation errors.
+type UnsafeAuthorizationServiceServer interface {
+	mustEmbedUnimplementedAuthorizationServiceServer()
+}
+
+func RegisterAuthorizationServiceServer(s grpc.ServiceRegistrar, srv AuthorizationServiceServer) {
+	// If the following call panics, it indicates UnimplementedAuthorizationServiceServer was
+	// embedded by pointer and is nil.  This will cause panics if an
+	// unimplemented method is ever invoked, so we test this at initialization
+	// time to prevent it from happening at runtime later due to I/O.
+	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
+		t.testEmbeddedByValue()
+	}
+	s.RegisterService(&AuthorizationService_ServiceDesc, srv)
+}
+
+func _AuthorizationService_CheckPermission_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AuthorizationPermissionRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AuthorizationServiceServer).CheckPermission(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AuthorizationService_CheckPermission_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AuthorizationServiceServer).CheckPermission(ctx, req.(*AuthorizationPermissionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AuthorizationService_BatchCheckResourceAccess_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(BatchResourceAccessRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AuthorizationServiceServer).BatchCheckResourceAccess(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AuthorizationService_BatchCheckResourceAccess_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AuthorizationServiceServer).BatchCheckResourceAccess(ctx, req.(*BatchResourceAccessRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AuthorizationService_ListAccessibleResources_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListAccessibleResourcesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AuthorizationServiceServer).ListAccessibleResources(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AuthorizationService_ListAccessibleResources_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AuthorizationServiceServer).ListAccessibleResources(ctx, req.(*ListAccessibleResourcesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AuthorizationService_GetAuthorizationRevision_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AuthorizationRevisionRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AuthorizationServiceServer).GetAuthorizationRevision(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AuthorizationService_GetAuthorizationRevision_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AuthorizationServiceServer).GetAuthorizationRevision(ctx, req.(*AuthorizationRevisionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// AuthorizationService_ServiceDesc is the grpc.ServiceDesc for AuthorizationService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var AuthorizationService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "core.AuthorizationService",
+	HandlerType: (*AuthorizationServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "CheckPermission",
+			Handler:    _AuthorizationService_CheckPermission_Handler,
+		},
+		{
+			MethodName: "BatchCheckResourceAccess",
+			Handler:    _AuthorizationService_BatchCheckResourceAccess_Handler,
+		},
+		{
+			MethodName: "ListAccessibleResources",
+			Handler:    _AuthorizationService_ListAccessibleResources_Handler,
+		},
+		{
+			MethodName: "GetAuthorizationRevision",
+			Handler:    _AuthorizationService_GetAuthorizationRevision_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "core/core.proto",
+}
