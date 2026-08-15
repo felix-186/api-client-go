@@ -50,6 +50,24 @@ func (c *Client) GetWarn(ctx context.Context, projectId, archive, id string, res
 	return parseRes(err, res, result)
 }
 
+// GetWarnStats 查询报警统计概览（Redis缓存，由warning服务定时任务刷新）。
+// 返回：warnCount报警总数、processedCount未处理数、confirmCount未确认数、warnDeviceCount报警设备数、updatedAt刷新时间；
+// table 传 "table" 时额外返回 tableLevel（每张表按低/中/高级别的报警设备数）。
+func (c *Client) GetWarnStats(ctx context.Context, projectId, table string, result interface{}) error {
+	if projectId == "" {
+		projectId = config.XRequestProjectDefault
+	}
+	cli, err := c.WarningClient.GetWarnServiceClient()
+	if err != nil {
+		return err
+	}
+	res, err := cli.GetWarnStats(
+		apicontext.GetGrpcContext(ctx, map[string]string{config.XRequestProject: projectId}),
+		&warning.WarnStatsRequest{Table: table})
+	_, err = parseRes(err, res, result)
+	return err
+}
+
 func (c *Client) BatchCreateWarn(ctx context.Context, projectId string, createData, result interface{}) error {
 	if projectId == "" {
 		projectId = config.XRequestProjectDefault

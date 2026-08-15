@@ -20,6 +20,7 @@ service WarnService {
   rpc Get (GetOrDeleteWarningRequest) returns (api.Response) {}
   rpc Create (api.CreateRequest) returns (api.Response) {}
   rpc BatchCreate (api.CreateRequest) returns (api.Response) {}
+  rpc GetWarnStats (WarnStatsRequest) returns (api.Response) {}
 }
 
 service RuleService {
@@ -38,6 +39,11 @@ message QueryWarningRequest {
 message GetOrDeleteWarningRequest {
   string id = 1;
   string archive = 2;
+}
+
+message WarnStatsRequest {
+  // 传 "table" 时额外返回每张表按级别统计的报警设备数
+  string table = 1;
 }
 
 
