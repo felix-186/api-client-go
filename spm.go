@@ -113,28 +113,6 @@ func (c *Client) UpdateProject(ctx context.Context, id string, updateData, resul
 	return nil
 }
 
-func (c *Client) UpdateProjectLicense(ctx context.Context, id string, updateData, _ interface{}) error {
-	if id == "" {
-		return errors.New("id为空")
-	}
-	if updateData == nil {
-		return errors.New("更新数据为空")
-	}
-	cli, err := c.SpmClient.GetProjectServiceClient()
-	if err != nil {
-		return err
-	}
-	bts, err := json.Marshal(updateData)
-	if err != nil {
-		return errors.Wrap(err, "序列化更新数据错误")
-	}
-	res, err := cli.UpdateLicense(apicontext.GetGrpcContext(ctx, map[string]string{}), &api.UpdateRequest{Id: id, Data: bts})
-	if _, err := parseRes(err, res, nil); err != nil {
-		return err
-	}
-	return nil
-}
-
 func (c *Client) ReplaceProject(ctx context.Context, id string, updateData, result interface{}) error {
 	if id == "" {
 		return errors.New("id为空")
