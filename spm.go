@@ -20,6 +20,7 @@ func (c *Client) QueryProjectAvailable(ctx context.Context, result interface{}) 
 			"name":   1,
 			"grant":  1,
 			"status": 1,
+			"hasSSO": 1,
 		},
 	}
 	_, err := c.QueryTableData(ctx, "base", "project", query, result)
