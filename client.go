@@ -24,7 +24,6 @@ import (
 	"github.com/felix-186/api-client-go/local_grpc"
 	"github.com/felix-186/api-client-go/record"
 	"github.com/felix-186/api-client-go/report"
-	"github.com/felix-186/api-client-go/spm"
 	"github.com/felix-186/api-client-go/sync"
 	"github.com/felix-186/api-client-go/syslog"
 	"github.com/felix-186/api-client-go/warning"
@@ -44,7 +43,6 @@ type Client struct {
 
 	RegistryClient      *KratosRegistryClient
 	AuthClient          *auth.Client
-	SpmClient           *spm.Client
 	CoreClient          *core.Client
 	FlowClient          *flow.Client
 	WarningClient       *warning.Client
@@ -90,15 +88,11 @@ func NewLocalClient(cfg config.Config, ss *local_grpc.Server) (*Client, func(), 
 	//authCC := auth.NewCustomCredential(f)
 	//cred := grpc.WithPerRPCCredentials(authCC)
 	//httpCred := authCC.HttpToken()
-	spmClient, cleanSpm, err := spm.NewLocalClient(cfg, cc)
-	if err != nil {
-		return nil, nil, err
-	}
 	coreClient, cleanCore, err := core.NewLocalClient(cfg, cc)
 	if err != nil {
 		return nil, nil, err
 	}
-	authCli.SetClient(spmClient, coreClient)
+	authCli.SetClient(coreClient)
 	flowClient, cleanFlow, err := flow.NewLocalClient(cfg, cc)
 	if err != nil {
 		return nil, nil, err
@@ -167,7 +161,6 @@ func NewLocalClient(cfg config.Config, ss *local_grpc.Server) (*Client, func(), 
 		Config: cfg,
 		//RegistryClient:    NewKartosRegistryClient(cli),
 		AuthClient:        authCli,
-		SpmClient:         spmClient,
 		CoreClient:        coreClient,
 		FlowClient:        flowClient,
 		WarningClient:     warningClient,
@@ -187,7 +180,6 @@ func NewLocalClient(cfg config.Config, ss *local_grpc.Server) (*Client, func(), 
 	}
 	a.Service = newService(a)
 	return a, func() {
-		cleanSpm()
 		cleanCore()
 		cleanFlow()
 		cleanWarning()
@@ -272,15 +264,11 @@ func newGrpcClient(cli *clientv3.Client, cfg config.Config) (*Client, func(), er
 	authCC := auth.NewCustomCredential(f)
 	cred := grpc.WithPerRPCCredentials(authCC)
 	httpCred := authCC.HttpToken()
-	spmClient, cleanSpm, err := spm.NewClient(cfg, r, cred, httpCred)
-	if err != nil {
-		return nil, nil, err
-	}
 	coreClient, cleanCore, err := core.NewClient(cfg, r, cred, httpCred)
 	if err != nil {
 		return nil, nil, err
 	}
-	authCli.SetClient(spmClient, coreClient)
+	authCli.SetClient(coreClient)
 	flowClient, cleanFlow, err := flow.NewClient(cfg, r, cred, httpCred)
 	if err != nil {
 		return nil, nil, err
@@ -344,7 +332,6 @@ func newGrpcClient(cli *clientv3.Client, cfg config.Config) (*Client, func(), er
 	a := &Client{
 		Config:              cfg,
 		AuthClient:          authCli,
-		SpmClient:           spmClient,
 		CoreClient:          coreClient,
 		FlowClient:          flowClient,
 		WarningClient:       warningClient,
@@ -367,7 +354,6 @@ func newGrpcClient(cli *clientv3.Client, cfg config.Config) (*Client, func(), er
 	}
 	a.Service = newService(a)
 	return a, func() {
-		cleanSpm()
 		cleanCore()
 		cleanFlow()
 		cleanWarning()

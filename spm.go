@@ -2,93 +2,66 @@ package api_client_go
 
 import (
 	"context"
-	netHttp "net/http"
-	"net/url"
 
-	"github.com/felix-186/api-client-go/apicontext"
-
-	"github.com/felix-186/api-client-go/api"
 	"github.com/felix-186/errors"
 	"github.com/felix-186/json"
 )
 
 func (c *Client) QueryProject(ctx context.Context, query, result interface{}) error {
-	cli, err := c.SpmClient.GetProjectServiceClient()
-	if err != nil {
-		return err
-	}
-	bts, err := json.Marshal(query)
-	if err != nil {
-		return errors.Wrap(err, "序列化查询参数错误")
-	}
-	res, err := cli.Query(apicontext.GetGrpcContext(ctx, map[string]string{}), &api.QueryRequest{Query: bts})
-	if _, err := parseRes(err, res, result); err != nil {
-		return err
-	}
-	return nil
+	_, err := c.QueryTableData(ctx, "base", "project", query, result)
+	return err
 }
 
 func (c *Client) QueryProjectAvailable(ctx context.Context, result interface{}) error {
-	cli, err := c.SpmClient.GetProjectServiceClient()
-	if err != nil {
-		return err
+	query := map[string]interface{}{
+		"filter": map[string]interface{}{"status": true},
+		"project": map[string]interface{}{
+			"id":     1,
+			"name":   1,
+			"grant":  1,
+			"status": 1,
+		},
 	}
-	res, err := cli.QueryAvailable(apicontext.GetGrpcContext(ctx, map[string]string{}), &api.EmptyRequest{})
-	if _, err := parseRes(err, res, result); err != nil {
-		return err
-	}
-	return nil
+	_, err := c.QueryTableData(ctx, "base", "project", query, result)
+	return err
 }
 
 func (c *Client) RestQueryProject(ctx context.Context, query, result interface{}) error {
-	u := url.URL{Path: "/spm/project"}
-	if query != nil {
-		bts, err := json.Marshal(query)
-		if err != nil {
-			return errors.Wrap(err, "序列化查询参数错误")
-		}
-		params := url.Values{}
-		params.Set("query", string(bts))
-		u.RawQuery = params.Encode()
-	}
-	cli, err := c.SpmClient.GetRestClient()
-	if err != nil {
-		return err
-	}
-	if err := cli.Invoke(ctx, netHttp.MethodGet, u.RequestURI(), map[string]interface{}{}, result); err != nil {
-		return err
-	}
-	return nil
+	return c.QueryProject(ctx, query, result)
 }
 
 func (c *Client) GetProject(ctx context.Context, id string, result interface{}) ([]byte, error) {
 	if id == "" {
 		return nil, errors.New("id为空")
 	}
-	cli, err := c.SpmClient.GetProjectServiceClient()
+	query := map[string]interface{}{"filter": map[string]interface{}{"id": id}}
+	rows := make([]map[string]interface{}, 0, 1)
+	_, err := c.QueryTableData(ctx, "base", "project", query, &rows)
 	if err != nil {
 		return nil, err
 	}
-	res, err := cli.Get(apicontext.GetGrpcContext(ctx, map[string]string{}), &api.GetOrDeleteRequest{Id: id})
-	if err != nil {
-		return nil, errors.Wrap(err, "请求错误")
+	// QueryTableData only returns a reliable count when withCount is requested;
+	// GetProject only needs the row, so use the actual result length here.
+	if len(rows) == 0 {
+		return nil, errors.New("项目不存在")
 	}
-	return parseRes(err, res, result)
+	bts, err := json.Marshal(rows[0])
+	if err != nil {
+		return nil, err
+	}
+	if result != nil {
+		if err := json.Unmarshal(bts, result); err != nil {
+			return nil, err
+		}
+	}
+	return bts, err
 }
 
 func (c *Client) DeleteProject(ctx context.Context, id string, result interface{}) error {
 	if id == "" {
 		return errors.New("id为空")
 	}
-	cli, err := c.SpmClient.GetProjectServiceClient()
-	if err != nil {
-		return err
-	}
-	res, err := cli.Delete(apicontext.GetGrpcContext(ctx, map[string]string{}), &api.GetOrDeleteRequest{Id: id})
-	if _, err := parseRes(err, res, result); err != nil {
-		return err
-	}
-	return nil
+	return c.DeleteTableData(ctx, "base", "project", id, result)
 }
 
 func (c *Client) UpdateProject(ctx context.Context, id string, updateData, result interface{}) error {
@@ -98,19 +71,7 @@ func (c *Client) UpdateProject(ctx context.Context, id string, updateData, resul
 	if updateData == nil {
 		return errors.New("更新数据为空")
 	}
-	cli, err := c.SpmClient.GetProjectServiceClient()
-	if err != nil {
-		return err
-	}
-	bts, err := json.Marshal(updateData)
-	if err != nil {
-		return errors.Wrap(err, "序列化更新数据错误")
-	}
-	res, err := cli.Update(apicontext.GetGrpcContext(ctx, map[string]string{}), &api.UpdateRequest{Id: id, Data: bts})
-	if _, err := parseRes(err, res, result); err != nil {
-		return err
-	}
-	return nil
+	return c.UpdateTableData(ctx, "base", "project", id, false, updateData, result)
 }
 
 func (c *Client) ReplaceProject(ctx context.Context, id string, updateData, result interface{}) error {
@@ -120,52 +81,17 @@ func (c *Client) ReplaceProject(ctx context.Context, id string, updateData, resu
 	if updateData == nil {
 		return errors.New("更新数据为空")
 	}
-	cli, err := c.SpmClient.GetProjectServiceClient()
-	if err != nil {
-		return err
-	}
-	bts, err := json.Marshal(updateData)
-	if err != nil {
-		return errors.Wrap(err, "序列化更新数据错误")
-	}
-	res, err := cli.Replace(apicontext.GetGrpcContext(ctx, map[string]string{}), &api.UpdateRequest{Id: id, Data: bts})
-	if _, err := parseRes(err, res, result); err != nil {
-		return err
-	}
-	return nil
+	return c.ReplaceTableData(ctx, "base", "project", id, false, updateData, result)
 }
 
 func (c *Client) CreateProject(ctx context.Context, createData, result interface{}) error {
 	if createData == nil {
 		return errors.New("插入数据为空")
 	}
-	cli, err := c.SpmClient.GetProjectServiceClient()
-	if err != nil {
-		return err
-	}
-	bts, err := json.Marshal(createData)
-	if err != nil {
-		return errors.Wrap(err, "序列化插入数据错误")
-	}
-	res, err := cli.Create(apicontext.GetGrpcContext(ctx, map[string]string{}), &api.CreateRequest{Data: bts})
-	if _, err := parseRes(err, res, result); err != nil {
-		return err
-	}
-	return nil
+	return c.CreateTableData(ctx, "base", "project", false, createData, result)
 }
 
 func (c *Client) QueryPmSetting(ctx context.Context, query, result interface{}) error {
-	cli, err := c.SpmClient.GetSettingServiceClient()
-	if err != nil {
-		return err
-	}
-	bts, err := json.Marshal(query)
-	if err != nil {
-		return errors.Wrap(err, "序列化查询参数错误")
-	}
-	res, err := cli.Query(apicontext.GetGrpcContext(ctx, map[string]string{}), &api.QueryRequest{Query: bts})
-	if _, err := parseRes(err, res, result); err != nil {
-		return err
-	}
-	return nil
+	_, err := c.QueryTableData(ctx, "base", "setting", query, result)
+	return err
 }

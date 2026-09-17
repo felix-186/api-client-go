@@ -10,7 +10,6 @@ import (
 	context2 "github.com/felix-186/api-client-go/apicontext"
 	"github.com/felix-186/api-client-go/config"
 	"github.com/felix-186/api-client-go/core"
-	"github.com/felix-186/api-client-go/spm"
 	"github.com/felix-186/errors"
 	"github.com/felix-186/json"
 )
@@ -28,7 +27,6 @@ type Client struct {
 	authToken Token
 
 	cfg        config.Config
-	spmClient  *spm.Client
 	coreClient *core.Client
 }
 
@@ -38,8 +36,7 @@ func NewClient(cfg config.Config) *Client {
 	}
 }
 
-func (a *Client) SetClient(spmClient *spm.Client, coreClient *core.Client) {
-	a.spmClient = spmClient
+func (a *Client) SetClient(coreClient *core.Client) {
 	a.coreClient = coreClient
 }
 
@@ -47,16 +44,16 @@ func (a *Client) getToken() (*Token, error) {
 	var authToken Token
 	switch a.cfg.Type {
 	case config.Tenant:
-		cli, err := a.spmClient.GetUserServiceClient()
+		cli, err := a.coreClient.GetAppServiceClient()
 		if err != nil {
 			return nil, errors.Wrap(err, "获取token客户端错误")
 		}
-		res, err := cli.GetToken(context.Background(), &api.TokenRequest{Ak: a.cfg.AK, Sk: a.cfg.SK})
+		res, err := cli.GetToken(context2.GetGrpcContext(context.Background(), map[string]string{config.XRequestProject: "base"}), &api.TokenRequest{Ak: a.cfg.AK, Sk: a.cfg.SK})
 		if err != nil {
 			return nil, errors.NewResErrorMsg(err, "请求token错误")
 		}
 		if !res.GetStatus() {
-			return nil, errors.Wrap400Response(fmt.Errorf(res.GetDetail()), int(res.GetCode()), "请求token响应错误: %s", res.GetInfo())
+			return nil, errors.Wrap400Response(fmt.Errorf("%s", res.GetDetail()), int(res.GetCode()), "请求token响应错误: %s", res.GetInfo())
 		}
 		if err := json.Unmarshal(res.GetResult(), &authToken); err != nil {
 			return nil, errors.Wrap(err, "解析 token 请求结果错误")
@@ -71,7 +68,7 @@ func (a *Client) getToken() (*Token, error) {
 			return nil, errors.NewResErrorMsg(err, "请求token错误")
 		}
 		if !res.GetStatus() {
-			return nil, errors.Wrap400Response(fmt.Errorf(res.GetDetail()), int(res.GetCode()), "请求token响应错误: %s", res.GetInfo())
+			return nil, errors.Wrap400Response(fmt.Errorf("%s", res.GetDetail()), int(res.GetCode()), "请求token响应错误: %s", res.GetInfo())
 		}
 		if err := json.Unmarshal(res.GetResult(), &authToken); err != nil {
 			return nil, errors.Wrap(err, "解析 token 请求结果错误")
