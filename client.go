@@ -20,12 +20,9 @@ import (
 	internalError "github.com/felix-186/api-client-go/errors"
 	"github.com/felix-186/api-client-go/flow"
 	"github.com/felix-186/api-client-go/jsserver"
-	"github.com/felix-186/api-client-go/live"
 	"github.com/felix-186/api-client-go/local_grpc"
-	"github.com/felix-186/api-client-go/record"
 	"github.com/felix-186/api-client-go/report"
 	"github.com/felix-186/api-client-go/sync"
-	"github.com/felix-186/api-client-go/syslog"
 	"github.com/felix-186/api-client-go/warning"
 	"github.com/felix-186/errors"
 	"github.com/felix-186/json"
@@ -49,16 +46,13 @@ type Client struct {
 	DriverClient        *driver.Client
 	DataServiceClient   *dataservice.Client
 	ReportClient        *report.Client
-	LiveClient          *live.Client
 	AlgorithmClient     *algorithm.Client
 	DataRelayClient     *datarelay.Client
 	JsServerClient      *jsserver.Client
 	SyncClient          *sync.Client
-	SyslogClient        *syslog.Client
 	ComputeRecordClient *computerecord.Client
 	AIClient            *ai.Client
 	EAPClient           *eap.Client
-	RecordClient        *record.Client
 	Service             *Service
 }
 
@@ -113,10 +107,6 @@ func NewLocalClient(cfg config.Config, ss *local_grpc.Server) (*Client, func(), 
 	if err != nil {
 		return nil, nil, err
 	}
-	liveClient, cleanLive, err := live.NewLocalClient(cfg, cc)
-	if err != nil {
-		return nil, nil, err
-	}
 	algorithmClient, cleanAlgorithm, err := algorithm.NewLocalClient(cfg, cc)
 	if err != nil {
 		return nil, nil, err
@@ -134,10 +124,6 @@ func NewLocalClient(cfg config.Config, ss *local_grpc.Server) (*Client, func(), 
 	if err != nil {
 		return nil, nil, err
 	}
-	syslogClient, cleanSyslog, err := syslog.NewLocalClient(cfg, cc)
-	if err != nil {
-		return nil, nil, err
-	}
 	computeRecordClient, cleanComputeRecord, err := computerecord.NewLocalClient(cfg, cc)
 	if err != nil {
 		return nil, nil, err
@@ -152,11 +138,6 @@ func NewLocalClient(cfg config.Config, ss *local_grpc.Server) (*Client, func(), 
 		return nil, nil, err
 	}
 
-	recordClient, cleanRecord, err := record.NewLocalClient(cfg, cc)
-	if err != nil {
-		return nil, nil, err
-	}
-
 	a := &Client{
 		Config: cfg,
 		//RegistryClient:    NewKartosRegistryClient(cli),
@@ -167,16 +148,13 @@ func NewLocalClient(cfg config.Config, ss *local_grpc.Server) (*Client, func(), 
 		DriverClient:      driverClient,
 		DataServiceClient: dataServiceClient,
 		ReportClient:      reportClient,
-		LiveClient:        liveClient,
 		AlgorithmClient:   algorithmClient,
 		DataRelayClient:   dataRelayClient,
 		//JsServerClient:      jsServerClient,
 		SyncClient:          syncClient,
-		SyslogClient:        syslogClient,
 		ComputeRecordClient: computeRecordClient,
 		AIClient:            aiClient,
 		EAPClient:           eapClient,
-		RecordClient:        recordClient,
 	}
 	a.Service = newService(a)
 	return a, func() {
@@ -186,16 +164,13 @@ func NewLocalClient(cfg config.Config, ss *local_grpc.Server) (*Client, func(), 
 		cleanDriver()
 		cleanDataService()
 		cleanReport()
-		cleanLive()
 		cleanAlgorithm()
 		cleanDataRelay()
 		//cleanJsServer()
 		cleanSync()
-		cleanSyslog()
 		cleanComputeRecord()
 		cleanAI()
 		cleanEAP()
-		cleanRecord()
 	}, nil
 }
 
@@ -289,10 +264,6 @@ func newGrpcClient(cli *clientv3.Client, cfg config.Config) (*Client, func(), er
 	if err != nil {
 		return nil, nil, err
 	}
-	liveClient, cleanLive, err := live.NewClient(cfg, r, cred, httpCred)
-	if err != nil {
-		return nil, nil, err
-	}
 	algorithmClient, cleanAlgorithm, err := algorithm.NewClient(cfg, r, cred, httpCred)
 	if err != nil {
 		return nil, nil, err
@@ -309,10 +280,6 @@ func newGrpcClient(cli *clientv3.Client, cfg config.Config) (*Client, func(), er
 	if err != nil {
 		return nil, nil, err
 	}
-	syslogClient, cleanSyslog, err := syslog.NewClient(cfg, r, cred, httpCred)
-	if err != nil {
-		return nil, nil, err
-	}
 	computeRecordClient, cleanComputeRecord, err := computerecord.NewClient(cfg, r, cred, httpCred)
 	if err != nil {
 		return nil, nil, err
@@ -325,10 +292,6 @@ func newGrpcClient(cli *clientv3.Client, cfg config.Config) (*Client, func(), er
 	if err != nil {
 		return nil, nil, err
 	}
-	recordClient, cleanRecord, err := record.NewClient(cfg, r, cred, httpCred)
-	if err != nil {
-		return nil, nil, err
-	}
 	a := &Client{
 		Config:              cfg,
 		AuthClient:          authCli,
@@ -338,16 +301,13 @@ func newGrpcClient(cli *clientv3.Client, cfg config.Config) (*Client, func(), er
 		DriverClient:        driverClient,
 		DataServiceClient:   dataServiceClient,
 		ReportClient:        reportClient,
-		LiveClient:          liveClient,
 		AlgorithmClient:     algorithmClient,
 		DataRelayClient:     dataRelayClient,
 		JsServerClient:      jsServerClient,
 		SyncClient:          syncClient,
-		SyslogClient:        syslogClient,
 		ComputeRecordClient: computeRecordClient,
 		AIClient:            aiClient,
 		EAPClient:           eapClient,
-		RecordClient:        recordClient,
 	}
 	if !cfg.LiteMode {
 		a.RegistryClient = NewKartosRegistryClient(cli)
@@ -360,16 +320,13 @@ func newGrpcClient(cli *clientv3.Client, cfg config.Config) (*Client, func(), er
 		cleanDriver()
 		cleanDataService()
 		cleanReport()
-		cleanLive()
 		cleanAlgorithm()
 		cleanDataRelay()
 		cleanJsServer()
 		cleanSync()
-		cleanSyslog()
 		cleanComputeRecord()
 		cleanAI()
 		cleanEAP()
-		cleanRecord()
 	}, nil
 }
 

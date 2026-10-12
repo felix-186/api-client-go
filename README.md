@@ -26,15 +26,12 @@ module github.com/felix-186/api-client-go
   - `DataServiceClient`
   - `FlowEngineClient`
   - `ReportClient`
-  - `LiveClient`
   - `AlgorithmClient`
   - `DataRelayClient`
   - `JsServerClient`
   - `SyncClient`
-  - `SyslogClient`
   - `ComputeRecordClient`
   - `AIClient`
-  - `RecordClient`
 
 主入口定义见 `client.go:42`。
 
