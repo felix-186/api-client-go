@@ -28,6 +28,8 @@ service AppService {
   rpc GetToken (api.TokenRequest) returns (api.Response) {}
   rpc Query (api.QueryRequest) returns (api.Response) {}
   rpc Get (api.GetOrDeleteRequest) returns (api.Response) {}
+  // 使用现有平台 token 换取指定用户的登录结果。
+  rpc ExchangeSSO (SSOExchangeRequest) returns (api.Response) {}
 }
 
 service LogService {
@@ -355,4 +357,8 @@ message MediaLibraryDirMkDirRequest {
 message MediaLibraryDeleteRequest {
   repeated string files = 1;
   bool completeDelete = 2;
+}
+
+message SSOExchangeRequest {
+  string username = 1;
 }

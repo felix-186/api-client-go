@@ -1600,6 +1600,50 @@ func (x *MediaLibraryDeleteRequest) GetCompleteDelete() bool {
 	return false
 }
 
+type SSOExchangeRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Username      string                 `protobuf:"bytes,1,opt,name=username,proto3" json:"username,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SSOExchangeRequest) Reset() {
+	*x = SSOExchangeRequest{}
+	mi := &file_core_core_proto_msgTypes[29]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SSOExchangeRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SSOExchangeRequest) ProtoMessage() {}
+
+func (x *SSOExchangeRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_core_core_proto_msgTypes[29]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SSOExchangeRequest.ProtoReflect.Descriptor instead.
+func (*SSOExchangeRequest) Descriptor() ([]byte, []int) {
+	return file_core_core_proto_rawDescGZIP(), []int{29}
+}
+
+func (x *SSOExchangeRequest) GetUsername() string {
+	if x != nil {
+		return x.Username
+	}
+	return ""
+}
+
 var File_core_core_proto protoreflect.FileDescriptor
 
 const file_core_core_proto_rawDesc = "" +
@@ -1702,19 +1746,22 @@ const file_core_core_proto_rawDesc = "" +
 	"\x04name\x18\x02 \x01(\tR\x04name\"Y\n" +
 	"\x19MediaLibraryDeleteRequest\x12\x14\n" +
 	"\x05files\x18\x01 \x03(\tR\x05files\x12&\n" +
-	"\x0ecompleteDelete\x18\x02 \x01(\bR\x0ecompleteDelete2\xaa\x02\n" +
+	"\x0ecompleteDelete\x18\x02 \x01(\bR\x0ecompleteDelete\"0\n" +
+	"\x12SSOExchangeRequest\x12\x1a\n" +
+	"\busername\x18\x01 \x01(\tR\busername2\xaa\x02\n" +
 	"\x0eLicenseService\x124\n" +
 	"\x0eGetFileLicense\x12\x11.api.QueryRequest\x1a\r.api.Response\"\x00\x120\n" +
 	"\n" +
 	"UseLicense\x12\x11.api.QueryRequest\x1a\r.api.Response\"\x00\x125\n" +
 	"\x0fFindMachineCode\x12\x11.api.QueryRequest\x1a\r.api.Response\"\x00\x12<\n" +
 	"\x10GetDriverLicense\x12\x17.api.GetOrDeleteRequest\x1a\r.api.Response\"\x00\x12;\n" +
-	"\rUploadLicense\x12\x17.core.UploadFileRequest\x1a\r.api.Response\"\x00(\x012\x9a\x01\n" +
+	"\rUploadLicense\x12\x17.core.UploadFileRequest\x1a\r.api.Response\"\x00(\x012\xd4\x01\n" +
 	"\n" +
 	"AppService\x12.\n" +
 	"\bGetToken\x12\x11.api.TokenRequest\x1a\r.api.Response\"\x00\x12+\n" +
 	"\x05Query\x12\x11.api.QueryRequest\x1a\r.api.Response\"\x00\x12/\n" +
-	"\x03Get\x12\x17.api.GetOrDeleteRequest\x1a\r.api.Response\"\x002\x8f\x02\n" +
+	"\x03Get\x12\x17.api.GetOrDeleteRequest\x1a\r.api.Response\"\x00\x128\n" +
+	"\vExchangeSSO\x12\x18.core.SSOExchangeRequest\x1a\r.api.Response\"\x002\x8f\x02\n" +
 	"\n" +
 	"LogService\x12-\n" +
 	"\x06Create\x12\x12.api.CreateRequest\x1a\r.api.Response\"\x00\x12/\n" +
@@ -1875,7 +1922,7 @@ func file_core_core_proto_rawDescGZIP() []byte {
 	return file_core_core_proto_rawDescData
 }
 
-var file_core_core_proto_msgTypes = make([]protoimpl.MessageInfo, 29)
+var file_core_core_proto_msgTypes = make([]protoimpl.MessageInfo, 30)
 var file_core_core_proto_goTypes = []any{
 	(*AuthorizationRevisionRequest)(nil),             // 0: core.AuthorizationRevisionRequest
 	(*AuthorizationRevisionResponse)(nil),            // 1: core.AuthorizationRevisionResponse
@@ -1906,267 +1953,270 @@ var file_core_core_proto_goTypes = []any{
 	(*MediaLibraryDirSettingQueryByPathRequest)(nil), // 26: core.MediaLibraryDirSettingQueryByPathRequest
 	(*MediaLibraryDirMkDirRequest)(nil),              // 27: core.MediaLibraryDirMkDirRequest
 	(*MediaLibraryDeleteRequest)(nil),                // 28: core.MediaLibraryDeleteRequest
-	(*api.QueryRequest)(nil),                         // 29: api.QueryRequest
-	(*api.GetOrDeleteRequest)(nil),                   // 30: api.GetOrDeleteRequest
-	(*api.TokenRequest)(nil),                         // 31: api.TokenRequest
-	(*api.CreateRequest)(nil),                        // 32: api.CreateRequest
-	(*api.UpdateRequest)(nil),                        // 33: api.UpdateRequest
-	(*api.EmptyRequest)(nil),                         // 34: api.EmptyRequest
-	(*api.Response)(nil),                             // 35: api.Response
+	(*SSOExchangeRequest)(nil),                       // 29: core.SSOExchangeRequest
+	(*api.QueryRequest)(nil),                         // 30: api.QueryRequest
+	(*api.GetOrDeleteRequest)(nil),                   // 31: api.GetOrDeleteRequest
+	(*api.TokenRequest)(nil),                         // 32: api.TokenRequest
+	(*api.CreateRequest)(nil),                        // 33: api.CreateRequest
+	(*api.UpdateRequest)(nil),                        // 34: api.UpdateRequest
+	(*api.EmptyRequest)(nil),                         // 35: api.EmptyRequest
+	(*api.Response)(nil),                             // 36: api.Response
 }
 var file_core_core_proto_depIdxs = []int32{
 	4,   // 0: core.BatchResourceAccessRequest.resources:type_name -> core.AuthorizationResource
 	4,   // 1: core.ResourceAccessDecision.resource:type_name -> core.AuthorizationResource
 	6,   // 2: core.BatchResourceAccessResponse.decisions:type_name -> core.ResourceAccessDecision
 	4,   // 3: core.ListAccessibleResourcesResponse.resources:type_name -> core.AuthorizationResource
-	29,  // 4: core.LicenseService.GetFileLicense:input_type -> api.QueryRequest
-	29,  // 5: core.LicenseService.UseLicense:input_type -> api.QueryRequest
-	29,  // 6: core.LicenseService.FindMachineCode:input_type -> api.QueryRequest
-	30,  // 7: core.LicenseService.GetDriverLicense:input_type -> api.GetOrDeleteRequest
+	30,  // 4: core.LicenseService.GetFileLicense:input_type -> api.QueryRequest
+	30,  // 5: core.LicenseService.UseLicense:input_type -> api.QueryRequest
+	30,  // 6: core.LicenseService.FindMachineCode:input_type -> api.QueryRequest
+	31,  // 7: core.LicenseService.GetDriverLicense:input_type -> api.GetOrDeleteRequest
 	21,  // 8: core.LicenseService.UploadLicense:input_type -> core.UploadFileRequest
-	31,  // 9: core.AppService.GetToken:input_type -> api.TokenRequest
-	29,  // 10: core.AppService.Query:input_type -> api.QueryRequest
-	30,  // 11: core.AppService.Get:input_type -> api.GetOrDeleteRequest
-	32,  // 12: core.LogService.Create:input_type -> api.CreateRequest
-	30,  // 13: core.LogService.Get:input_type -> api.GetOrDeleteRequest
-	29,  // 14: core.LogService.Query:input_type -> api.QueryRequest
-	29,  // 15: core.LogService.QueryApiPermission:input_type -> api.QueryRequest
-	32,  // 16: core.LogService.CreateApiPermission:input_type -> api.CreateRequest
-	29,  // 17: core.UserService.Query:input_type -> api.QueryRequest
-	30,  // 18: core.UserService.Get:input_type -> api.GetOrDeleteRequest
-	30,  // 19: core.UserService.Delete:input_type -> api.GetOrDeleteRequest
-	33,  // 20: core.UserService.Update:input_type -> api.UpdateRequest
-	33,  // 21: core.UserService.Replace:input_type -> api.UpdateRequest
-	32,  // 22: core.UserService.Create:input_type -> api.CreateRequest
-	20,  // 23: core.UserService.GetCurrentUserInfo:input_type -> core.LoginUserRequest
-	32,  // 24: core.UserService.UserPermissionUpdate:input_type -> api.CreateRequest
-	29,  // 25: core.UserService.QueryBackup:input_type -> api.QueryRequest
-	29,  // 26: core.UserService.DeleteManyBackup:input_type -> api.QueryRequest
-	32,  // 27: core.UserService.CreateManyBackup:input_type -> api.CreateRequest
-	32,  // 28: core.UserService.CallAIModel:input_type -> api.CreateRequest
-	29,  // 29: core.APIKeyService.Query:input_type -> api.QueryRequest
-	30,  // 30: core.APIKeyService.Get:input_type -> api.GetOrDeleteRequest
-	32,  // 31: core.APIKeyService.Create:input_type -> api.CreateRequest
-	30,  // 32: core.APIKeyService.Delete:input_type -> api.GetOrDeleteRequest
-	12,  // 33: core.APIKeyService.GetByKeyID:input_type -> core.GetRequestName
-	13,  // 34: core.APIKeyService.Verify:input_type -> core.VerifyAPIKeyRequest
-	29,  // 35: core.TableSchemaService.Query:input_type -> api.QueryRequest
-	10,  // 36: core.TableSchemaService.QueryDeviceByDriverAndGroup:input_type -> core.GetDeviceRequest
-	10,  // 37: core.TableSchemaService.QueryTableDeviceByDriverAndGroup:input_type -> core.GetDeviceRequest
-	11,  // 38: core.TableSchemaService.FindDevice:input_type -> core.GetDataDeviceRequest
-	29,  // 39: core.TableSchemaService.QueryEmulator:input_type -> api.QueryRequest
-	30,  // 40: core.TableSchemaService.Get:input_type -> api.GetOrDeleteRequest
-	30,  // 41: core.TableSchemaService.Delete:input_type -> api.GetOrDeleteRequest
-	33,  // 42: core.TableSchemaService.Update:input_type -> api.UpdateRequest
-	33,  // 43: core.TableSchemaService.Replace:input_type -> api.UpdateRequest
-	32,  // 44: core.TableSchemaService.Create:input_type -> api.CreateRequest
-	29,  // 45: core.TableSchemaService.StatsQuery:input_type -> api.QueryRequest
-	30,  // 46: core.TableSchemaService.FindCommandByID:input_type -> api.GetOrDeleteRequest
-	15,  // 47: core.TableDataService.Query:input_type -> core.QueryDataRequest
-	15,  // 48: core.TableDataService.QueryByTableId:input_type -> core.QueryDataRequest
-	16,  // 49: core.TableDataService.Get:input_type -> core.GetOrDeleteDataRequest
-	16,  // 50: core.TableDataService.Delete:input_type -> core.GetOrDeleteDataRequest
-	15,  // 51: core.TableDataService.DeleteMany:input_type -> core.QueryDataRequest
-	17,  // 52: core.TableDataService.Update:input_type -> core.UpdateDataRequest
-	17,  // 53: core.TableDataService.Replace:input_type -> core.UpdateDataRequest
-	19,  // 54: core.TableDataService.Create:input_type -> core.CreateDataRequest
-	19,  // 55: core.TableDataService.CreateMany:input_type -> core.CreateDataRequest
-	32,  // 56: core.TableDataService.FindTableDataDeptByDeptIDs:input_type -> api.CreateRequest
-	18,  // 57: core.TableDataService.UpdateMany:input_type -> core.MultiUpdateDataRequest
-	34,  // 58: core.TableDataService.GetWarningFilterIDs:input_type -> api.EmptyRequest
-	16,  // 59: core.TableDataService.FindTagByID:input_type -> core.GetOrDeleteDataRequest
-	16,  // 60: core.TableDataService.FindCommandByID:input_type -> core.GetOrDeleteDataRequest
-	15,  // 61: core.TableDataService.QueryByDB:input_type -> core.QueryDataRequest
-	16,  // 62: core.TableDataService.GetByDB:input_type -> core.GetOrDeleteDataRequest
-	16,  // 63: core.TableDataService.DeleteByDB:input_type -> core.GetOrDeleteDataRequest
-	15,  // 64: core.TableDataService.DeleteManyByDB:input_type -> core.QueryDataRequest
-	17,  // 65: core.TableDataService.UpdateByDB:input_type -> core.UpdateDataRequest
-	17,  // 66: core.TableDataService.ReplaceByDB:input_type -> core.UpdateDataRequest
-	19,  // 67: core.TableDataService.CreateByDB:input_type -> core.CreateDataRequest
-	19,  // 68: core.TableDataService.CreateManyByDB:input_type -> core.CreateDataRequest
-	18,  // 69: core.TableDataService.UpdateManyByDB:input_type -> core.MultiUpdateDataRequest
-	29,  // 70: core.TableRecordService.Query:input_type -> api.QueryRequest
-	30,  // 71: core.TableRecordService.Get:input_type -> api.GetOrDeleteRequest
-	30,  // 72: core.TableRecordService.Delete:input_type -> api.GetOrDeleteRequest
-	33,  // 73: core.TableRecordService.Update:input_type -> api.UpdateRequest
-	33,  // 74: core.TableRecordService.Replace:input_type -> api.UpdateRequest
-	32,  // 75: core.TableRecordService.Create:input_type -> api.CreateRequest
-	32,  // 76: core.MessageService.Create:input_type -> api.CreateRequest
-	29,  // 77: core.MessageService.Query:input_type -> api.QueryRequest
-	32,  // 78: core.DashboardService.Create:input_type -> api.CreateRequest
-	29,  // 79: core.DashboardService.Query:input_type -> api.QueryRequest
-	32,  // 80: core.DataQueryService.PostLatest:input_type -> api.CreateRequest
-	29,  // 81: core.DataQueryService.GetQuery:input_type -> api.QueryRequest
-	32,  // 82: core.DataQueryService.PostQuery:input_type -> api.CreateRequest
-	29,  // 83: core.RoleService.Query:input_type -> api.QueryRequest
-	30,  // 84: core.RoleService.Get:input_type -> api.GetOrDeleteRequest
-	34,  // 85: core.RoleService.AdminRoleCheck:input_type -> api.EmptyRequest
-	29,  // 86: core.CatalogService.Query:input_type -> api.QueryRequest
-	30,  // 87: core.CatalogService.Get:input_type -> api.GetOrDeleteRequest
-	29,  // 88: core.DeptService.Query:input_type -> api.QueryRequest
-	30,  // 89: core.DeptService.Get:input_type -> api.GetOrDeleteRequest
-	29,  // 90: core.SettingService.Query:input_type -> api.QueryRequest
-	29,  // 91: core.SystemVariableService.Query:input_type -> api.QueryRequest
-	30,  // 92: core.SystemVariableService.Get:input_type -> api.GetOrDeleteRequest
-	30,  // 93: core.SystemVariableService.Delete:input_type -> api.GetOrDeleteRequest
-	33,  // 94: core.SystemVariableService.Update:input_type -> api.UpdateRequest
-	33,  // 95: core.SystemVariableService.Replace:input_type -> api.UpdateRequest
-	32,  // 96: core.SystemVariableService.Create:input_type -> api.CreateRequest
-	29,  // 97: core.BackupService.Query:input_type -> api.QueryRequest
-	30,  // 98: core.BackupService.Get:input_type -> api.GetOrDeleteRequest
-	30,  // 99: core.BackupService.Delete:input_type -> api.GetOrDeleteRequest
-	33,  // 100: core.BackupService.Update:input_type -> api.UpdateRequest
-	29,  // 101: core.BackupService.Import:input_type -> api.QueryRequest
-	29,  // 102: core.BackupService.Export:input_type -> api.QueryRequest
-	21,  // 103: core.BackupService.Upload:input_type -> core.UploadFileRequest
-	30,  // 104: core.BackupService.Download:input_type -> api.GetOrDeleteRequest
-	29,  // 105: core.TaskManagerService.Query:input_type -> api.QueryRequest
-	30,  // 106: core.TaskManagerService.Get:input_type -> api.GetOrDeleteRequest
-	30,  // 107: core.TaskManagerService.Delete:input_type -> api.GetOrDeleteRequest
-	33,  // 108: core.TaskManagerService.Update:input_type -> api.UpdateRequest
-	33,  // 109: core.TaskManagerService.Replace:input_type -> api.UpdateRequest
-	32,  // 110: core.TaskManagerService.Create:input_type -> api.CreateRequest
-	23,  // 111: core.MediaLibraryService.Query:input_type -> core.MediaLibraryQueryRequest
-	24,  // 112: core.MediaLibraryService.UploadFromUrl:input_type -> core.MediaLibraryUploadFromUrlRequest
-	25,  // 113: core.MediaLibraryService.UploadFromBase64:input_type -> core.MediaLibraryUploadFromBase64Request
-	27,  // 114: core.MediaLibraryService.Mkdir:input_type -> core.MediaLibraryDirMkDirRequest
-	28,  // 115: core.MediaLibraryService.DeleteFiles:input_type -> core.MediaLibraryDeleteRequest
-	32,  // 116: core.MediaLibraryDirSettingService.Create:input_type -> api.CreateRequest
-	30,  // 117: core.MediaLibraryDirSettingService.Delete:input_type -> api.GetOrDeleteRequest
-	33,  // 118: core.MediaLibraryDirSettingService.Update:input_type -> api.UpdateRequest
-	33,  // 119: core.MediaLibraryDirSettingService.Replace:input_type -> api.UpdateRequest
-	30,  // 120: core.MediaLibraryDirSettingService.Get:input_type -> api.GetOrDeleteRequest
-	26,  // 121: core.MediaLibraryDirSettingService.GetByPath:input_type -> core.MediaLibraryDirSettingQueryByPathRequest
-	29,  // 122: core.MediaLibraryDirSettingService.Query:input_type -> api.QueryRequest
-	2,   // 123: core.AuthorizationService.CheckPermission:input_type -> core.AuthorizationPermissionRequest
-	5,   // 124: core.AuthorizationService.BatchCheckResourceAccess:input_type -> core.BatchResourceAccessRequest
-	8,   // 125: core.AuthorizationService.ListAccessibleResources:input_type -> core.ListAccessibleResourcesRequest
-	0,   // 126: core.AuthorizationService.GetAuthorizationRevision:input_type -> core.AuthorizationRevisionRequest
-	35,  // 127: core.LicenseService.GetFileLicense:output_type -> api.Response
-	35,  // 128: core.LicenseService.UseLicense:output_type -> api.Response
-	35,  // 129: core.LicenseService.FindMachineCode:output_type -> api.Response
-	35,  // 130: core.LicenseService.GetDriverLicense:output_type -> api.Response
-	35,  // 131: core.LicenseService.UploadLicense:output_type -> api.Response
-	35,  // 132: core.AppService.GetToken:output_type -> api.Response
-	35,  // 133: core.AppService.Query:output_type -> api.Response
-	35,  // 134: core.AppService.Get:output_type -> api.Response
-	35,  // 135: core.LogService.Create:output_type -> api.Response
-	35,  // 136: core.LogService.Get:output_type -> api.Response
-	35,  // 137: core.LogService.Query:output_type -> api.Response
-	35,  // 138: core.LogService.QueryApiPermission:output_type -> api.Response
-	35,  // 139: core.LogService.CreateApiPermission:output_type -> api.Response
-	35,  // 140: core.UserService.Query:output_type -> api.Response
-	35,  // 141: core.UserService.Get:output_type -> api.Response
-	35,  // 142: core.UserService.Delete:output_type -> api.Response
-	35,  // 143: core.UserService.Update:output_type -> api.Response
-	35,  // 144: core.UserService.Replace:output_type -> api.Response
-	35,  // 145: core.UserService.Create:output_type -> api.Response
-	35,  // 146: core.UserService.GetCurrentUserInfo:output_type -> api.Response
-	35,  // 147: core.UserService.UserPermissionUpdate:output_type -> api.Response
-	35,  // 148: core.UserService.QueryBackup:output_type -> api.Response
-	35,  // 149: core.UserService.DeleteManyBackup:output_type -> api.Response
-	35,  // 150: core.UserService.CreateManyBackup:output_type -> api.Response
-	35,  // 151: core.UserService.CallAIModel:output_type -> api.Response
-	35,  // 152: core.APIKeyService.Query:output_type -> api.Response
-	35,  // 153: core.APIKeyService.Get:output_type -> api.Response
-	35,  // 154: core.APIKeyService.Create:output_type -> api.Response
-	35,  // 155: core.APIKeyService.Delete:output_type -> api.Response
-	35,  // 156: core.APIKeyService.GetByKeyID:output_type -> api.Response
-	14,  // 157: core.APIKeyService.Verify:output_type -> core.VerifyAPIKeyResponse
-	35,  // 158: core.TableSchemaService.Query:output_type -> api.Response
-	35,  // 159: core.TableSchemaService.QueryDeviceByDriverAndGroup:output_type -> api.Response
-	35,  // 160: core.TableSchemaService.QueryTableDeviceByDriverAndGroup:output_type -> api.Response
-	35,  // 161: core.TableSchemaService.FindDevice:output_type -> api.Response
-	35,  // 162: core.TableSchemaService.QueryEmulator:output_type -> api.Response
-	35,  // 163: core.TableSchemaService.Get:output_type -> api.Response
-	35,  // 164: core.TableSchemaService.Delete:output_type -> api.Response
-	35,  // 165: core.TableSchemaService.Update:output_type -> api.Response
-	35,  // 166: core.TableSchemaService.Replace:output_type -> api.Response
-	35,  // 167: core.TableSchemaService.Create:output_type -> api.Response
-	35,  // 168: core.TableSchemaService.StatsQuery:output_type -> api.Response
-	35,  // 169: core.TableSchemaService.FindCommandByID:output_type -> api.Response
-	35,  // 170: core.TableDataService.Query:output_type -> api.Response
-	35,  // 171: core.TableDataService.QueryByTableId:output_type -> api.Response
-	35,  // 172: core.TableDataService.Get:output_type -> api.Response
-	35,  // 173: core.TableDataService.Delete:output_type -> api.Response
-	35,  // 174: core.TableDataService.DeleteMany:output_type -> api.Response
-	35,  // 175: core.TableDataService.Update:output_type -> api.Response
-	35,  // 176: core.TableDataService.Replace:output_type -> api.Response
-	35,  // 177: core.TableDataService.Create:output_type -> api.Response
-	35,  // 178: core.TableDataService.CreateMany:output_type -> api.Response
-	35,  // 179: core.TableDataService.FindTableDataDeptByDeptIDs:output_type -> api.Response
-	35,  // 180: core.TableDataService.UpdateMany:output_type -> api.Response
-	35,  // 181: core.TableDataService.GetWarningFilterIDs:output_type -> api.Response
-	35,  // 182: core.TableDataService.FindTagByID:output_type -> api.Response
-	35,  // 183: core.TableDataService.FindCommandByID:output_type -> api.Response
-	35,  // 184: core.TableDataService.QueryByDB:output_type -> api.Response
-	35,  // 185: core.TableDataService.GetByDB:output_type -> api.Response
-	35,  // 186: core.TableDataService.DeleteByDB:output_type -> api.Response
-	35,  // 187: core.TableDataService.DeleteManyByDB:output_type -> api.Response
-	35,  // 188: core.TableDataService.UpdateByDB:output_type -> api.Response
-	35,  // 189: core.TableDataService.ReplaceByDB:output_type -> api.Response
-	35,  // 190: core.TableDataService.CreateByDB:output_type -> api.Response
-	35,  // 191: core.TableDataService.CreateManyByDB:output_type -> api.Response
-	35,  // 192: core.TableDataService.UpdateManyByDB:output_type -> api.Response
-	35,  // 193: core.TableRecordService.Query:output_type -> api.Response
-	35,  // 194: core.TableRecordService.Get:output_type -> api.Response
-	35,  // 195: core.TableRecordService.Delete:output_type -> api.Response
-	35,  // 196: core.TableRecordService.Update:output_type -> api.Response
-	35,  // 197: core.TableRecordService.Replace:output_type -> api.Response
-	35,  // 198: core.TableRecordService.Create:output_type -> api.Response
-	35,  // 199: core.MessageService.Create:output_type -> api.Response
-	35,  // 200: core.MessageService.Query:output_type -> api.Response
-	35,  // 201: core.DashboardService.Create:output_type -> api.Response
-	35,  // 202: core.DashboardService.Query:output_type -> api.Response
-	35,  // 203: core.DataQueryService.PostLatest:output_type -> api.Response
-	35,  // 204: core.DataQueryService.GetQuery:output_type -> api.Response
-	35,  // 205: core.DataQueryService.PostQuery:output_type -> api.Response
-	35,  // 206: core.RoleService.Query:output_type -> api.Response
-	35,  // 207: core.RoleService.Get:output_type -> api.Response
-	35,  // 208: core.RoleService.AdminRoleCheck:output_type -> api.Response
-	35,  // 209: core.CatalogService.Query:output_type -> api.Response
-	35,  // 210: core.CatalogService.Get:output_type -> api.Response
-	35,  // 211: core.DeptService.Query:output_type -> api.Response
-	35,  // 212: core.DeptService.Get:output_type -> api.Response
-	35,  // 213: core.SettingService.Query:output_type -> api.Response
-	35,  // 214: core.SystemVariableService.Query:output_type -> api.Response
-	35,  // 215: core.SystemVariableService.Get:output_type -> api.Response
-	35,  // 216: core.SystemVariableService.Delete:output_type -> api.Response
-	35,  // 217: core.SystemVariableService.Update:output_type -> api.Response
-	35,  // 218: core.SystemVariableService.Replace:output_type -> api.Response
-	35,  // 219: core.SystemVariableService.Create:output_type -> api.Response
-	35,  // 220: core.BackupService.Query:output_type -> api.Response
-	35,  // 221: core.BackupService.Get:output_type -> api.Response
-	35,  // 222: core.BackupService.Delete:output_type -> api.Response
-	35,  // 223: core.BackupService.Update:output_type -> api.Response
-	35,  // 224: core.BackupService.Import:output_type -> api.Response
-	35,  // 225: core.BackupService.Export:output_type -> api.Response
-	35,  // 226: core.BackupService.Upload:output_type -> api.Response
-	22,  // 227: core.BackupService.Download:output_type -> core.DownloadFileResponse
-	35,  // 228: core.TaskManagerService.Query:output_type -> api.Response
-	35,  // 229: core.TaskManagerService.Get:output_type -> api.Response
-	35,  // 230: core.TaskManagerService.Delete:output_type -> api.Response
-	35,  // 231: core.TaskManagerService.Update:output_type -> api.Response
-	35,  // 232: core.TaskManagerService.Replace:output_type -> api.Response
-	35,  // 233: core.TaskManagerService.Create:output_type -> api.Response
-	35,  // 234: core.MediaLibraryService.Query:output_type -> api.Response
-	35,  // 235: core.MediaLibraryService.UploadFromUrl:output_type -> api.Response
-	35,  // 236: core.MediaLibraryService.UploadFromBase64:output_type -> api.Response
-	35,  // 237: core.MediaLibraryService.Mkdir:output_type -> api.Response
-	35,  // 238: core.MediaLibraryService.DeleteFiles:output_type -> api.Response
-	35,  // 239: core.MediaLibraryDirSettingService.Create:output_type -> api.Response
-	35,  // 240: core.MediaLibraryDirSettingService.Delete:output_type -> api.Response
-	35,  // 241: core.MediaLibraryDirSettingService.Update:output_type -> api.Response
-	35,  // 242: core.MediaLibraryDirSettingService.Replace:output_type -> api.Response
-	35,  // 243: core.MediaLibraryDirSettingService.Get:output_type -> api.Response
-	35,  // 244: core.MediaLibraryDirSettingService.GetByPath:output_type -> api.Response
-	35,  // 245: core.MediaLibraryDirSettingService.Query:output_type -> api.Response
-	3,   // 246: core.AuthorizationService.CheckPermission:output_type -> core.AuthorizationDecision
-	7,   // 247: core.AuthorizationService.BatchCheckResourceAccess:output_type -> core.BatchResourceAccessResponse
-	9,   // 248: core.AuthorizationService.ListAccessibleResources:output_type -> core.ListAccessibleResourcesResponse
-	1,   // 249: core.AuthorizationService.GetAuthorizationRevision:output_type -> core.AuthorizationRevisionResponse
-	127, // [127:250] is the sub-list for method output_type
-	4,   // [4:127] is the sub-list for method input_type
+	32,  // 9: core.AppService.GetToken:input_type -> api.TokenRequest
+	30,  // 10: core.AppService.Query:input_type -> api.QueryRequest
+	31,  // 11: core.AppService.Get:input_type -> api.GetOrDeleteRequest
+	29,  // 12: core.AppService.ExchangeSSO:input_type -> core.SSOExchangeRequest
+	33,  // 13: core.LogService.Create:input_type -> api.CreateRequest
+	31,  // 14: core.LogService.Get:input_type -> api.GetOrDeleteRequest
+	30,  // 15: core.LogService.Query:input_type -> api.QueryRequest
+	30,  // 16: core.LogService.QueryApiPermission:input_type -> api.QueryRequest
+	33,  // 17: core.LogService.CreateApiPermission:input_type -> api.CreateRequest
+	30,  // 18: core.UserService.Query:input_type -> api.QueryRequest
+	31,  // 19: core.UserService.Get:input_type -> api.GetOrDeleteRequest
+	31,  // 20: core.UserService.Delete:input_type -> api.GetOrDeleteRequest
+	34,  // 21: core.UserService.Update:input_type -> api.UpdateRequest
+	34,  // 22: core.UserService.Replace:input_type -> api.UpdateRequest
+	33,  // 23: core.UserService.Create:input_type -> api.CreateRequest
+	20,  // 24: core.UserService.GetCurrentUserInfo:input_type -> core.LoginUserRequest
+	33,  // 25: core.UserService.UserPermissionUpdate:input_type -> api.CreateRequest
+	30,  // 26: core.UserService.QueryBackup:input_type -> api.QueryRequest
+	30,  // 27: core.UserService.DeleteManyBackup:input_type -> api.QueryRequest
+	33,  // 28: core.UserService.CreateManyBackup:input_type -> api.CreateRequest
+	33,  // 29: core.UserService.CallAIModel:input_type -> api.CreateRequest
+	30,  // 30: core.APIKeyService.Query:input_type -> api.QueryRequest
+	31,  // 31: core.APIKeyService.Get:input_type -> api.GetOrDeleteRequest
+	33,  // 32: core.APIKeyService.Create:input_type -> api.CreateRequest
+	31,  // 33: core.APIKeyService.Delete:input_type -> api.GetOrDeleteRequest
+	12,  // 34: core.APIKeyService.GetByKeyID:input_type -> core.GetRequestName
+	13,  // 35: core.APIKeyService.Verify:input_type -> core.VerifyAPIKeyRequest
+	30,  // 36: core.TableSchemaService.Query:input_type -> api.QueryRequest
+	10,  // 37: core.TableSchemaService.QueryDeviceByDriverAndGroup:input_type -> core.GetDeviceRequest
+	10,  // 38: core.TableSchemaService.QueryTableDeviceByDriverAndGroup:input_type -> core.GetDeviceRequest
+	11,  // 39: core.TableSchemaService.FindDevice:input_type -> core.GetDataDeviceRequest
+	30,  // 40: core.TableSchemaService.QueryEmulator:input_type -> api.QueryRequest
+	31,  // 41: core.TableSchemaService.Get:input_type -> api.GetOrDeleteRequest
+	31,  // 42: core.TableSchemaService.Delete:input_type -> api.GetOrDeleteRequest
+	34,  // 43: core.TableSchemaService.Update:input_type -> api.UpdateRequest
+	34,  // 44: core.TableSchemaService.Replace:input_type -> api.UpdateRequest
+	33,  // 45: core.TableSchemaService.Create:input_type -> api.CreateRequest
+	30,  // 46: core.TableSchemaService.StatsQuery:input_type -> api.QueryRequest
+	31,  // 47: core.TableSchemaService.FindCommandByID:input_type -> api.GetOrDeleteRequest
+	15,  // 48: core.TableDataService.Query:input_type -> core.QueryDataRequest
+	15,  // 49: core.TableDataService.QueryByTableId:input_type -> core.QueryDataRequest
+	16,  // 50: core.TableDataService.Get:input_type -> core.GetOrDeleteDataRequest
+	16,  // 51: core.TableDataService.Delete:input_type -> core.GetOrDeleteDataRequest
+	15,  // 52: core.TableDataService.DeleteMany:input_type -> core.QueryDataRequest
+	17,  // 53: core.TableDataService.Update:input_type -> core.UpdateDataRequest
+	17,  // 54: core.TableDataService.Replace:input_type -> core.UpdateDataRequest
+	19,  // 55: core.TableDataService.Create:input_type -> core.CreateDataRequest
+	19,  // 56: core.TableDataService.CreateMany:input_type -> core.CreateDataRequest
+	33,  // 57: core.TableDataService.FindTableDataDeptByDeptIDs:input_type -> api.CreateRequest
+	18,  // 58: core.TableDataService.UpdateMany:input_type -> core.MultiUpdateDataRequest
+	35,  // 59: core.TableDataService.GetWarningFilterIDs:input_type -> api.EmptyRequest
+	16,  // 60: core.TableDataService.FindTagByID:input_type -> core.GetOrDeleteDataRequest
+	16,  // 61: core.TableDataService.FindCommandByID:input_type -> core.GetOrDeleteDataRequest
+	15,  // 62: core.TableDataService.QueryByDB:input_type -> core.QueryDataRequest
+	16,  // 63: core.TableDataService.GetByDB:input_type -> core.GetOrDeleteDataRequest
+	16,  // 64: core.TableDataService.DeleteByDB:input_type -> core.GetOrDeleteDataRequest
+	15,  // 65: core.TableDataService.DeleteManyByDB:input_type -> core.QueryDataRequest
+	17,  // 66: core.TableDataService.UpdateByDB:input_type -> core.UpdateDataRequest
+	17,  // 67: core.TableDataService.ReplaceByDB:input_type -> core.UpdateDataRequest
+	19,  // 68: core.TableDataService.CreateByDB:input_type -> core.CreateDataRequest
+	19,  // 69: core.TableDataService.CreateManyByDB:input_type -> core.CreateDataRequest
+	18,  // 70: core.TableDataService.UpdateManyByDB:input_type -> core.MultiUpdateDataRequest
+	30,  // 71: core.TableRecordService.Query:input_type -> api.QueryRequest
+	31,  // 72: core.TableRecordService.Get:input_type -> api.GetOrDeleteRequest
+	31,  // 73: core.TableRecordService.Delete:input_type -> api.GetOrDeleteRequest
+	34,  // 74: core.TableRecordService.Update:input_type -> api.UpdateRequest
+	34,  // 75: core.TableRecordService.Replace:input_type -> api.UpdateRequest
+	33,  // 76: core.TableRecordService.Create:input_type -> api.CreateRequest
+	33,  // 77: core.MessageService.Create:input_type -> api.CreateRequest
+	30,  // 78: core.MessageService.Query:input_type -> api.QueryRequest
+	33,  // 79: core.DashboardService.Create:input_type -> api.CreateRequest
+	30,  // 80: core.DashboardService.Query:input_type -> api.QueryRequest
+	33,  // 81: core.DataQueryService.PostLatest:input_type -> api.CreateRequest
+	30,  // 82: core.DataQueryService.GetQuery:input_type -> api.QueryRequest
+	33,  // 83: core.DataQueryService.PostQuery:input_type -> api.CreateRequest
+	30,  // 84: core.RoleService.Query:input_type -> api.QueryRequest
+	31,  // 85: core.RoleService.Get:input_type -> api.GetOrDeleteRequest
+	35,  // 86: core.RoleService.AdminRoleCheck:input_type -> api.EmptyRequest
+	30,  // 87: core.CatalogService.Query:input_type -> api.QueryRequest
+	31,  // 88: core.CatalogService.Get:input_type -> api.GetOrDeleteRequest
+	30,  // 89: core.DeptService.Query:input_type -> api.QueryRequest
+	31,  // 90: core.DeptService.Get:input_type -> api.GetOrDeleteRequest
+	30,  // 91: core.SettingService.Query:input_type -> api.QueryRequest
+	30,  // 92: core.SystemVariableService.Query:input_type -> api.QueryRequest
+	31,  // 93: core.SystemVariableService.Get:input_type -> api.GetOrDeleteRequest
+	31,  // 94: core.SystemVariableService.Delete:input_type -> api.GetOrDeleteRequest
+	34,  // 95: core.SystemVariableService.Update:input_type -> api.UpdateRequest
+	34,  // 96: core.SystemVariableService.Replace:input_type -> api.UpdateRequest
+	33,  // 97: core.SystemVariableService.Create:input_type -> api.CreateRequest
+	30,  // 98: core.BackupService.Query:input_type -> api.QueryRequest
+	31,  // 99: core.BackupService.Get:input_type -> api.GetOrDeleteRequest
+	31,  // 100: core.BackupService.Delete:input_type -> api.GetOrDeleteRequest
+	34,  // 101: core.BackupService.Update:input_type -> api.UpdateRequest
+	30,  // 102: core.BackupService.Import:input_type -> api.QueryRequest
+	30,  // 103: core.BackupService.Export:input_type -> api.QueryRequest
+	21,  // 104: core.BackupService.Upload:input_type -> core.UploadFileRequest
+	31,  // 105: core.BackupService.Download:input_type -> api.GetOrDeleteRequest
+	30,  // 106: core.TaskManagerService.Query:input_type -> api.QueryRequest
+	31,  // 107: core.TaskManagerService.Get:input_type -> api.GetOrDeleteRequest
+	31,  // 108: core.TaskManagerService.Delete:input_type -> api.GetOrDeleteRequest
+	34,  // 109: core.TaskManagerService.Update:input_type -> api.UpdateRequest
+	34,  // 110: core.TaskManagerService.Replace:input_type -> api.UpdateRequest
+	33,  // 111: core.TaskManagerService.Create:input_type -> api.CreateRequest
+	23,  // 112: core.MediaLibraryService.Query:input_type -> core.MediaLibraryQueryRequest
+	24,  // 113: core.MediaLibraryService.UploadFromUrl:input_type -> core.MediaLibraryUploadFromUrlRequest
+	25,  // 114: core.MediaLibraryService.UploadFromBase64:input_type -> core.MediaLibraryUploadFromBase64Request
+	27,  // 115: core.MediaLibraryService.Mkdir:input_type -> core.MediaLibraryDirMkDirRequest
+	28,  // 116: core.MediaLibraryService.DeleteFiles:input_type -> core.MediaLibraryDeleteRequest
+	33,  // 117: core.MediaLibraryDirSettingService.Create:input_type -> api.CreateRequest
+	31,  // 118: core.MediaLibraryDirSettingService.Delete:input_type -> api.GetOrDeleteRequest
+	34,  // 119: core.MediaLibraryDirSettingService.Update:input_type -> api.UpdateRequest
+	34,  // 120: core.MediaLibraryDirSettingService.Replace:input_type -> api.UpdateRequest
+	31,  // 121: core.MediaLibraryDirSettingService.Get:input_type -> api.GetOrDeleteRequest
+	26,  // 122: core.MediaLibraryDirSettingService.GetByPath:input_type -> core.MediaLibraryDirSettingQueryByPathRequest
+	30,  // 123: core.MediaLibraryDirSettingService.Query:input_type -> api.QueryRequest
+	2,   // 124: core.AuthorizationService.CheckPermission:input_type -> core.AuthorizationPermissionRequest
+	5,   // 125: core.AuthorizationService.BatchCheckResourceAccess:input_type -> core.BatchResourceAccessRequest
+	8,   // 126: core.AuthorizationService.ListAccessibleResources:input_type -> core.ListAccessibleResourcesRequest
+	0,   // 127: core.AuthorizationService.GetAuthorizationRevision:input_type -> core.AuthorizationRevisionRequest
+	36,  // 128: core.LicenseService.GetFileLicense:output_type -> api.Response
+	36,  // 129: core.LicenseService.UseLicense:output_type -> api.Response
+	36,  // 130: core.LicenseService.FindMachineCode:output_type -> api.Response
+	36,  // 131: core.LicenseService.GetDriverLicense:output_type -> api.Response
+	36,  // 132: core.LicenseService.UploadLicense:output_type -> api.Response
+	36,  // 133: core.AppService.GetToken:output_type -> api.Response
+	36,  // 134: core.AppService.Query:output_type -> api.Response
+	36,  // 135: core.AppService.Get:output_type -> api.Response
+	36,  // 136: core.AppService.ExchangeSSO:output_type -> api.Response
+	36,  // 137: core.LogService.Create:output_type -> api.Response
+	36,  // 138: core.LogService.Get:output_type -> api.Response
+	36,  // 139: core.LogService.Query:output_type -> api.Response
+	36,  // 140: core.LogService.QueryApiPermission:output_type -> api.Response
+	36,  // 141: core.LogService.CreateApiPermission:output_type -> api.Response
+	36,  // 142: core.UserService.Query:output_type -> api.Response
+	36,  // 143: core.UserService.Get:output_type -> api.Response
+	36,  // 144: core.UserService.Delete:output_type -> api.Response
+	36,  // 145: core.UserService.Update:output_type -> api.Response
+	36,  // 146: core.UserService.Replace:output_type -> api.Response
+	36,  // 147: core.UserService.Create:output_type -> api.Response
+	36,  // 148: core.UserService.GetCurrentUserInfo:output_type -> api.Response
+	36,  // 149: core.UserService.UserPermissionUpdate:output_type -> api.Response
+	36,  // 150: core.UserService.QueryBackup:output_type -> api.Response
+	36,  // 151: core.UserService.DeleteManyBackup:output_type -> api.Response
+	36,  // 152: core.UserService.CreateManyBackup:output_type -> api.Response
+	36,  // 153: core.UserService.CallAIModel:output_type -> api.Response
+	36,  // 154: core.APIKeyService.Query:output_type -> api.Response
+	36,  // 155: core.APIKeyService.Get:output_type -> api.Response
+	36,  // 156: core.APIKeyService.Create:output_type -> api.Response
+	36,  // 157: core.APIKeyService.Delete:output_type -> api.Response
+	36,  // 158: core.APIKeyService.GetByKeyID:output_type -> api.Response
+	14,  // 159: core.APIKeyService.Verify:output_type -> core.VerifyAPIKeyResponse
+	36,  // 160: core.TableSchemaService.Query:output_type -> api.Response
+	36,  // 161: core.TableSchemaService.QueryDeviceByDriverAndGroup:output_type -> api.Response
+	36,  // 162: core.TableSchemaService.QueryTableDeviceByDriverAndGroup:output_type -> api.Response
+	36,  // 163: core.TableSchemaService.FindDevice:output_type -> api.Response
+	36,  // 164: core.TableSchemaService.QueryEmulator:output_type -> api.Response
+	36,  // 165: core.TableSchemaService.Get:output_type -> api.Response
+	36,  // 166: core.TableSchemaService.Delete:output_type -> api.Response
+	36,  // 167: core.TableSchemaService.Update:output_type -> api.Response
+	36,  // 168: core.TableSchemaService.Replace:output_type -> api.Response
+	36,  // 169: core.TableSchemaService.Create:output_type -> api.Response
+	36,  // 170: core.TableSchemaService.StatsQuery:output_type -> api.Response
+	36,  // 171: core.TableSchemaService.FindCommandByID:output_type -> api.Response
+	36,  // 172: core.TableDataService.Query:output_type -> api.Response
+	36,  // 173: core.TableDataService.QueryByTableId:output_type -> api.Response
+	36,  // 174: core.TableDataService.Get:output_type -> api.Response
+	36,  // 175: core.TableDataService.Delete:output_type -> api.Response
+	36,  // 176: core.TableDataService.DeleteMany:output_type -> api.Response
+	36,  // 177: core.TableDataService.Update:output_type -> api.Response
+	36,  // 178: core.TableDataService.Replace:output_type -> api.Response
+	36,  // 179: core.TableDataService.Create:output_type -> api.Response
+	36,  // 180: core.TableDataService.CreateMany:output_type -> api.Response
+	36,  // 181: core.TableDataService.FindTableDataDeptByDeptIDs:output_type -> api.Response
+	36,  // 182: core.TableDataService.UpdateMany:output_type -> api.Response
+	36,  // 183: core.TableDataService.GetWarningFilterIDs:output_type -> api.Response
+	36,  // 184: core.TableDataService.FindTagByID:output_type -> api.Response
+	36,  // 185: core.TableDataService.FindCommandByID:output_type -> api.Response
+	36,  // 186: core.TableDataService.QueryByDB:output_type -> api.Response
+	36,  // 187: core.TableDataService.GetByDB:output_type -> api.Response
+	36,  // 188: core.TableDataService.DeleteByDB:output_type -> api.Response
+	36,  // 189: core.TableDataService.DeleteManyByDB:output_type -> api.Response
+	36,  // 190: core.TableDataService.UpdateByDB:output_type -> api.Response
+	36,  // 191: core.TableDataService.ReplaceByDB:output_type -> api.Response
+	36,  // 192: core.TableDataService.CreateByDB:output_type -> api.Response
+	36,  // 193: core.TableDataService.CreateManyByDB:output_type -> api.Response
+	36,  // 194: core.TableDataService.UpdateManyByDB:output_type -> api.Response
+	36,  // 195: core.TableRecordService.Query:output_type -> api.Response
+	36,  // 196: core.TableRecordService.Get:output_type -> api.Response
+	36,  // 197: core.TableRecordService.Delete:output_type -> api.Response
+	36,  // 198: core.TableRecordService.Update:output_type -> api.Response
+	36,  // 199: core.TableRecordService.Replace:output_type -> api.Response
+	36,  // 200: core.TableRecordService.Create:output_type -> api.Response
+	36,  // 201: core.MessageService.Create:output_type -> api.Response
+	36,  // 202: core.MessageService.Query:output_type -> api.Response
+	36,  // 203: core.DashboardService.Create:output_type -> api.Response
+	36,  // 204: core.DashboardService.Query:output_type -> api.Response
+	36,  // 205: core.DataQueryService.PostLatest:output_type -> api.Response
+	36,  // 206: core.DataQueryService.GetQuery:output_type -> api.Response
+	36,  // 207: core.DataQueryService.PostQuery:output_type -> api.Response
+	36,  // 208: core.RoleService.Query:output_type -> api.Response
+	36,  // 209: core.RoleService.Get:output_type -> api.Response
+	36,  // 210: core.RoleService.AdminRoleCheck:output_type -> api.Response
+	36,  // 211: core.CatalogService.Query:output_type -> api.Response
+	36,  // 212: core.CatalogService.Get:output_type -> api.Response
+	36,  // 213: core.DeptService.Query:output_type -> api.Response
+	36,  // 214: core.DeptService.Get:output_type -> api.Response
+	36,  // 215: core.SettingService.Query:output_type -> api.Response
+	36,  // 216: core.SystemVariableService.Query:output_type -> api.Response
+	36,  // 217: core.SystemVariableService.Get:output_type -> api.Response
+	36,  // 218: core.SystemVariableService.Delete:output_type -> api.Response
+	36,  // 219: core.SystemVariableService.Update:output_type -> api.Response
+	36,  // 220: core.SystemVariableService.Replace:output_type -> api.Response
+	36,  // 221: core.SystemVariableService.Create:output_type -> api.Response
+	36,  // 222: core.BackupService.Query:output_type -> api.Response
+	36,  // 223: core.BackupService.Get:output_type -> api.Response
+	36,  // 224: core.BackupService.Delete:output_type -> api.Response
+	36,  // 225: core.BackupService.Update:output_type -> api.Response
+	36,  // 226: core.BackupService.Import:output_type -> api.Response
+	36,  // 227: core.BackupService.Export:output_type -> api.Response
+	36,  // 228: core.BackupService.Upload:output_type -> api.Response
+	22,  // 229: core.BackupService.Download:output_type -> core.DownloadFileResponse
+	36,  // 230: core.TaskManagerService.Query:output_type -> api.Response
+	36,  // 231: core.TaskManagerService.Get:output_type -> api.Response
+	36,  // 232: core.TaskManagerService.Delete:output_type -> api.Response
+	36,  // 233: core.TaskManagerService.Update:output_type -> api.Response
+	36,  // 234: core.TaskManagerService.Replace:output_type -> api.Response
+	36,  // 235: core.TaskManagerService.Create:output_type -> api.Response
+	36,  // 236: core.MediaLibraryService.Query:output_type -> api.Response
+	36,  // 237: core.MediaLibraryService.UploadFromUrl:output_type -> api.Response
+	36,  // 238: core.MediaLibraryService.UploadFromBase64:output_type -> api.Response
+	36,  // 239: core.MediaLibraryService.Mkdir:output_type -> api.Response
+	36,  // 240: core.MediaLibraryService.DeleteFiles:output_type -> api.Response
+	36,  // 241: core.MediaLibraryDirSettingService.Create:output_type -> api.Response
+	36,  // 242: core.MediaLibraryDirSettingService.Delete:output_type -> api.Response
+	36,  // 243: core.MediaLibraryDirSettingService.Update:output_type -> api.Response
+	36,  // 244: core.MediaLibraryDirSettingService.Replace:output_type -> api.Response
+	36,  // 245: core.MediaLibraryDirSettingService.Get:output_type -> api.Response
+	36,  // 246: core.MediaLibraryDirSettingService.GetByPath:output_type -> api.Response
+	36,  // 247: core.MediaLibraryDirSettingService.Query:output_type -> api.Response
+	3,   // 248: core.AuthorizationService.CheckPermission:output_type -> core.AuthorizationDecision
+	7,   // 249: core.AuthorizationService.BatchCheckResourceAccess:output_type -> core.BatchResourceAccessResponse
+	9,   // 250: core.AuthorizationService.ListAccessibleResources:output_type -> core.ListAccessibleResourcesResponse
+	1,   // 251: core.AuthorizationService.GetAuthorizationRevision:output_type -> core.AuthorizationRevisionResponse
+	128, // [128:252] is the sub-list for method output_type
+	4,   // [4:128] is the sub-list for method input_type
 	4,   // [4:4] is the sub-list for extension type_name
 	4,   // [4:4] is the sub-list for extension extendee
 	0,   // [0:4] is the sub-list for field type_name
@@ -2183,7 +2233,7 @@ func file_core_core_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_core_core_proto_rawDesc), len(file_core_core_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   29,
+			NumMessages:   30,
 			NumExtensions: 0,
 			NumServices:   21,
 		},

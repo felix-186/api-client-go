@@ -274,9 +274,10 @@ var LicenseService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	AppService_GetToken_FullMethodName = "/core.AppService/GetToken"
-	AppService_Query_FullMethodName    = "/core.AppService/Query"
-	AppService_Get_FullMethodName      = "/core.AppService/Get"
+	AppService_GetToken_FullMethodName    = "/core.AppService/GetToken"
+	AppService_Query_FullMethodName       = "/core.AppService/Query"
+	AppService_Get_FullMethodName         = "/core.AppService/Get"
+	AppService_ExchangeSSO_FullMethodName = "/core.AppService/ExchangeSSO"
 )
 
 // AppServiceClient is the client API for AppService service.
@@ -286,6 +287,8 @@ type AppServiceClient interface {
 	GetToken(ctx context.Context, in *api.TokenRequest, opts ...grpc.CallOption) (*api.Response, error)
 	Query(ctx context.Context, in *api.QueryRequest, opts ...grpc.CallOption) (*api.Response, error)
 	Get(ctx context.Context, in *api.GetOrDeleteRequest, opts ...grpc.CallOption) (*api.Response, error)
+	// 使用现有平台 token 换取指定用户的登录结果。
+	ExchangeSSO(ctx context.Context, in *SSOExchangeRequest, opts ...grpc.CallOption) (*api.Response, error)
 }
 
 type appServiceClient struct {
@@ -326,6 +329,16 @@ func (c *appServiceClient) Get(ctx context.Context, in *api.GetOrDeleteRequest, 
 	return out, nil
 }
 
+func (c *appServiceClient) ExchangeSSO(ctx context.Context, in *SSOExchangeRequest, opts ...grpc.CallOption) (*api.Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(api.Response)
+	err := c.cc.Invoke(ctx, AppService_ExchangeSSO_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // AppServiceServer is the server API for AppService service.
 // All implementations must embed UnimplementedAppServiceServer
 // for forward compatibility.
@@ -333,6 +346,8 @@ type AppServiceServer interface {
 	GetToken(context.Context, *api.TokenRequest) (*api.Response, error)
 	Query(context.Context, *api.QueryRequest) (*api.Response, error)
 	Get(context.Context, *api.GetOrDeleteRequest) (*api.Response, error)
+	// 使用现有平台 token 换取指定用户的登录结果。
+	ExchangeSSO(context.Context, *SSOExchangeRequest) (*api.Response, error)
 	mustEmbedUnimplementedAppServiceServer()
 }
 
@@ -351,6 +366,9 @@ func (UnimplementedAppServiceServer) Query(context.Context, *api.QueryRequest) (
 }
 func (UnimplementedAppServiceServer) Get(context.Context, *api.GetOrDeleteRequest) (*api.Response, error) {
 	return nil, status.Error(codes.Unimplemented, "method Get not implemented")
+}
+func (UnimplementedAppServiceServer) ExchangeSSO(context.Context, *SSOExchangeRequest) (*api.Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method ExchangeSSO not implemented")
 }
 func (UnimplementedAppServiceServer) mustEmbedUnimplementedAppServiceServer() {}
 func (UnimplementedAppServiceServer) testEmbeddedByValue()                    {}
@@ -427,6 +445,24 @@ func _AppService_Get_Handler(srv interface{}, ctx context.Context, dec func(inte
 	return interceptor(ctx, in, info, handler)
 }
 
+func _AppService_ExchangeSSO_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SSOExchangeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AppServiceServer).ExchangeSSO(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AppService_ExchangeSSO_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AppServiceServer).ExchangeSSO(ctx, req.(*SSOExchangeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // AppService_ServiceDesc is the grpc.ServiceDesc for AppService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -445,6 +481,10 @@ var AppService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Get",
 			Handler:    _AppService_Get_Handler,
+		},
+		{
+			MethodName: "ExchangeSSO",
+			Handler:    _AppService_ExchangeSSO_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
