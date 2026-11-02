@@ -13,13 +13,14 @@ import (
 const serviceName = "eap"
 
 type Client struct {
-	lock       sync.RWMutex
-	cc         grpc.ClientConnInterface
-	conn       *grpc.ClientConn
-	registry   *etcd.Registry
-	config     config.Config
-	opts       []grpc.DialOption
-	taskClient TaskServiceClient
+	lock         sync.RWMutex
+	cc           grpc.ClientConnInterface
+	conn         *grpc.ClientConn
+	registry     *etcd.Registry
+	config       config.Config
+	opts         []grpc.DialOption
+	taskClient   TaskServiceClient
+	backupClient BackupServiceClient
 }
 
 func NewClient(cfg config.Config, registry *etcd.Registry, cred grpc.DialOption) (*Client, func(), error) {
@@ -32,7 +33,7 @@ func NewClient(cfg config.Config, registry *etcd.Registry, cred grpc.DialOption)
 }
 
 func NewLocalClient(cfg config.Config, cc grpc.ClientConnInterface) (*Client, func(), error) {
-	return &Client{config: cfg, cc: cc, taskClient: NewTaskServiceClient(cc)}, func() {}, nil
+	return &Client{config: cfg, cc: cc, taskClient: NewTaskServiceClient(cc), backupClient: NewBackupServiceClient(cc)}, func() {}, nil
 }
 
 func (c *Client) createConn() error {
@@ -47,7 +48,22 @@ func (c *Client) createConn() error {
 	}
 	c.conn = cc
 	c.taskClient = NewTaskServiceClient(cc)
+	c.backupClient = NewBackupServiceClient(cc)
 	return nil
+}
+
+func (c *Client) GetBackupServiceClient() (BackupServiceClient, error) {
+	if c.cc == nil {
+		if err := c.createConn(); err != nil {
+			return nil, err
+		}
+	}
+	c.lock.RLock()
+	defer c.lock.RUnlock()
+	if c.backupClient == nil {
+		return nil, errors.New("客户端是空")
+	}
+	return c.backupClient, nil
 }
 
 func (c *Client) GetTaskServiceClient() (TaskServiceClient, error) {

@@ -1,4 +1,4 @@
-syntax = "proto3";
+﻿syntax = "proto3";
 
 package eap;
 
@@ -25,4 +25,31 @@ message SendTaskMessageResponse {
   string task_id = 1;
   string run_id = 2;
   string message_id = 3;
+}
+
+// Unary chunks also work with KESI's in-process local_grpc transport.
+service BackupService {
+  rpc PrepareExport(BackupEmpty) returns (BackupTransfer);
+  rpc ReadExport(BackupChunk) returns (BackupChunk);
+  rpc BeginImport(BackupImportRequest) returns (BackupTransfer);
+  rpc WriteImport(BackupChunk) returns (BackupChunk);
+  rpc CommitImport(BackupTransferID) returns (BackupEmpty);
+  rpc CloseTransfer(BackupTransferID) returns (BackupEmpty);
+}
+message BackupEmpty {}
+message BackupTransferID { string id = 1; }
+message BackupTransfer {
+  string id = 1;
+  int64 size = 2;
+  bytes sha256 = 3;
+}
+message BackupChunk {
+  string id = 1;
+  int64 offset = 2;
+  bytes data = 3;
+}
+message BackupImportRequest {
+  int64 size = 1;
+  bytes sha256 = 2;
+  int32 rule = 3;
 }

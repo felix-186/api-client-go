@@ -209,6 +209,266 @@ func (x *SendTaskMessageResponse) GetMessageId() string {
 	return ""
 }
 
+type BackupEmpty struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *BackupEmpty) Reset() {
+	*x = BackupEmpty{}
+	mi := &file_eap_eap_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *BackupEmpty) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*BackupEmpty) ProtoMessage() {}
+
+func (x *BackupEmpty) ProtoReflect() protoreflect.Message {
+	mi := &file_eap_eap_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use BackupEmpty.ProtoReflect.Descriptor instead.
+func (*BackupEmpty) Descriptor() ([]byte, []int) {
+	return file_eap_eap_proto_rawDescGZIP(), []int{3}
+}
+
+type BackupTransferID struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *BackupTransferID) Reset() {
+	*x = BackupTransferID{}
+	mi := &file_eap_eap_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *BackupTransferID) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*BackupTransferID) ProtoMessage() {}
+
+func (x *BackupTransferID) ProtoReflect() protoreflect.Message {
+	mi := &file_eap_eap_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use BackupTransferID.ProtoReflect.Descriptor instead.
+func (*BackupTransferID) Descriptor() ([]byte, []int) {
+	return file_eap_eap_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *BackupTransferID) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+type BackupTransfer struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	Size          int64                  `protobuf:"varint,2,opt,name=size,proto3" json:"size,omitempty"`
+	Sha256        []byte                 `protobuf:"bytes,3,opt,name=sha256,proto3" json:"sha256,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *BackupTransfer) Reset() {
+	*x = BackupTransfer{}
+	mi := &file_eap_eap_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *BackupTransfer) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*BackupTransfer) ProtoMessage() {}
+
+func (x *BackupTransfer) ProtoReflect() protoreflect.Message {
+	mi := &file_eap_eap_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use BackupTransfer.ProtoReflect.Descriptor instead.
+func (*BackupTransfer) Descriptor() ([]byte, []int) {
+	return file_eap_eap_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *BackupTransfer) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+func (x *BackupTransfer) GetSize() int64 {
+	if x != nil {
+		return x.Size
+	}
+	return 0
+}
+
+func (x *BackupTransfer) GetSha256() []byte {
+	if x != nil {
+		return x.Sha256
+	}
+	return nil
+}
+
+type BackupChunk struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	Offset        int64                  `protobuf:"varint,2,opt,name=offset,proto3" json:"offset,omitempty"`
+	Data          []byte                 `protobuf:"bytes,3,opt,name=data,proto3" json:"data,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *BackupChunk) Reset() {
+	*x = BackupChunk{}
+	mi := &file_eap_eap_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *BackupChunk) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*BackupChunk) ProtoMessage() {}
+
+func (x *BackupChunk) ProtoReflect() protoreflect.Message {
+	mi := &file_eap_eap_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use BackupChunk.ProtoReflect.Descriptor instead.
+func (*BackupChunk) Descriptor() ([]byte, []int) {
+	return file_eap_eap_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *BackupChunk) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+func (x *BackupChunk) GetOffset() int64 {
+	if x != nil {
+		return x.Offset
+	}
+	return 0
+}
+
+func (x *BackupChunk) GetData() []byte {
+	if x != nil {
+		return x.Data
+	}
+	return nil
+}
+
+type BackupImportRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Size          int64                  `protobuf:"varint,1,opt,name=size,proto3" json:"size,omitempty"`
+	Sha256        []byte                 `protobuf:"bytes,2,opt,name=sha256,proto3" json:"sha256,omitempty"`
+	Rule          int32                  `protobuf:"varint,3,opt,name=rule,proto3" json:"rule,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *BackupImportRequest) Reset() {
+	*x = BackupImportRequest{}
+	mi := &file_eap_eap_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *BackupImportRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*BackupImportRequest) ProtoMessage() {}
+
+func (x *BackupImportRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_eap_eap_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use BackupImportRequest.ProtoReflect.Descriptor instead.
+func (*BackupImportRequest) Descriptor() ([]byte, []int) {
+	return file_eap_eap_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *BackupImportRequest) GetSize() int64 {
+	if x != nil {
+		return x.Size
+	}
+	return 0
+}
+
+func (x *BackupImportRequest) GetSha256() []byte {
+	if x != nil {
+		return x.Sha256
+	}
+	return nil
+}
+
+func (x *BackupImportRequest) GetRule() int32 {
+	if x != nil {
+		return x.Rule
+	}
+	return 0
+}
+
 var File_eap_eap_proto protoreflect.FileDescriptor
 
 const file_eap_eap_proto_rawDesc = "" +
@@ -228,9 +488,32 @@ const file_eap_eap_proto_rawDesc = "" +
 	"\atask_id\x18\x01 \x01(\tR\x06taskId\x12\x15\n" +
 	"\x06run_id\x18\x02 \x01(\tR\x05runId\x12\x1d\n" +
 	"\n" +
-	"message_id\x18\x03 \x01(\tR\tmessageId2Y\n" +
+	"message_id\x18\x03 \x01(\tR\tmessageId\"\r\n" +
+	"\vBackupEmpty\"\"\n" +
+	"\x10BackupTransferID\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\"L\n" +
+	"\x0eBackupTransfer\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
+	"\x04size\x18\x02 \x01(\x03R\x04size\x12\x16\n" +
+	"\x06sha256\x18\x03 \x01(\fR\x06sha256\"I\n" +
+	"\vBackupChunk\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\x12\x16\n" +
+	"\x06offset\x18\x02 \x01(\x03R\x06offset\x12\x12\n" +
+	"\x04data\x18\x03 \x01(\fR\x04data\"U\n" +
+	"\x13BackupImportRequest\x12\x12\n" +
+	"\x04size\x18\x01 \x01(\x03R\x04size\x12\x16\n" +
+	"\x06sha256\x18\x02 \x01(\fR\x06sha256\x12\x12\n" +
+	"\x04rule\x18\x03 \x01(\x05R\x04rule2Y\n" +
 	"\vTaskService\x12J\n" +
-	"\vSendMessage\x12\x1b.eap.SendTaskMessageRequest\x1a\x1c.eap.SendTaskMessageResponse\"\x00B(Z&github.com/felix-186/api-client-go/eapb\x06proto3"
+	"\vSendMessage\x12\x1b.eap.SendTaskMessageRequest\x1a\x1c.eap.SendTaskMessageResponse\"\x002\xdd\x02\n" +
+	"\rBackupService\x126\n" +
+	"\rPrepareExport\x12\x10.eap.BackupEmpty\x1a\x13.eap.BackupTransfer\x120\n" +
+	"\n" +
+	"ReadExport\x12\x10.eap.BackupChunk\x1a\x10.eap.BackupChunk\x12<\n" +
+	"\vBeginImport\x12\x18.eap.BackupImportRequest\x1a\x13.eap.BackupTransfer\x121\n" +
+	"\vWriteImport\x12\x10.eap.BackupChunk\x1a\x10.eap.BackupChunk\x127\n" +
+	"\fCommitImport\x12\x15.eap.BackupTransferID\x1a\x10.eap.BackupEmpty\x128\n" +
+	"\rCloseTransfer\x12\x15.eap.BackupTransferID\x1a\x10.eap.BackupEmptyB(Z&github.com/felix-186/api-client-go/eapb\x06proto3"
 
 var (
 	file_eap_eap_proto_rawDescOnce sync.Once
@@ -244,18 +527,35 @@ func file_eap_eap_proto_rawDescGZIP() []byte {
 	return file_eap_eap_proto_rawDescData
 }
 
-var file_eap_eap_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
+var file_eap_eap_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
 var file_eap_eap_proto_goTypes = []any{
 	(*Attachment)(nil),              // 0: eap.Attachment
 	(*SendTaskMessageRequest)(nil),  // 1: eap.SendTaskMessageRequest
 	(*SendTaskMessageResponse)(nil), // 2: eap.SendTaskMessageResponse
+	(*BackupEmpty)(nil),             // 3: eap.BackupEmpty
+	(*BackupTransferID)(nil),        // 4: eap.BackupTransferID
+	(*BackupTransfer)(nil),          // 5: eap.BackupTransfer
+	(*BackupChunk)(nil),             // 6: eap.BackupChunk
+	(*BackupImportRequest)(nil),     // 7: eap.BackupImportRequest
 }
 var file_eap_eap_proto_depIdxs = []int32{
 	0, // 0: eap.SendTaskMessageRequest.attachments:type_name -> eap.Attachment
 	1, // 1: eap.TaskService.SendMessage:input_type -> eap.SendTaskMessageRequest
-	2, // 2: eap.TaskService.SendMessage:output_type -> eap.SendTaskMessageResponse
-	2, // [2:3] is the sub-list for method output_type
-	1, // [1:2] is the sub-list for method input_type
+	3, // 2: eap.BackupService.PrepareExport:input_type -> eap.BackupEmpty
+	6, // 3: eap.BackupService.ReadExport:input_type -> eap.BackupChunk
+	7, // 4: eap.BackupService.BeginImport:input_type -> eap.BackupImportRequest
+	6, // 5: eap.BackupService.WriteImport:input_type -> eap.BackupChunk
+	4, // 6: eap.BackupService.CommitImport:input_type -> eap.BackupTransferID
+	4, // 7: eap.BackupService.CloseTransfer:input_type -> eap.BackupTransferID
+	2, // 8: eap.TaskService.SendMessage:output_type -> eap.SendTaskMessageResponse
+	5, // 9: eap.BackupService.PrepareExport:output_type -> eap.BackupTransfer
+	6, // 10: eap.BackupService.ReadExport:output_type -> eap.BackupChunk
+	5, // 11: eap.BackupService.BeginImport:output_type -> eap.BackupTransfer
+	6, // 12: eap.BackupService.WriteImport:output_type -> eap.BackupChunk
+	3, // 13: eap.BackupService.CommitImport:output_type -> eap.BackupEmpty
+	3, // 14: eap.BackupService.CloseTransfer:output_type -> eap.BackupEmpty
+	8, // [8:15] is the sub-list for method output_type
+	1, // [1:8] is the sub-list for method input_type
 	1, // [1:1] is the sub-list for extension type_name
 	1, // [1:1] is the sub-list for extension extendee
 	0, // [0:1] is the sub-list for field type_name
@@ -272,9 +572,9 @@ func file_eap_eap_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_eap_eap_proto_rawDesc), len(file_eap_eap_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   3,
+			NumMessages:   8,
 			NumExtensions: 0,
-			NumServices:   1,
+			NumServices:   2,
 		},
 		GoTypes:           file_eap_eap_proto_goTypes,
 		DependencyIndexes: file_eap_eap_proto_depIdxs,

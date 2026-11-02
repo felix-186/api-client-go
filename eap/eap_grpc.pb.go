@@ -119,3 +119,299 @@ var TaskService_ServiceDesc = grpc.ServiceDesc{
 	Streams:  []grpc.StreamDesc{},
 	Metadata: "eap/eap.proto",
 }
+
+const (
+	BackupService_PrepareExport_FullMethodName = "/eap.BackupService/PrepareExport"
+	BackupService_ReadExport_FullMethodName    = "/eap.BackupService/ReadExport"
+	BackupService_BeginImport_FullMethodName   = "/eap.BackupService/BeginImport"
+	BackupService_WriteImport_FullMethodName   = "/eap.BackupService/WriteImport"
+	BackupService_CommitImport_FullMethodName  = "/eap.BackupService/CommitImport"
+	BackupService_CloseTransfer_FullMethodName = "/eap.BackupService/CloseTransfer"
+)
+
+// BackupServiceClient is the client API for BackupService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+//
+// Unary chunks also work with KESI's in-process local_grpc transport.
+type BackupServiceClient interface {
+	PrepareExport(ctx context.Context, in *BackupEmpty, opts ...grpc.CallOption) (*BackupTransfer, error)
+	ReadExport(ctx context.Context, in *BackupChunk, opts ...grpc.CallOption) (*BackupChunk, error)
+	BeginImport(ctx context.Context, in *BackupImportRequest, opts ...grpc.CallOption) (*BackupTransfer, error)
+	WriteImport(ctx context.Context, in *BackupChunk, opts ...grpc.CallOption) (*BackupChunk, error)
+	CommitImport(ctx context.Context, in *BackupTransferID, opts ...grpc.CallOption) (*BackupEmpty, error)
+	CloseTransfer(ctx context.Context, in *BackupTransferID, opts ...grpc.CallOption) (*BackupEmpty, error)
+}
+
+type backupServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewBackupServiceClient(cc grpc.ClientConnInterface) BackupServiceClient {
+	return &backupServiceClient{cc}
+}
+
+func (c *backupServiceClient) PrepareExport(ctx context.Context, in *BackupEmpty, opts ...grpc.CallOption) (*BackupTransfer, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(BackupTransfer)
+	err := c.cc.Invoke(ctx, BackupService_PrepareExport_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backupServiceClient) ReadExport(ctx context.Context, in *BackupChunk, opts ...grpc.CallOption) (*BackupChunk, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(BackupChunk)
+	err := c.cc.Invoke(ctx, BackupService_ReadExport_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backupServiceClient) BeginImport(ctx context.Context, in *BackupImportRequest, opts ...grpc.CallOption) (*BackupTransfer, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(BackupTransfer)
+	err := c.cc.Invoke(ctx, BackupService_BeginImport_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backupServiceClient) WriteImport(ctx context.Context, in *BackupChunk, opts ...grpc.CallOption) (*BackupChunk, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(BackupChunk)
+	err := c.cc.Invoke(ctx, BackupService_WriteImport_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backupServiceClient) CommitImport(ctx context.Context, in *BackupTransferID, opts ...grpc.CallOption) (*BackupEmpty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(BackupEmpty)
+	err := c.cc.Invoke(ctx, BackupService_CommitImport_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backupServiceClient) CloseTransfer(ctx context.Context, in *BackupTransferID, opts ...grpc.CallOption) (*BackupEmpty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(BackupEmpty)
+	err := c.cc.Invoke(ctx, BackupService_CloseTransfer_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// BackupServiceServer is the server API for BackupService service.
+// All implementations must embed UnimplementedBackupServiceServer
+// for forward compatibility.
+//
+// Unary chunks also work with KESI's in-process local_grpc transport.
+type BackupServiceServer interface {
+	PrepareExport(context.Context, *BackupEmpty) (*BackupTransfer, error)
+	ReadExport(context.Context, *BackupChunk) (*BackupChunk, error)
+	BeginImport(context.Context, *BackupImportRequest) (*BackupTransfer, error)
+	WriteImport(context.Context, *BackupChunk) (*BackupChunk, error)
+	CommitImport(context.Context, *BackupTransferID) (*BackupEmpty, error)
+	CloseTransfer(context.Context, *BackupTransferID) (*BackupEmpty, error)
+	mustEmbedUnimplementedBackupServiceServer()
+}
+
+// UnimplementedBackupServiceServer must be embedded to have
+// forward compatible implementations.
+//
+// NOTE: this should be embedded by value instead of pointer to avoid a nil
+// pointer dereference when methods are called.
+type UnimplementedBackupServiceServer struct{}
+
+func (UnimplementedBackupServiceServer) PrepareExport(context.Context, *BackupEmpty) (*BackupTransfer, error) {
+	return nil, status.Error(codes.Unimplemented, "method PrepareExport not implemented")
+}
+func (UnimplementedBackupServiceServer) ReadExport(context.Context, *BackupChunk) (*BackupChunk, error) {
+	return nil, status.Error(codes.Unimplemented, "method ReadExport not implemented")
+}
+func (UnimplementedBackupServiceServer) BeginImport(context.Context, *BackupImportRequest) (*BackupTransfer, error) {
+	return nil, status.Error(codes.Unimplemented, "method BeginImport not implemented")
+}
+func (UnimplementedBackupServiceServer) WriteImport(context.Context, *BackupChunk) (*BackupChunk, error) {
+	return nil, status.Error(codes.Unimplemented, "method WriteImport not implemented")
+}
+func (UnimplementedBackupServiceServer) CommitImport(context.Context, *BackupTransferID) (*BackupEmpty, error) {
+	return nil, status.Error(codes.Unimplemented, "method CommitImport not implemented")
+}
+func (UnimplementedBackupServiceServer) CloseTransfer(context.Context, *BackupTransferID) (*BackupEmpty, error) {
+	return nil, status.Error(codes.Unimplemented, "method CloseTransfer not implemented")
+}
+func (UnimplementedBackupServiceServer) mustEmbedUnimplementedBackupServiceServer() {}
+func (UnimplementedBackupServiceServer) testEmbeddedByValue()                       {}
+
+// UnsafeBackupServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to BackupServiceServer will
+// result in compilation errors.
+type UnsafeBackupServiceServer interface {
+	mustEmbedUnimplementedBackupServiceServer()
+}
+
+func RegisterBackupServiceServer(s grpc.ServiceRegistrar, srv BackupServiceServer) {
+	// If the following call panics, it indicates UnimplementedBackupServiceServer was
+	// embedded by pointer and is nil.  This will cause panics if an
+	// unimplemented method is ever invoked, so we test this at initialization
+	// time to prevent it from happening at runtime later due to I/O.
+	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
+		t.testEmbeddedByValue()
+	}
+	s.RegisterService(&BackupService_ServiceDesc, srv)
+}
+
+func _BackupService_PrepareExport_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(BackupEmpty)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackupServiceServer).PrepareExport(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackupService_PrepareExport_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackupServiceServer).PrepareExport(ctx, req.(*BackupEmpty))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackupService_ReadExport_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(BackupChunk)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackupServiceServer).ReadExport(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackupService_ReadExport_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackupServiceServer).ReadExport(ctx, req.(*BackupChunk))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackupService_BeginImport_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(BackupImportRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackupServiceServer).BeginImport(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackupService_BeginImport_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackupServiceServer).BeginImport(ctx, req.(*BackupImportRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackupService_WriteImport_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(BackupChunk)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackupServiceServer).WriteImport(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackupService_WriteImport_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackupServiceServer).WriteImport(ctx, req.(*BackupChunk))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackupService_CommitImport_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(BackupTransferID)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackupServiceServer).CommitImport(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackupService_CommitImport_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackupServiceServer).CommitImport(ctx, req.(*BackupTransferID))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackupService_CloseTransfer_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(BackupTransferID)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackupServiceServer).CloseTransfer(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackupService_CloseTransfer_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackupServiceServer).CloseTransfer(ctx, req.(*BackupTransferID))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// BackupService_ServiceDesc is the grpc.ServiceDesc for BackupService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var BackupService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "eap.BackupService",
+	HandlerType: (*BackupServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "PrepareExport",
+			Handler:    _BackupService_PrepareExport_Handler,
+		},
+		{
+			MethodName: "ReadExport",
+			Handler:    _BackupService_ReadExport_Handler,
+		},
+		{
+			MethodName: "BeginImport",
+			Handler:    _BackupService_BeginImport_Handler,
+		},
+		{
+			MethodName: "WriteImport",
+			Handler:    _BackupService_WriteImport_Handler,
+		},
+		{
+			MethodName: "CommitImport",
+			Handler:    _BackupService_CommitImport_Handler,
+		},
+		{
+			MethodName: "CloseTransfer",
+			Handler:    _BackupService_CloseTransfer_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "eap/eap.proto",
+}
