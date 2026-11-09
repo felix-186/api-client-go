@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	clienterrors "github.com/felix-186/api-client-go/errors"
+	"github.com/felix-186/errors"
 	"reflect"
 	"strings"
 	"sync"
@@ -119,7 +120,17 @@ func (s *Server) Invoke(ctx context.Context, method string, args any, reply any)
 
 			appReply, appErr := md.Handler(srv.GetServiceImpl(), ctx, df, nil)
 			if appErr != nil {
-				return clienterrors.FromGRPC(clienterrors.ToGRPC(appErr))
+				wireErr := clienterrors.ToGRPC(appErr)
+				if status.Code(wireErr) == codes.Unknown {
+					var response *errors.ResponseError
+					structured := errors.As(appErr, &response)
+					businessCode, httpStatus := 0, 0
+					if structured {
+						businessCode, httpStatus = response.Code, response.StatusCode
+					}
+					logger.Errorf("local_grpc Unknown 边界 method=%s input_type=%T input_grpc=%s structured=%t business_code=%d http_status=%d", method, appErr, status.Code(appErr), structured, businessCode, httpStatus)
+				}
+				return clienterrors.FromGRPC(wireErr)
 			}
 
 			b, err := codec.Marshal(appReply)
