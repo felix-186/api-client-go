@@ -40,6 +40,7 @@ func CreateConn(serviceName string, cfg config.Config, r *etcd.Registry, opts ..
 		cfg.Limit = 100
 	}
 	opts = append(opts, ggrpc.WithDefaultCallOptions(ggrpc.MaxCallRecvMsgSize(cfg.Limit*1024*1024), ggrpc.MaxCallSendMsgSize(cfg.Limit*1024*1024)))
+	opts = append(opts, ggrpc.WithChainUnaryInterceptor(internalError.UnaryClientErrorDecoder))
 	logger.Infof("grpc create conn,serviceName: %s config: %+v", serviceName, cfg)
 	if r != nil {
 		// WithBlock: 阻塞到 discovery 首次解析出可用节点后再返回,

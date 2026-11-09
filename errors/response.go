@@ -53,7 +53,8 @@ import (
 
 // UnWrapResponse 解包响应错误
 func UnWrapResponse(err error) *errors.ResponseError {
-	if v, ok := err.(*errors.ResponseError); ok {
+	var v *errors.ResponseError
+	if errors.As(err, &v) {
 		return v
 	}
 	return nil
@@ -71,5 +72,5 @@ func ParseBody(statusCode int, body []byte) error {
 }
 
 func ParseResponse(res *api.Response) error {
-	return errors.Wrap400Response(fmt.Errorf(res.GetDetail()), int(res.GetCode()), res.GetInfo())
+	return errors.Wrap400Response(fmt.Errorf("%s", res.GetDetail()), int(res.GetCode()), "%s", res.GetInfo())
 }

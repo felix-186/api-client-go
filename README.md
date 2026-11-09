@@ -1,5 +1,13 @@
 # api-client-go
 
+## gRPC 错误传递
+
+公共 `errors.ToGRPC` 使用 gRPC 状态与标记为 `gts.ResponseError` 的 ErrorInfo 传递结构化错误，保留业务 code、HTTP 状态、消息、字段及可 JSON 序列化的模板数据。普通未知错误保持 Unknown，取消/超时及原生 gRPC 状态保持原语义。不会把网络、限流或服务错误一律转换为 400。
+
+`conn.CreateConn` 为所有通过它创建的服务连接安装统一解码拦截器；`local_grpc.Server.Invoke` 使用同一编码/解码路径。调用者可用 `errors.As` 提取 `github.com/felix-186/errors.ResponseError`。直接自行创建 gRPC 连接的调用者，应安装 `errors.UnaryClientErrorDecoder` 或调用 `errors.FromGRPC`，否则仍可读取 gRPC 标准状态与 ErrorInfo。已有 `api.Response{status:false}` 解析继续兼容，不修改 protobuf 字段。
+
+需先发布并升级客户端，再升级使用新公共错误中间件的服务端。旧客户端可看到正确的标准 gRPC 状态，但不能自动还原业务码；旧服务端已丢失成 Unknown 的业务码无法在客户端凭空恢复。未在本次修改中发布版本或变更各服务的版本依赖。详情测试包括 `go test ./errors ./local_grpc ./conn`，以及 service 公共中间件中的真实 gRPC 往返测试。
+
 `api-client-go` 是一个面向 IOT 平台的 Go 客户端库，用于统一访问平台内多个 gRPC 服务，并封装认证、服务发现、配置加载与本地调试能力。
 
 当前模块名：

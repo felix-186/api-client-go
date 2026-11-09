@@ -3,6 +3,7 @@ package local_grpc
 import (
 	"context"
 	"fmt"
+	clienterrors "github.com/felix-186/api-client-go/errors"
 	"reflect"
 	"strings"
 	"sync"
@@ -118,14 +119,7 @@ func (s *Server) Invoke(ctx context.Context, method string, args any, reply any)
 
 			appReply, appErr := md.Handler(srv.GetServiceImpl(), ctx, df, nil)
 			if appErr != nil {
-				appStatus, ok := status.FromError(appErr)
-				if !ok {
-					// Convert non-status application error to a status error with code
-					// Unknown, but handle context errors specifically.
-					appStatus = status.FromContextError(appErr)
-					appErr = appStatus.Err()
-				}
-				return appErr
+				return clienterrors.FromGRPC(clienterrors.ToGRPC(appErr))
 			}
 
 			b, err := codec.Marshal(appReply)
